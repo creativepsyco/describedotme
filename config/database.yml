@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: describe.me_development
   pool: 5
-  username: root
-  password:
+  username: describedotme
+  password: describedotme
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -27,8 +27,8 @@ test:
   reconnect: false
   database: describe.me_test
   pool: 5
-  username: root
-  password:
+  username: describedotme
+  password: describedotme
   socket: /tmp/mysql.sock
 
 production:
@@ -37,6 +37,6 @@ production:
   reconnect: true
   database: describe.me_production
   pool: 5
-  username: root
-  password: 
+  username: describedotme
+  password: describedotme
   #socket: /tmp/mysql.sock
