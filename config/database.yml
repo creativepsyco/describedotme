@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: describe.me_production
   pool: 5
-  username: root
-  password:
+  username: b7414830cf9ce0
+  password: 0efe13b2
   socket: /tmp/mysql.sock
