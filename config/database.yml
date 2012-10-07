@@ -12,7 +12,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: describe.me_development
+  database: describedotme_development
   pool: 5
   username: describedotme
   password: describedotme
@@ -25,7 +25,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: describe.me_test
+  database: describedotme_test
   pool: 5
   username: describedotme
   password: describedotme
@@ -35,7 +35,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: describe.me_production
+  database: describedotme_production
   pool: 5
   username: describedotme
   password: describedotme

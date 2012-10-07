@@ -1,3 +1,26 @@
+== Configuration for database:
+
+1. Install mysql server 
+2. Create db user: describedotme, pass: describedotme (subject to change upon deployment)
+   CREATE USER 'describedotme'@'localhost' IDENTIFIED BY 'describedotme';
+
+3. Open mysql
+4. Create 3 database: describe.me_development, describe.me_test, describe.me_production
+   CREATE DATABASE IF NOT EXISTS describedotme_development;
+   CREATE DATABASE IF NOT EXISTS describedotme_test;
+   CREATE DATABASE IF NOT EXISTS describedotme_production;
+
+4. Grant all priviliges for user describedotme
+   GRANT ALL PRIVILEGES ON describedotme_development.* TO describedotme;
+   GRANT ALL PRIVILEGES ON describedotme_test.* TO describedotme;
+   GRANT ALL PRIVILEGES ON describedotme_production.* TO describedotme;
+
+
+
+
+
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
