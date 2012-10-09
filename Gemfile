@@ -28,4 +28,4 @@ gem "twitter-bootstrap-rails"
 
 # Backbone js
 # More https://github.com/codebrew/backbone-rails
-gem "rails-backbone"
+gem 'backbone-on-rails'
