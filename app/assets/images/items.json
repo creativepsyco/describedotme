@@ -50,7 +50,7 @@ Thanks!",
 				},
 
 				{
-					"id" 			: 3,
+					"id" 			: 4,
 					"title" 		: "A tutorial to put the fonts in the right places",
 					"description"	: "Andrew, app/assets/fonts is actually already in your asset load path, along with images. So you can just point to the asset in the same way: <%= asset_path('/Ubuntu/Ubuntu-R-webfont.eot') %>[1] or how ever you are referencing your images.",
 					"tags"			: ["Rails", "Fonts", "Magic"],
