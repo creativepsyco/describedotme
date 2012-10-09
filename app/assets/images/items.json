@@ -1,20 +1,48 @@
 [
 				{
 					"id" 			: 1,
-					"title" 		: "Sample Title A",
-					"description"	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
-					"item_url"  	: "http://google.com",
+					"title" 		: "Creating a recipe for destruction",
+					"description"	: "note that the duplicate name issue should normally not pose a problem. the assets being served will have a different format normally so this problem would not occur. Also the asset pipeline gives assets a seed in the name. this is A to break the local cashe of the user's browser but it is also to make sure all files have a unique name. on pre-compile (that you run in production) a yaml file is created in the app linking the generated files to the original path. This allows for quick linking from in-code naming to compiled asset name. This at the same time avoids the duplicate name issues.",
+					"tags"			: ["c++", "java", "backbone"],
+					"images"		: [
+						"http://beans.seartipy.com/wp-content/uploads/2006/12/visualc++.JPG",
+						"http://www.codeproject.com/KB/recipes/wave_preprocessor/wave_preprocessor.jpg",
+						"http://www.chillinside.com/wp-content/uploads/2010/04/turbo-cpp.png"
+					],
 					"creator_id"	: 1,
 					"created_at"	: 199012131,
 					"updated_at"	: 199012131,
 					"category_id"	: 2
 				},
-
 				{
 					"id" 			: 2,
-					"title" 		: "Sample Title A",
-					"description"	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
-					"item_url"  	: "http://google.com",
+					"title" 		: "Rails Tutorial for Noobies",
+					"description"	: "I'm getting the error Uncaught SyntaxError: Unexpected token <. If I replace <%= aNumber %> with an integer, it works as expected. Also, if I console.log(<%%= aNumber %>), it logs the correct number.
+
+Does anybody know how I can accomplish something like this? I know that's kind of a sloppy way to organize my code, but this is just a quick little hack I'm putting together.
+
+Thanks!",
+					"tags"			: ["underscore", "c-sharp", "backbone"],
+					"images"		: [
+						"http://beans.seartipy.com/wp-content/uploads/2006/12/visualc++.JPG",
+						"http://media-cdn.tripadvisor.com/media/photo-s/01/0d/8d/e3/pattaya.jpg",
+						"http://www.pattaya-info.com/Pattaya.jpg"
+					],
+					"creator_id"	: 1,
+					"created_at"	: 199012131,
+					"updated_at"	: 199012131,
+					"category_id"	: 2
+				},
+				{
+					"id" 			: 3,
+					"title" 		: "A tutorial to put the fonts in the right places",
+					"description"	: "Andrew, app/assets/fonts is actually already in your asset load path, along with images. So you can just point to the asset in the same way: <%= asset_path('/Ubuntu/Ubuntu-R-webfont.eot') %>[1] or how ever you are referencing your images.",
+					"tags"			: ["Rails", "Fonts", "Magic"],
+					"images"		: [
+						"http://kiranb.scripts.mit.edu/backbone-slides/images/rails-integration.png",
+						"http://brocrastinator.com/wp-content/uploads/2011/06/bitches.jpg",
+						"http://www.demotivationalposters.org/image/demotivational-poster/1010/my-bitches-demotivational-poster-1286753317.jpg"
+					],
 					"creator_id"	: 1,
 					"created_at"	: 199012131,
 					"updated_at"	: 199012131,
@@ -23,31 +51,14 @@
 
 				{
 					"id" 			: 3,
-					"title" 		: "Sample Title A",
-					"description"	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
-					"item_url"  	: "http://google.com",
-					"creator_id"	: 1,
-					"created_at"	: 199012131,
-					"updated_at"	: 199012131,
-					"category_id"	: 2
-				},
-
-				{
-					"id" 			: 4,
-					"title" 		: "Sample Title A",
-					"description"	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
-					"item_url"  	: "http://google.com",
-					"creator_id"	: 2,
-					"created_at"	: 199012131,
-					"updated_at"	: 199012131,
-					"category_id"	: 2
-				},
-
-				{
-					"id" 			: 5,
-					"title" 		: "Sample Title A",
-					"description"	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
-					"item_url"  	: "http://google.com",
+					"title" 		: "A tutorial to put the fonts in the right places",
+					"description"	: "Andrew, app/assets/fonts is actually already in your asset load path, along with images. So you can just point to the asset in the same way: <%= asset_path('/Ubuntu/Ubuntu-R-webfont.eot') %>[1] or how ever you are referencing your images.",
+					"tags"			: ["Rails", "Fonts", "Magic"],
+					"images"		: [
+						"http://kiranb.scripts.mit.edu/backbone-slides/images/rails-integration.png",
+						"http://brocrastinator.com/wp-content/uploads/2011/06/bitches.jpg",
+						"http://www.demotivationalposters.org/image/demotivational-poster/1010/my-bitches-demotivational-poster-1286753317.jpg"
+					],
 					"creator_id"	: 1,
 					"created_at"	: 199012131,
 					"updated_at"	: 199012131,
