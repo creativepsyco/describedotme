@@ -23,3 +23,9 @@ gem "devise", ">= 2.1.0"
 gem "cancan"
 
 
+# Bootstrap Rails
+gem "twitter-bootstrap-rails"
+
+# Backbone js
+# More https://github.com/codebrew/backbone-rails
+gem "rails-backbone"
