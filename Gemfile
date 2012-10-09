@@ -24,7 +24,7 @@ gem "cancan"
 
 
 # Bootstrap Rails
-gem "twitter-bootstrap-rails"
+gem 'bootstrap-sass', '2.0.0'
 
 # Backbone js
 # More https://github.com/codebrew/backbone-rails
