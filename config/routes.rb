@@ -5,9 +5,9 @@ DescribeMe::Application.routes.draw do
   root :to => "home#index"
 
   devise_for :users
-  resources :users
-  resources :items
-
+  resources :users do
+    resources :items
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -36,8 +36,13 @@ class Ability
     end
     if user.has_role? :normal
       can :manage, User, :id => user.id
-      # manage projects he owns
-      can :manage, Item do |item|
+
+
+      # can create new projects
+      can [:new, :create], Item 
+
+      # can update and delete only projects he owns
+      can [:edit, :update, :destroy], Item do |item|
         item.try(:creator) == user
       end
     end

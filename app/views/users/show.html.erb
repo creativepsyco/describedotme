@@ -15,7 +15,8 @@
   </tr>
 <% end %>
 
-<%= link_to 'New Item', new_item_path %>
+<p/>
+<%= link_to 'New Item', new_user_item_path(@user) %>
  
 <table class="one-column-emphasis">
 	<tbody>
@@ -26,7 +27,7 @@
 		<tr>
 			<td class="oce-first">Role:</td>
 			<% @user.roles.each do |r| %>
-			<td><%= @r.role %></td>
+			<td><%= r.role %></td>
 			<% end %>
 		</tr>
 	<% if can?(:see_timestamps, User) %>

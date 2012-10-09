@@ -1,8 +1,4 @@
 class ItemsController < ApplicationController
-  before_filter :get_user, :only => [:index,:new,:edit]
-  before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
-  load_and_authorize_resource :only => [:show,:new,:destroy,:edit,:update]
- 
   # Get roles accessible by the current item
   #----------------------------------------------------
   def accessible_roles
@@ -21,7 +17,8 @@ class ItemsController < ApplicationController
   # GET /items.json                                       HTML and AJAX
   #-----------------------------------------------------------------------
   def index
-    @items = Item.accessible_by(current_ability, :index).limit(20)
+    @user = User.find(params[:user_id]) 
+    @items = @user.items
     respond_to do |format|
       format.json { render :json => @items }
       format.xml  { render :xml => @items }
@@ -34,6 +31,8 @@ class ItemsController < ApplicationController
   # GET /items/new.json                                    HTML AND AJAX
   #-------------------------------------------------------------------
   def new
+    puts params
+    @user = User.find(params[:user_id]) 
     respond_to do |format|
       format.json { render :json => @item }   
       format.xml  { render :xml => @item }
@@ -46,9 +45,6 @@ class ItemsController < ApplicationController
   # GET /items/1.json                                     HTML AND AJAX
   #-------------------------------------------------------------------
   def show
-  	if (!params[:id]) 
-  	  @item = current_item
-  	end
    	@item = Item.find(params[:id]) 
    	puts "Item: ", @item, @item.name, @item.id
     respond_to do |format|

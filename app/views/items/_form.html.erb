@@ -1,15 +1,9 @@
-<%= form_for(@item) do |f| %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
-      <% @item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for([@user, @user.items.build]) do |f| %>
+  <p><%= f.label :title %></p>
+  <p><%= f.text_field :title %></p>
+       
+  <p><%= f.label :description %></p>
+  <p><%= f.text_area :description %></p>
 
   <div class="actions">
     <%= f.submit %>
