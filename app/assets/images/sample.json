@@ -1,0 +1,93 @@
+{
+	'items':[
+				{
+					'id' 			: 1,
+					'title' 		: "Sample Title A",
+					'description'	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+					'item_url'  	: "http://google.com",
+					'creator_id'	: 1,
+					'created_at'	: 199012131,
+					'updated_at'	: 199012131,
+					'category_id'	: 2
+				},
+
+				{
+					'id' 			: 2,
+					'title' 		: "Sample Title A",
+					'description'	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+					'item_url'  	: "http://google.com",
+					'creator_id'	: 1,
+					'created_at'	: 199012131,
+					'updated_at'	: 199012131,
+					'category_id'	: 2
+				},
+
+				{
+					'id' 			: 3,
+					'title' 		: "Sample Title A",
+					'description'	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+					'item_url'  	: "http://google.com",
+					'creator_id'	: 1,
+					'created_at'	: 199012131,
+					'updated_at'	: 199012131,
+					'category_id'	: 2
+				},
+
+				{
+					'id' 			: 4,
+					'title' 		: "Sample Title A",
+					'description'	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+					'item_url'  	: "http://google.com",
+					'creator_id'	: 2,
+					'created_at'	: 199012131,
+					'updated_at'	: 199012131,
+					'category_id'	: 2
+				},
+
+				{
+					'id' 			: 5,
+					'title' 		: "Sample Title A",
+					'description'	: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ",
+					'item_url'  	: "http://google.com",
+					'creator_id'	: 1,
+					'created_at'	: 199012131,
+					'updated_at'	: 199012131,
+					'category_id'	: 2
+				},
+			],
+
+	'users':
+	[
+			{
+				'id' 				: 1,	
+				'name' 				: "David Jones",
+				'avatar_url' 		: "rails.png",
+				'email'				: "e@example.org"
+			},
+			{
+				'id' 				: 2,	
+				'name' 				: "Mary Jones",
+				'avatar_url' 		: "rails.png",
+				'email'				: "b@example.org"
+			}
+	],
+
+	'categories' : 
+	[
+		{
+			'id'			: 1,
+			'name'			: "Funny Art",
+			'description'	: "Lorem Ipsum Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+		},
+		{
+			'id'			: 2,
+			'name'			: "Comics",
+			'description'	: "Lorem Ipsum Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+		},
+		{
+			'id'			: 3,
+			'name'			: "Advice",
+			'description'	: "Lorem Ipsum Lorem Ipsum  Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+		}
+	]
+}
