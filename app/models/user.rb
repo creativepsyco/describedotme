@@ -14,10 +14,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
 
   has_and_belongs_to_many :roles
-
-  has_and_belongs_to_many :favourite_items, :class_name => "Item", :through => :users_favourite_items
-  has_and_belongs_to_many :kudo_items, :class_name => "Item", :through => :users_kudo_items
-
   def role? (role)
     return !!self.roles.find_by_role(role)
   end
