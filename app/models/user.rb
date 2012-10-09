@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  before_create :set_default_role
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -14,8 +17,16 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
 
   has_and_belongs_to_many :roles
+  has_many :items, :foreign_key => "creator_id"
 
-  def role? (role)
-    return !!self.roles.find_by_role(role)
+  def has_role? (role)
+    return !!self.roles.find_by_role(role.to_s)
   end
+
+
+  private
+  def set_default_role
+    self.roles << Role.find_by_role('normal')
+  end
+
 end

@@ -13,6 +13,11 @@
 
 ActiveRecord::Schema.define(:version => 20121007133540) do
 
+  create_table "categories", :force => true do |t|
+    t.string "name"
+    t.string "description"
+  end
+
   create_table "items", :force => true do |t|
     t.string   "title"
     t.string   "description"
@@ -52,15 +57,5 @@ ActiveRecord::Schema.define(:version => 20121007133540) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_favorite_items", :force => true do |t|
-    t.integer "user_id"
-    t.integer "item_id"
-  end
-
-  create_table "users_kudo_items", :force => true do |t|
-    t.integer "user_id"
-    t.integer "item_id"
-  end
 
 end
