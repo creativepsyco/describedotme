@@ -1,0 +1,10 @@
+
+<h3>Home</h3>
+<% @users.each do |u| %>
+  <tr>
+    <td><%= link_to_if(can?(:read, User), "#{u.name}", user_path(u.id)) {} %></td>
+    <td><%= "#{u.email}" %></td>
+    <td><%= "#{u.roles.collect{|r| r.name}}" %></td>
+    
+  </tr>
+<% end %>

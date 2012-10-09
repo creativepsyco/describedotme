@@ -1,0 +1,37 @@
+<h3><%= @user.name %></h3>
+
+<% if(can?(:update, @user)) %>
+<%= link_to "Edit", edit_user_path(@user) %>| 
+<% end %>
+<% if (can?(:delete, @user)) %>
+<%= link_to "Delete", user_path(@user), :confirm => "Are you sure?", :method => :delete  %>
+<% end %>
+ 
+<table class="one-column-emphasis">
+	<tbody>
+		<tr>
+			<td class="oce-first">Email:</td>
+			<td><%= @user.email %></td>
+		</tr>
+		<tr>
+			<td class="oce-first">Role:</td>
+			<% @user.roles.each do |r| %>
+			<td><%= @r.role %></td>
+			<% end %>
+		</tr>
+	<% if can?(:see_timestamps, User) %>
+		<tr>
+			<td class="oce-first">Created at:</td>
+			<td><%= @user.created_at %></td>
+		</tr>
+		<tr>
+			<td class="oce-first">Last Sign In:</td>
+			<td><%= @user.last_sign_in_at %></td>
+		</tr>
+		<tr>
+			<td class="oce-first">Sign In Count:</td>
+			<td><%= @user.sign_in_count %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
