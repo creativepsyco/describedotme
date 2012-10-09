@@ -16,3 +16,6 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+
+# Ignore Gemfile.lock
+Gemfile.lock
