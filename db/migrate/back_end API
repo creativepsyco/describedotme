@@ -1,7 +1,0 @@
-API: 
-
-User:
-
-
-
-GET /users/:id 						=> get user with id
