@@ -5,7 +5,7 @@
    CREATE USER 'describedotme'@'localhost' IDENTIFIED BY 'describedotme';
 
 3. Open mysql
-4. Create 3 database: describe.me_development, describe.me_test, describe.me_production
+4. Create 3 database: describedotme_development, describedotme_test, describedotme_production
    CREATE DATABASE IF NOT EXISTS describedotme_development;
    CREATE DATABASE IF NOT EXISTS describedotme_test;
    CREATE DATABASE IF NOT EXISTS describedotme_production;
