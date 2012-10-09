@@ -27,24 +27,26 @@ class Ability
 
     user ||= User.new # guest user
  
-    puts "RUNNING HERE ", user.name, user.id
-    if user.role? :super_admin
+    if user.has_role? :super_admin
       can :manage, :all
-    elsif user.role? :admin
+    end
+    if user.has_role? :admin
 #      can :manage, [Product, Asset, Issue]
       can :see_timestamps, User
-    elsif user.role? :normal
+    end
+    if user.has_role? :normal
       can :manage, User, :id => user.id
       # manage projects he owns
       can :manage, Item do |item|
-        item.try(:owner) == user
+        item.try(:creator) == user
       end
-      can :manage, Project do |project|
-        project.try(:owner) == user
-      end
-    else 
-      # all user can read other user's profile, not change
-      can :read, User
     end
+      #can :manage, Project do |project|
+      #  project.try(:creator) == user
+      #end
+    
+      # all user can read other user's profile, not change
+    can :read, User
+    
   end
 end

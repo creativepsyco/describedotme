@@ -89,7 +89,20 @@ class UsersController < ApplicationController
   # POST /users.json                                      HTML AND AJAX
   #-----------------------------------------------------------------
   def create
+    role_ids = params[:user][:role_ids]
+    params[:user].delete :role_ids
+
+    puts params[:user]
+
     @user = User.new(params[:user])
+    
+    role_ids.each do |role_id|
+      puts role_id
+      role = Role.find_by_id role_id
+      if (role)
+        @user.roles << role
+      end
+    end
  
     if @user.save
       respond_to do |format|
