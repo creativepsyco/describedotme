@@ -11,12 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009143800) do
-
-  create_table "categories", :force => true do |t|
-    t.string "name"
-    t.string "description"
-  end
+ActiveRecord::Schema.define(:version => 20121010061454) do
 
   create_table "items", :force => true do |t|
     t.string   "title"
@@ -29,11 +24,11 @@ ActiveRecord::Schema.define(:version => 20121009143800) do
 
   create_table "photos", :force => true do |t|
     t.string   "caption"
-    t.string   "descriptin"
+    t.string   "description"
     t.string   "photo_url"
     t.integer  "item_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -70,5 +65,15 @@ ActiveRecord::Schema.define(:version => 20121009143800) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_favorite_items", :force => true do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+  end
+
+  create_table "users_kudo_items", :force => true do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+  end
 
 end
