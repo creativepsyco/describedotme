@@ -1,13 +1,17 @@
 DescribeMe::Application.routes.draw do
   authenticated :user do
-    root :to => 'home#index'
+    root :to => "home#index"
   end
   root :to => "home#index"
+
+  resources :items
 
   devise_for :users
   resources :users do
     resources :items
   end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+
+  before_filter :user_signed_in?, :only => [:create, :new, :edit]
+
   # Get roles accessible by the current item
   #----------------------------------------------------
   def accessible_roles
@@ -11,13 +14,22 @@ class ItemsController < ApplicationController
     @current_user = current_user
   end
 
+  def identify_user
+    if !params[:user_id]
+      @user = current_user
+    elsif
+      @user = User.find(params[:user_id])
+    end
+    return @user
+  end
+
 
   # GET /items
   # GET /items.xml
   # GET /items.json                                       HTML and AJAX
   #-----------------------------------------------------------------------
   def index
-    @user = User.find(params[:user_id])
+    self.identify_user
     @items = @user.items
     respond_to do |format|
       format.json { render :json => @items }
@@ -31,8 +43,8 @@ class ItemsController < ApplicationController
   # GET /items/new.json                                    HTML AND AJAX
   #-------------------------------------------------------------------
   def new
-    puts params
-    @user = User.find(params[:user_id])
+    @user = current_user
+    @item = current_user.items.build
     respond_to do |format|
       format.json { render :json => @item }
       format.xml  { render :xml => @item }
@@ -45,7 +57,7 @@ class ItemsController < ApplicationController
   # GET /items/1.json                                     HTML AND AJAX
   #-------------------------------------------------------------------
   def show
-    @user = User.find(params[:user_id])
+    self.identify_user
     @item = Item.find(params[:id])
     respond_to do |format|
       format.json { render :json => @item }
@@ -59,6 +71,7 @@ class ItemsController < ApplicationController
   # GET /items/1/edit.json                                HTML AND AJAX
   #-------------------------------------------------------------------
   def edit
+    @item = Item.find(params[:id])
     respond_to do |format|
       format.json { render :json => @item }
       format.xml  { render :xml => @item }
@@ -85,7 +98,7 @@ class ItemsController < ApplicationController
   # POST /items.json                                      HTML AND AJAX
   #-----------------------------------------------------------------
   def create
-    @item = Item.new(params[:item])
+    @item = current_user.items.build(params[:item])
 
     if @item.save
       respond_to do |format|

@@ -1,18 +1,14 @@
 <h1>Listing items</h1>
 
 <table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @items.each_with_index do |item, i| %>
-  <% @item = @items[i]
+  <% @item = @items[i] %>
   <tr>
-    <td><%= link_to 'Show', url_for([@user, @item]) %></td>
+    <td><%= @item.title %></td>
+    <td><%= @item.description %></td>
+    <td><%= link_to 'Show', user_item_path(@user, @item) %></td>
     <td><%= link_to 'Edit', edit_user_item_path(@user, @item) %></td>
-    <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', user_item_path(@user, @item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

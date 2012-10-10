@@ -48,9 +48,9 @@ class UsersController < ApplicationController
   def show
     if (!params[:id])
       @user = current_user
+    elsif
+      @user = User.find(params[:id])
     end
-    @user = User.find(params[:id])
-    puts "User: ", @user, @user.name, @user.id
     respond_to do |format|
       format.json { render :json => @user }
       format.xml  { render :xml => @user }
