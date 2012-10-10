@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   def accessible_roles
     @accessible_roles = Role.accessible_by(current_ability, :read)
   end
- 
+
   # Make the current item object available to views
   #----------------------------------------
   def get_user
@@ -13,11 +13,11 @@ class ItemsController < ApplicationController
 
 
   # GET /items
-  # GET /items.xml                                                
+  # GET /items.xml
   # GET /items.json                                       HTML and AJAX
   #-----------------------------------------------------------------------
   def index
-    @user = User.find(params[:user_id]) 
+    @user = User.find(params[:user_id])
     @items = @user.items
     respond_to do |format|
       format.json { render :json => @items }
@@ -25,68 +25,68 @@ class ItemsController < ApplicationController
       format.html
     end
   end
- 
+
   # GET /items/new
-  # GET /items/new.xml                                            
+  # GET /items/new.xml
   # GET /items/new.json                                    HTML AND AJAX
   #-------------------------------------------------------------------
   def new
     puts params
-    @user = User.find(params[:user_id]) 
+    @user = User.find(params[:user_id])
     respond_to do |format|
-      format.json { render :json => @item }   
+      format.json { render :json => @item }
       format.xml  { render :xml => @item }
       format.html
     end
   end
- 
+
   # GET /items/1
-  # GET /items/1.xml                                                       
+  # GET /items/1.xml
   # GET /items/1.json                                     HTML AND AJAX
   #-------------------------------------------------------------------
   def show
-   	@item = Item.find(params[:id]) 
-   	puts "Item: ", @item, @item.name, @item.id
+    @user = User.find(params[:user_id])
+    @item = Item.find(params[:id])
     respond_to do |format|
       format.json { render :json => @item }
       format.xml  { render :xml => @item }
-      format.html      
+      format.html
     end
   end
- 
-  # GET /items/1/edit                                                      
-  # GET /items/1/edit.xml                                                      
+
+  # GET /items/1/edit
+  # GET /items/1/edit.xml
   # GET /items/1/edit.json                                HTML AND AJAX
   #-------------------------------------------------------------------
   def edit
     respond_to do |format|
-      format.json { render :json => @item }   
+      format.json { render :json => @item }
       format.xml  { render :xml => @item }
       format.html
     end
   end
- 
-  # DELETE /items/1     
+
+  # DELETE /items/1
   # DELETE /items/1.xml
   # DELETE /items/1.json                                  HTML AND AJAX
   #-------------------------------------------------------------------
   def destroy
     @item.destroy!
- 
+
     respond_to do |format|
       format.json { respond_to_destroy(:ajax) }
       format.xml  { head :ok }
-      format.html { respond_to_destroy(:html) }      
+      format.html { respond_to_destroy(:html) }
     end
   end
- 
+
   # POST /items
-  # POST /items.xml         
+  # POST /items.xml
   # POST /items.json                                      HTML AND AJAX
   #-----------------------------------------------------------------
   def create
     @item = Item.new(params[:item])
- 
+
     if @item.save
       respond_to do |format|
         format.json { render :json => @item.to_json, :status => 200 }
@@ -112,7 +112,7 @@ class ItemsController < ApplicationController
     else
       @item.errors[:base] << "The password you entered is incorrect" unless @item.valid_password?(params[:item][:current_password])
     end
- 
+
     respond_to do |format|
       if @item.errors[:base].empty? and @item.update_attributes(params[:item])
         flash[:notice] = "Your account has been updated"
