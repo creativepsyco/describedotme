@@ -18,6 +18,9 @@
 5. Setup
       $ bundle install
       $ rake db:migrate
+      $ rake db:seed
+
+6. For Testing one more additional step
       $ rake db:populate
 
 == Welcome to Rails
