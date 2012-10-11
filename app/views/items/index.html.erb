@@ -1,0 +1,18 @@
+<h1>Listing items</h1>
+
+<table>
+<% @items.each_with_index do |item, i| %>
+  <% @item = @items[i] %>
+  <tr>
+    <td><%= @item.title %></td>
+    <td><%= @item.description %></td>
+    <td><%= link_to 'Show', user_item_path(@user, @item) %></td>
+    <td><%= link_to 'Edit', edit_user_item_path(@user, @item) %></td>
+    <td><%= link_to 'Destroy', user_item_path(@user, @item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_user_item_path(@user) %>

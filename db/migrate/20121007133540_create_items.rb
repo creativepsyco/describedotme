@@ -5,19 +5,15 @@ class CreateItems < ActiveRecord::Migration
       t.string :description
       t.string :item_url
       t.references :category
-      t.references :creator
+      t.integer :creator_id # refer to user id
 
       t.timestamps
     end
 
-    create_table :users_favorite_items do |t|
-    	t.references :user, :item
+    create_table :categories do |t|
+      t.string :name
+      t.string :description
     end
-
-    create_table :users_kudo_items do |t|
-    	t.references :user, :item
-    end
-
 
   end
 end
