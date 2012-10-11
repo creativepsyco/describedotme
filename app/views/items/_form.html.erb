@@ -1,7 +1,7 @@
-<%= form_for([@user, @user.items.build]) do |f| %>
+<%= form_for(@item) do |f| %>
   <p><%= f.label :title %></p>
   <p><%= f.text_field :title %></p>
-       
+
   <p><%= f.label :description %></p>
   <p><%= f.text_area :description %></p>
 

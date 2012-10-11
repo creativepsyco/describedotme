@@ -1,23 +1,29 @@
 <h3><%= @user.name %></h3>
 
 <% if(can?(:update, @user)) %>
-<%= link_to "Edit", edit_user_path(@user) %>| 
+<%= link_to "Edit", edit_user_path(@user) %>|
 <% end %>
 <% if (can?(:delete, @user)) %>
 <%= link_to "Delete", user_path(@user), :confirm => "Are you sure?", :method => :delete  %>
 <% end %>
 
-<% @user.items.each do |item| %>
+<table>
+<% @user.items.each_with_index do |item, i| %>
+  <% @item = @user.items[i] %>
   <tr>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= @item.title %></td>
+    <td><%= @item.description %></td>
+    <td><%= link_to 'Show', user_item_path(@user, @item) %></td>
+    <td><%= link_to 'Edit', edit_user_item_path(@item) %></td>
+    <td><%= link_to 'Destroy', user_item_path(@user, @item),
+            method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+</table>
 
 <p/>
 <%= link_to 'New Item', new_user_item_path(@user) %>
- 
+
 <table class="one-column-emphasis">
 	<tbody>
 		<tr>
