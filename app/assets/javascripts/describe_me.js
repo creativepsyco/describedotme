@@ -4,7 +4,8 @@ window.DescribeMe = {
   Views: {},
   Routers: {},
   init: function() {
-    alert('Hello from Backbone!');
+    	DescribeMe.router = new DescribeMe.Routers.Router();
+    	Backbone.history.start();
   }
 };
 

@@ -1,1 +1,21 @@
 @import "bootstrap";
+
+body {
+	background: #F1F1F1;
+}
+
+.project-item {
+	background: #fff;
+
+	-webkit-box-shadow:  0px 1px 1px 0px #999;
+	box-shadow:  0px 1px 1px 0px #999;
+}
+
+.project-item h3 {
+	padding: 10px;
+}
+
+.project-item .controls{
+	padding: 10px;
+	text-align: right;
+}
