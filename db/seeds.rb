@@ -7,6 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts 'SETTING UP DEFAULT USER LOGIN'
 
+
+Category.create! :name => 'Photo', :description => 'Photos taken by you'
+Category.create! :name => 'Computer Program', :description => 'Computer Programs written by you'
+Category.create! :name => 'Written Song', :description => 'Songs written by you'
+Category.create! :name => 'Performed Song', :description => 'Songs performed by you'
+Category.create! :name => 'Drawing', :description => 'Drawings drawn by you'
+
+
+
 role = Role.create! :role => 'super_admin'
 role1 = Role.create! :role => 'admin'
 role2 = Role.create! :role => 'normal'
