@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010061454) do
+ActiveRecord::Schema.define(:version => 20121012092115) do
+
+  create_table "categories", :force => true do |t|
+    t.string "name"
+    t.string "description"
+  end
+
+  add_index "categories", ["name"], :name => "index_categories_on_name", :unique => true
 
   create_table "items", :force => true do |t|
     t.string   "title"
@@ -37,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20121010061454) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "roles", ["role"], :name => "index_roles_on_role", :unique => true
+
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
@@ -46,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20121010061454) do
     t.string "name"
     t.string "description"
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -65,15 +76,5 @@ ActiveRecord::Schema.define(:version => 20121010061454) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_favorite_items", :force => true do |t|
-    t.integer "user_id"
-    t.integer "item_id"
-  end
-
-  create_table "users_kudo_items", :force => true do |t|
-    t.integer "user_id"
-    t.integer "item_id"
-  end
 
 end

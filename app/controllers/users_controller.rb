@@ -75,12 +75,24 @@ class UsersController < ApplicationController
   # DELETE /users/1.json                                  HTML AND AJAX
   #-------------------------------------------------------------------
   def destroy
-    @user.destroy!
+    if (!params[:id])
+      @user = current_user
+    elsif
+      @user = User.find(params[:id])
+    end
 
-    respond_to do |format|
-      format.json { respond_to_destroy(:ajax) }
-      format.xml  { head :ok }
-      format.html { respond_to_destroy(:html) }
+    if @user.destroy
+      respond_to do |format|
+        format.json { render :json => {:result => :ok}, :status => 200 }
+        format.xml  { head :ok }
+        format.html { redirect_to :action => :index }
+      end
+    else
+      respond_to do |format|
+        format.json { render :text => "Could not destroy user", :status => :unprocessable_entity } # placeholder
+        format.xml  { head :ok }
+        format.html { render :action => :new, :status => :unprocessable_entity }
+      end
     end
   end
 
