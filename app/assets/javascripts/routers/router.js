@@ -1,7 +1,8 @@
 DescribeMe.Routers.Router = Backbone.Router.extend({
 	routes: {
 		'projects': 'showAllProjects',
-		'import' : 'importArticle'
+		'projects/new': 'newProject',
+		'' : 'homePage'
 	},
   
 	initialize: function() {
@@ -21,8 +22,11 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		var projectList = new DescribeMe.Views.ProjectList({model:projects}).render();
 	},
 
-	importArticle: function() {
-		window.importView = new Tabzine.Views.ArticleImport($('#mercury_iframe').contents().find('#main-container'));
-		importView.render();
+	newProject: function() {
+		var newProject = new DescribeMe.Views.ProjectNew().render();
+	},
+
+	homePage: function() {
+		// code to display home page view.
 	} 
 });
