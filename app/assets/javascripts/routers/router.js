@@ -1,5 +1,6 @@
 DescribeMe.Routers.Router = Backbone.Router.extend({
 	routes: {
+		'profile': 'showProfile',
 		'projects': 'showAllProjects',
 		'projects/new': 'newProject',
 		'' : 'homePage'
@@ -15,6 +16,11 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		var p3 = new DescribeMe.Models.ProjectItem({title:'Project Title 3', thumbnail: 'http://www.ordnung-statt-chaos.de/wp-content/themes/thesis/rotator/sample-2.jpg'});
 		var projects = new DescribeMe.Collections.ProjectList([p1,p2, p3]);
 		return projects;
+	},
+
+	showProfile: function() {
+		var p1 = new DescribeMe.Models.Profile({username:'Mike Nicolas', profilePicture: 'http://a.dryicons.com/images/icon_sets/shine_icon_set/png/256x256/user.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'});
+		var profileShow = new DescribeMe.Views.ProfileShow({model:p1}).render();
 	},
 
 	showAllProjects: function() {
