@@ -25,7 +25,7 @@ gem "faker", "1.0.1"
 
 
 # Bootstrap Rails
-gem 'bootstrap-sass', '2.0.0'
+gem "bootstrap-sass", "~>2.1.0"
 
 # Backbone js
 # More https://github.com/codebrew/backbone-rails

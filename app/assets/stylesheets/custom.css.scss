@@ -19,3 +19,35 @@ body {
 	padding: 10px;
 	text-align: right;
 }
+
+.profile-top{
+	background: #4B4B4B;
+	border-radius:4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius:4px 4px 0 0; /* Firefox 3.6 and earlier */	
+}
+
+.profile-header{
+	background: #fff;
+	padding: 19px 20px 30px; 
+	background: white;
+	-webkit-box-shadow:  0px 1px 1px 0px #999;
+	box-shadow:  0px 1px 1px 0px #999;
+}
+
+#profile-username-text {
+	color: #fff;
+	padding-left:20px;
+	line-height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.right {
+	float: right;
+}
+
+.profile-statistic li {
+	line-height: 27px;
+	border-bottom: 1px solid #E5E5E5;
+}

@@ -5,6 +5,7 @@ DescribeMe.Views.ProjectList = Backbone.View.extend({
 	template: JST['project/list'],
 
 	initialize: function () {
+        console.log(this.model);
 		this.model.bind("reset", this.render, this);
         this.model.bind("add", this.add);
 	},

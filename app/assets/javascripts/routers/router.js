@@ -1,7 +1,9 @@
 DescribeMe.Routers.Router = Backbone.Router.extend({
 	routes: {
+		'profile': 'showProfile',
 		'projects': 'showAllProjects',
-		'import' : 'importArticle'
+		'projects/new': 'newProject',
+		'' : 'homePage'
 	},
   
 	initialize: function() {
@@ -16,13 +18,21 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		return projects;
 	},
 
+	showProfile: function() {
+		var p1 = new DescribeMe.Models.Profile({username:'Mike Nicolas', profilePicture: 'http://a.dryicons.com/images/icon_sets/shine_icon_set/png/256x256/user.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'});
+		var profileShow = new DescribeMe.Views.ProfileShow({model:p1}).render();
+	},
+
 	showAllProjects: function() {
 		var projects = this.getDummy();
 		var projectList = new DescribeMe.Views.ProjectList({model:projects}).render();
 	},
 
-	importArticle: function() {
-		window.importView = new Tabzine.Views.ArticleImport($('#mercury_iframe').contents().find('#main-container'));
-		importView.render();
+	newProject: function() {
+		var newProject = new DescribeMe.Views.ProjectNew().render();
+	},
+
+	homePage: function() {
+		// code to display home page view.
 	} 
 });
