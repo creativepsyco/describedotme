@@ -112,7 +112,18 @@ class ItemsController < ApplicationController
   # POST /items.json                                      HTML AND AJAX
   #-----------------------------------------------------------------
   def create
-    @item = current_user.items.build(params[:item])
+    puts params
+    item_data = {
+      :title => params[:title],
+      :description => params[:description]
+    }
+
+    @item = current_user.items.build(item_data)
+    if params[:photos]
+      params[:photos].each do |photo|
+        @item.photos.build(photo)
+      end
+    end
 
     if @item.save
       respond_to do |format|
