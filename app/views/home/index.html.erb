@@ -1,3 +1,23 @@
 <div id="main-content" class="row">
 	
 </div>
+
+<!--test-->
+<script type="text/javascript">
+	 function doTheUpload()
+	 {
+	 		var fileInput = document.getElementById('uploadFile');
+	 		var file = fileInput.files[0];
+	 		var callback = function (img_url, message) {
+	 			// Callback invoked when image is uploaded
+	 			alert(img_url);
+	 		};
+            Upload.doUpload(file, callback);
+            return false;
+      }
+</script>
+<form enctype='multipart/form-data' >
+File to upload: <input id="uploadFile" type="file" name="upfile"><br>
+Notes about the file: 
+<a class="btn" href="#" onclick="doTheUpload()">Press</a> to upload the file!
+</form>
