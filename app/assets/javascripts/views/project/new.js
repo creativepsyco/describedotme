@@ -8,7 +8,7 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 	},
 
 	events : {
-		'click #save' : 'onSave',
+		'submit form' : 'onSave',
 	},
 
 	onSave: function() {
@@ -29,7 +29,7 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 	    		alert("Failure - " + response);
 	    	}
 	    });
-
+		return false;
 		
 	},
 
