@@ -23,7 +23,7 @@
 		    </div>
 		  </div>
 		  <div class="control-group">
-		  	<a class="btn btn-small" href="#" class="delete"><i class="icon-picture"></i></a>
+		  	<a id="img-upload" class="btn btn-small" href="#imageUploadModal" class="delete" data-toggle="modal"><i class="icon-picture"></i></a>
 		    <div class="controls pull-right">
 		      <button id="cancel" type="submit" class="btn">Cancel</button>
 		      <button id="save" type="submit" class="btn btn-primary">Save</button>
@@ -31,4 +31,19 @@
 		  </div>
 		</form>
 	</div>
+</div>
+<div class="modal" id="imageUploadModal" tabindex="-1" data-show="false" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Image Upload</h3>
+  </div>
+  <div class="modal-body">
+    <div style="text-align:center;"><a class="btn" onclick="$('input').click()">Select Image</a></div>
+	<input id="img-uploader" style="visibility: collapse; width: 0px;" type="file">
+	<div style="text-align: center;"><img id="img-upload-preview" style="height:80px;"/></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
 </div>
