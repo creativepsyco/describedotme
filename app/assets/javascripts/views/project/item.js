@@ -9,15 +9,22 @@ DescribeMe.Views.ProjectItem = Backbone.View.extend({
 
 	events : {
 		'click .edit' : 'onEditClick',
-		'click .delete' : 'onDeleteClick'
+		'click .delete' : 'onDeleteClick',
 	},
 
 	onEditClick: function() {
-		
+		alert("Editting");
 	},
 
 	onDeleteClick: function() {
+		alert("Attempt to delete");
 
+		this.model.destroy(
+		{
+			success: function(model, response) {
+				alert("Deleted");
+			}
+  		});
 	},
 
 	render: function() {
