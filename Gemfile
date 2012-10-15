@@ -10,8 +10,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  # Bootstrap Rails
-  gem "bootstrap-sass", "~>2.1.0"
 end
 gem 'jquery-rails'
 gem "rspec-rails", ">= 2.10.1", :group => [:development, :test]
@@ -28,3 +26,6 @@ gem "faker", "1.0.1"
 # Backbone js
 # More https://github.com/codebrew/backbone-rails
 gem 'backbone-on-rails'
+
+# Bootstrap Rails
+gem "bootstrap-sass", "2.0.0"
