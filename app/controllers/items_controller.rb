@@ -23,6 +23,16 @@ class ItemsController < ApplicationController
     return @user
   end
 
+  def convert_to_json(item)
+    default_photo = 'http://placehold.it/300x200'
+    return {
+      :id => item.id,
+      :title => item.title,
+      :desc => item.description,
+      :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
+      :photos => item.photos,
+    }
+  end
 
   # GET /items
   # GET /items.xml
@@ -31,10 +41,13 @@ class ItemsController < ApplicationController
   def index
     self.identify_user
     @items = @user.items
+    @itemlist = @items.map do |item|
+      convert_to_json(item)
+    end
     respond_to do |format|
-      format.json { render :json => @items }
+      format.json { render :json => @itemlist }
       format.xml  { render :xml => @items }
-      format.html
+      format.html { render text: "Unsupported Format", status: 404 }
     end
   end
 
@@ -59,8 +72,9 @@ class ItemsController < ApplicationController
   def show
     self.identify_user
     @item = Item.find(params[:id])
+    @itemjson = convert_to_json(@item)
     respond_to do |format|
-      format.json { render :json => @item }
+      format.json { render :json => @itemjson}
       format.xml  { render :xml => @item }
       format.html
     end
