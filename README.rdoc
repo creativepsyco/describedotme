@@ -49,7 +49,7 @@ For user:
              user profile GET   /users(.:format)                         users#profile
                                 # return: 
                                 {id: int, name: string, email: string, num_items: int, 
-                                  items: [{title: string, description: string, files_id: [int], tags: [string]}]}
+                                  items: [{title: string, description: string, photos: [{photo_url: string, description: string}, ..], tags: [string]}]}
 
                    users GET    /users(.:format)                         users#index
                                 # return: # i think we need to change name => first name / last name
