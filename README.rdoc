@@ -11,9 +11,9 @@
        CREATE DATABASE IF NOT EXISTS describedotme_production;
 
 4. Grant all priviliges for user describedotme
-       GRANT ALL PRIVILEGES ON describedotme_development.* TO describedotme;
-       GRANT ALL PRIVILEGES ON describedotme_test.* TO describedotme;
-       GRANT ALL PRIVILEGES ON describedotme_production.* TO describedotme;
+       GRANT ALL PRIVILEGES ON describedotme_development.* TO describedotme@localhost;
+       GRANT ALL PRIVILEGES ON describedotme_test.* TO describedotme@localhost;
+       GRANT ALL PRIVILEGES ON describedotme_production.* TO describedotme@localhost;
 
 5. Setup
       $ bundle install
