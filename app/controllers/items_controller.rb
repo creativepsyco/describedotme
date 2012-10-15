@@ -31,6 +31,7 @@ class ItemsController < ApplicationController
       :desc => item.description,
       :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
       :photos => item.photos,
+      :comments => item.comments,
     }
   end
 
