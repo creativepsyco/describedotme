@@ -1,3 +1,8 @@
+/**
+ * [getParentFunction description]
+ * @param  {[type]} funcName [description]
+ * @return {[type]}          [description]
+ */
 function getParentFunction(funcName) {
   var func = null;
   // Child opened in new window e.g. target="blank"
@@ -13,10 +18,13 @@ function getParentFunction(funcName) {
   }
   return func; 
 }
+// TODO: Remove the above function once it goes into production
+//////////////////////////////
+//
 
-var WidgetAPI.log = getParentFunction("WidgetAPI.log");
+var WidgetAPI_log = getParentFunction("WidgetAPI.log");
 
 $(document).ready(function($) {
 	// Stuff to do as soon as the DOM is ready. Use $() w/o colliding with other libs;
-	WidgetAPI.log("hello from the widget");
+	WidgetAPI_log("hello from the widget");
 });
