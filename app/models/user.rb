@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   before_save :default_photo
   
   def default_values
-    self.status ||= 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+    self.photo_url ||= 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+    self.description ||= ''
   end
 
   # Include default devise modules. Others available are:
