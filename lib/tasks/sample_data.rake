@@ -26,6 +26,7 @@ namespace :db do
                            description: description)
       end
     end
+
     puts "Populate sample photos"
     sample_photos = [
       'http://behance.vo.llnwd.net/profiles4/146258/projects/5480661/0970f716f3f81d5afbee8bcc0bdab799.jpg',
@@ -45,6 +46,19 @@ namespace :db do
           photo = item.photos.create!(
             caption: Faker::Lorem.sentence(3),
             photo_url: sample_photos.sample
+          )
+        end
+      end
+    end
+
+    puts "Populate sample comments"
+    5.times do
+      users.each do |user|
+        user.items.each do |item|
+          creator = users.sample
+          comment = item.comments.create!(
+            creator_id: creator.id,
+            content: Faker::Lorem.sentence(7)
           )
         end
       end
