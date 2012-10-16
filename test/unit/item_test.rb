@@ -31,4 +31,15 @@ class ItemTest < ActiveSupport::TestCase
     assert user_two.save, "User cannot favourite item"
   end
 
+  test "user should be able to kudo item" do
+    item = Item.new
+    user_one = users(:one)
+    item.creator = user_one
+    item.save
+
+    user_two = users(:two)
+    user_two.kudo_items << item
+    assert user_two.save, "User cannot kudo item"
+  end
+
 end

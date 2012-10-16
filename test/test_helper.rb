@@ -4,6 +4,7 @@ require 'rails/test_help'
 # load "#{Rails.root}/db/seeds.rb"
 
 class ActiveSupport::TestCase
+	include Devise::TestHelpers
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
