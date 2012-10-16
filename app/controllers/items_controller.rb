@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_filter :user_signed_in?, :only => [:create, :new, :edit]
+  before_filter :user_signed_in?, :only => [:create, :new, :edit, :destroy]
 
   # Get roles accessible by the current item
   #----------------------------------------------------
@@ -31,6 +31,7 @@ class ItemsController < ApplicationController
       :desc => item.description,
       :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
       :photos => item.photos,
+      :comments => item.comments,
     }
   end
 
@@ -98,12 +99,24 @@ class ItemsController < ApplicationController
   # DELETE /items/1.json                                  HTML AND AJAX
   #-------------------------------------------------------------------
   def destroy
-    @item.destroy!
+    @item = Item.find(params[:id])
+    if current_user.id != @item.creator_id.to_i
+      respond_to do |format|
+        format.all { render :text => "Unauthorized action" }
+      end
+      return
+    end
 
-    respond_to do |format|
-      format.json { respond_to_destroy(:ajax) }
-      format.xml  { head :ok }
-      format.html { respond_to_destroy(:html) }
+    puts 'Pass authentication check'
+
+    if @item.destroy
+      respond_to do |format|
+        format.all { render :json => {:result => :ok}, :status => 200 }
+      end
+    else
+      respond_to do |format|
+        format.all { render :text => "Could not delete comment", :status => :unprocessable_entity } # placeholder
+      end
     end
   end
 

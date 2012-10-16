@@ -5,6 +5,7 @@ DescribeMe::Application.routes.draw do
   root :to => "home#index"
 
   resources :items
+  resources :comments, :only => [:show, :create, :destroy]
 
   devise_for :users
   resources :users do
