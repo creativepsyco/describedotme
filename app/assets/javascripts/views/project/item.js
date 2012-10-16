@@ -17,12 +17,10 @@ DescribeMe.Views.ProjectItem = Backbone.View.extend({
 	},
 
 	onDeleteClick: function() {
-		alert("Attempt to delete");
-
 		this.model.destroy(
 		{
 			success: function(model, response) {
-				alert("Deleted");
+				alert("Success");
 			}
   		});
 	},
