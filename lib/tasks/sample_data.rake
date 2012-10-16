@@ -6,7 +6,8 @@ namespace :db do
     User.create(name: "Example User",
                 email: "example@describe.me",
                 password: "foobar",
-                password_confirmation: "foobar")
+                password_confirmation: "foobar",
+                description: "")
     20.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@describe.me"
@@ -14,7 +15,8 @@ namespace :db do
       User.create(name: name,
                   email: email,
                   password: password,
-                  password_confirmation: password)
+                  password_confirmation: password,
+                  description: "")
     end
     puts "Populate sample posts"
     users = User.all(limit: 6)
