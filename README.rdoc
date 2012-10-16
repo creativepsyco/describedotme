@@ -11,9 +11,9 @@
        CREATE DATABASE IF NOT EXISTS describedotme_production;
 
 4. Grant all priviliges for user describedotme
-       GRANT ALL PRIVILEGES ON describedotme_development.* TO describedotme;
-       GRANT ALL PRIVILEGES ON describedotme_test.* TO describedotme;
-       GRANT ALL PRIVILEGES ON describedotme_production.* TO describedotme;
+       GRANT ALL PRIVILEGES ON describedotme_development.* TO describedotme@localhost;
+       GRANT ALL PRIVILEGES ON describedotme_test.* TO describedotme@localhost;
+       GRANT ALL PRIVILEGES ON describedotme_production.* TO describedotme@localhost;
 
 5. Setup
       $ bundle install
@@ -49,7 +49,7 @@ For user:
              user profile GET   /users(.:format)                         users#profile
                                 # return: 
                                 {id: int, name: string, email: string, num_items: int, 
-                                  items: [{title: string, description: string, files_id: [int], tags: [string]}]}
+                                  items: [{title: string, description: string, photos: [{photo_url: string, description: string}, ..], tags: [string]}]}
 
                    users GET    /users(.:format)                         users#index
                                 # return: # i think we need to change name => first name / last name
@@ -69,13 +69,14 @@ For user item:
 
                                 // Hung: in charge of this part
 
-              user_items GET    /users/:user_id/items(.:format)          items#index       
+              user_items GET    /users/:user_id/items(.:format)          items#index
+                   items GET    /items                                   items#index       current user's all items
                                 return:
                                 [{title: string, description: string, files_id: [int], tags: [string]}]
                                 
                                 # files_id: array of files associated with this item <photo, songs ... >
 
-                         POST   /users/:user_id/items(.:format)          items#create
+                         POST   /items(.:format)          items#create
                                 # create new item
                                 # params:
                                 {title: string, description: string, files_id: [int], tags: [string]}
@@ -83,22 +84,21 @@ For user item:
                                 return:
                                 {result: "ok"}  /  {result: "not_ok", error_message: string}
 
-           new_user_item GET    /users/:user_id/items/new(.:format)      items#new
-                                // not used
-
-          edit_user_item GET    /users/:user_id/items/:id/edit(.:format) items#edit
-                                // not used
+                new_item GET    /items/new(.:format)      items#new
+                                
+               edit_item GET    /items/:id/edit(.:format) items#edit
 
                user_item GET    /users/:user_id/items/:id(.:format)      items#show
+                    item GET    /items/:id                               items#show        current user's items
                                 {title: string, description: string, files_id: [int], tags: [string]}
 
-                         PUT    /users/:user_id/items/:id(.:format)      items#update
+                         PUT    /items/:id(.:format)      items#update
                                 # params:
                                 {title: string, description: string, files_id: [int], tags: [string]}
                                 # return:
                                 {result: "ok"}  /  {result: "not_ok", error_message: string}
 
-                         DELETE /users/:user_id/items/:id(.:format)      items#destroy
+                         DELETE /items/:id(.:format)      items#destroy
                                 # return:
                                 {result: "ok"}  /  {result: "not_ok", error_message: string}
 

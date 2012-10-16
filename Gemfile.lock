@@ -37,7 +37,7 @@ GEM
       railties (>= 3.1)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
-    bootstrap-sass (2.1.0.0)
+    bootstrap-sass (2.0.0)
     builder (3.0.3)
     cancan (1.6.8)
     capybara (1.1.2)
@@ -188,11 +188,12 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
   backbone-on-rails
-  bootstrap-sass (~> 2.1.0)
+  bootstrap-sass (= 2.0.0)
   cancan
   capybara (>= 1.1.2)
   coffee-rails (~> 3.2.1)

@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_filter :user_signed_in?, :only => [:create, :new, :edit]
+  before_filter :user_signed_in?, :only => [:create, :new, :edit, :destroy]
 
   # Get roles accessible by the current item
   #----------------------------------------------------
@@ -23,6 +23,17 @@ class ItemsController < ApplicationController
     return @user
   end
 
+  def convert_to_json(item)
+    default_photo = 'http://placehold.it/300x200'
+    return {
+      :id => item.id,
+      :title => item.title,
+      :desc => item.description,
+      :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
+      :photos => item.photos,
+      :comments => item.comments,
+    }
+  end
 
   # GET /items
   # GET /items.xml
@@ -31,10 +42,13 @@ class ItemsController < ApplicationController
   def index
     self.identify_user
     @items = @user.items
+    @itemlist = @items.map do |item|
+      convert_to_json(item)
+    end
     respond_to do |format|
-      format.json { render :json => @items }
+      format.json { render :json => @itemlist }
       format.xml  { render :xml => @items }
-      format.html
+      format.html { render text: "Unsupported Format", status: 404 }
     end
   end
 
@@ -59,8 +73,9 @@ class ItemsController < ApplicationController
   def show
     self.identify_user
     @item = Item.find(params[:id])
+    @itemjson = convert_to_json(@item)
     respond_to do |format|
-      format.json { render :json => @item }
+      format.json { render :json => @itemjson}
       format.xml  { render :xml => @item }
       format.html
     end
@@ -84,12 +99,24 @@ class ItemsController < ApplicationController
   # DELETE /items/1.json                                  HTML AND AJAX
   #-------------------------------------------------------------------
   def destroy
-    @item.destroy!
+    @item = Item.find(params[:id])
+    if current_user.id != @item.creator_id.to_i
+      respond_to do |format|
+        format.all { render :text => "Unauthorized action" }
+      end
+      return
+    end
 
-    respond_to do |format|
-      format.json { respond_to_destroy(:ajax) }
-      format.xml  { head :ok }
-      format.html { respond_to_destroy(:html) }
+    puts 'Pass authentication check'
+
+    if @item.destroy
+      respond_to do |format|
+        format.all { render :json => {:result => :ok}, :status => 200 }
+      end
+    else
+      respond_to do |format|
+        format.all { render :text => "Could not delete comment", :status => :unprocessable_entity } # placeholder
+      end
     end
   end
 
@@ -98,7 +125,18 @@ class ItemsController < ApplicationController
   # POST /items.json                                      HTML AND AJAX
   #-----------------------------------------------------------------
   def create
-    @item = current_user.items.build(params[:item])
+    puts params
+    item_data = {
+      :title => params[:title],
+      :description => params[:description]
+    }
+
+    @item = current_user.items.build(item_data)
+    if params[:photos]
+      params[:photos].each do |photo|
+        @item.photos.build(photo)
+      end
+    end
 
     if @item.save
       respond_to do |format|

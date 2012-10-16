@@ -23,10 +23,9 @@ gem "devise", ">= 2.1.0"
 gem "cancan"
 gem "faker", "1.0.1"
 
-
-# Bootstrap Rails
-gem "bootstrap-sass", "~>2.1.0"
-
 # Backbone js
 # More https://github.com/codebrew/backbone-rails
 gem 'backbone-on-rails'
+
+# Bootstrap Rails
+gem "bootstrap-sass", "2.0.0"

@@ -1,9 +1,19 @@
-@import "bootstrap";
-
 body {
 	background: #F1F1F1;
 }
-
+.page-top {
+	padding-bottom: 9px;
+  	margin: 20px 0 30px;
+  	border-bottom: 1px solid #CFCFCF;
+}
+.toolbar-search {
+	margin: 20px 0 20px;
+}
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #CFCFCF;
+}
 .project-item {
 	background: #fff;
 
@@ -11,8 +21,10 @@ body {
 	box-shadow:  0px 1px 1px 0px #999;
 }
 
-.project-item h3 {
+.project-item h4 {
 	padding: 10px;
+	height: 13px;
+	overflow: hidden;
 }
 
 .project-item .controls{
