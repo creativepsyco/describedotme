@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
 
   before_create :set_default_role
+  before_save :default_photo
+  
+  def default_values
+    self.status ||= 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+  end
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -9,7 +14,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :photo_url, :description
 
   # attr_accessible :title, :body
   validates :name, presence: true
