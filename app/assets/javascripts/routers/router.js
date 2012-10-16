@@ -22,19 +22,39 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 
 	showProfile: function() {
 		var self = this;
-		var p1 = new DescribeMe.Models.Profile({username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'});
+		var profile = new DescribeMe.Models.Profile({id:"1"});
+		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
 		var projects = new DescribeMe.Collections.ProjectList();
+
+		this.profileShow = new DescribeMe.Views.ProfileShow();
+		this.profileShow.render();
+
+		profile.fetch(
+		{
+			success: function() {
+				if(self.profileShow) {
+    				self.profileShow.profileModel = profile;
+    			}
+    			else {
+					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
+    			}
+    			self.profileShow.renderProfile();
+				console.log(profile.toJSON());
+			},
+			error: function() {
+				console.log('Unable to load profile!');
+			}
+		});
 		projects.fetch(
 		{
     		success: function () {
-    			p1.set({projects: projects});
     			if(self.profileShow) {
-    				self.profileShow.model = p1;
+    				self.profileShow.projectsModel = projects;
     			}
     			else {
-					self.profileShow = new DescribeMe.Views.ProfileShow({model:p1});
+					self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
     			}
-    			self.profileShow.render();
+    			self.profileShow.renderProject();
     		},
     		error: function() {
     			console.log('Unable to load projects!');
@@ -83,6 +103,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	showDashboard: function(){
 		var self = this;
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
-		var profileShow = new DescribeMe.Views.DashboardShow({sidebar:self.sidebar}).render();
+		
+		var dashboardShow = new DescribeMe.Views.DashboardShow({sidebar:self.sidebar}).render();
 	}
 });
