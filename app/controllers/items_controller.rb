@@ -74,6 +74,7 @@ class ItemsController < ApplicationController
     self.identify_user
     @item = Item.find(params[:id])
     @itemjson = convert_to_json(@item)
+    puts @itemjson
     respond_to do |format|
       format.json { render :json => @itemjson}
       format.xml  { render :xml => @item }
@@ -130,7 +131,6 @@ class ItemsController < ApplicationController
       :title => params[:title],
       :description => params[:description]
     }
-
     @item = current_user.items.build(item_data)
     if params[:photos]
       params[:photos].each do |photo|

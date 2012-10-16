@@ -21,12 +21,26 @@ class UserTest < ActiveSupport::TestCase
 
 
 	test "should be able to create user" do
-		password_digest = User.new.send(:password_digest, 'testtest')
   	user = User.new ({:name => 'Hoang', 
   		:email => 'test111@test.com', 
   		:password => 'password_digest', 
   		:password_confirmation => 'password_digest'})
   	assert user.save
   end
+
+  test "should be able to create user with same email" do
+    user1 = users(:one)
+    user = User.new ({:name => 'Hoang', 
+      :email => user1.email, 
+      :password => 'password_digest', 
+      :password_confirmation => 'password_digest'})
+    assert user.save
+  end
+
+  test "should be able to delete exist user" do
+    user1 = users(:one)
+    assert user1.destroy
+  end
+
 
 end
