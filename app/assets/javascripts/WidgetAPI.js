@@ -1,7 +1,11 @@
 /**
  * @author Mohit
- * [WidgetAPI description]
- * @type {Object}
+ * 
+ * [ WidgetAPI provides storage API for widgets to be able to write to the server
+ *  About the storage - storage is in the form of a JSON file/string stored to the
+ *  database by means of a Widget Controller.]
+ *  
+ * @type {window.prototype}
  */
 window.WidgetAPI = {
 	/**
@@ -47,5 +51,25 @@ window.WidgetAPI = {
 			this.currentUserId = 1;
 			return this.currentUserId;
 		}
+	},
+
+	/**
+	 * [log description]
+	 * @param  {[string]} message [Message to put]
+	 * @return {[type]}         [description]
+	 */
+	log: function widget_api_log(message) {
+		console.log(message);
+	},
+
+	/**
+	 * [logError description]
+	 * @param  {[type]} errorMessage [description]
+	 * @return {[type]}              [description]
+	 */
+	logError: function widget_api_logError(errorMessage) {
+		// TODO: Possibly send error to server
+		// for now just write to the console.log
+		this.log(errorMessage);
 	}
 };

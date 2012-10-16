@@ -51,7 +51,6 @@
  				// Assumption : File is alright
  				// TODO: implement a check
  				console.log(config_json_string);
- 				// Create the iframe and put stuff
  				//1. Load the start page
  				var src = config_json_string.location + "/index.html";
  				//2. Load with default options
