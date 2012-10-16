@@ -1,24 +1,43 @@
-<div id="profile-username" class="profile-top">
-	<a href="#" id="profile-username-text"><%= username %></a>
-</div>
-<div id="profile-header" class="profile-header">
-	<div class="row">
-		<div class="span3" style="border-right: 1px solid #E5E5E5;">
-			<img style="width:138px; height:138px;" src="<%= profilePicture %>"/>
+<div class="row">	
+	<div class="offset2 span12" style="margin-top:20px;">
+		<div id="profile-username" class="profile-top">
+			<a id="profile-username-text"><%= username %></a>
 		</div>
-		<div class="span6">
-			<p class="lead">About me</p>
-			<p><%= aboutMe %></p>
-		</div>
-		<div class="span2">
-			<ul class="unstyled profile-statistic">
-		      <li>Portfolio Views <span class="right">0</span></li>
-		      <li>Kudos <span class="right">0</span></li>
-		      <li>Followers <span class="right">0</span></li>
-		    </ul>
+		<div id="profile-header" class="profile-header">
+			<div class="row">
+				<div class="span3" style="border-right: 1px solid #E5E5E5; text-align:center; margin-left:0px">
+					<img style="width:138px; height:138px;" src="<%= profilePicture %>"/>
+				</div>
+				<div class="span6">
+					<h3 class="lead">About Me</h3>
+					<p><%= aboutMe %></p>
+				</div>
+				<div class="span2">
+					<ul class="unstyled profile-statistic">
+				      <li>Portfolio Views <span class="right">0</span></li>
+				      <li>Kudos <span class="right">0</span></li>
+				      <li>Followers <span class="right">0</span></li>
+				    </ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-
-<div id="profile-content" class="profile-content">
+<div id="profile-content" class="row">
+	<div class="span12 offset2">
+		<div id="profile-username" class="profile-top" style="margin-top: 20px; margin-bottom: 0px;">
+			<a id="profile-username-text">Projects</a>
+		</div>
+		<div id="project-container">
+		</div>
+	</div>
+</div>
+<div id="profile-addon" class="row">
+	<div class="span12 offset2">
+		<div id="profile-username" class="profile-top" style="margin-top: 20px; margin-bottom: 0px;">
+			<a id="profile-username-text">Add-Ons</a>
+		</div>
+		<div id="addon-container" style="height:60px;">
+		</div>
+	</div>
 </div>

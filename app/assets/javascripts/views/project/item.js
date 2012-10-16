@@ -20,7 +20,7 @@ DescribeMe.Views.ProjectItem = Backbone.View.extend({
 		this.model.destroy(
 		{
 			success: function(model, response) {
-				alert("Success");
+				DescribeMe.router.showAllProjects();
 			}
   		});
 	},

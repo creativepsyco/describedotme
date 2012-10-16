@@ -1,4 +1,5 @@
 DescribeMe::Application.routes.draw do
+
   authenticated :user do
     root :to => "home#index"
   end
@@ -21,6 +22,8 @@ DescribeMe::Application.routes.draw do
       resources :kudos, :only => [:index, :create]
     end
   end
+
+  match 'profile' => 'home#profile'
 
   #routes for favorite and kudo:
   match 'favourite_items' => 'users#favorite_items'
