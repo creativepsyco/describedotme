@@ -25,7 +25,7 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 		$(this.el).empty();
 		$(this.el).html(this.template(this.model.toJSON()));
 
-		WidgetLoader.addAllWidgets('#profile-widgets', null);
+		WidgetLoader.addAllWidgets('#addon-container', null);
 
 		$(this.el).find('#project-container').append($(this.projectList.el));
 		return this;

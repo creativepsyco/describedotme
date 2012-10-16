@@ -6,9 +6,15 @@ DescribeMe.Views.WidgetConfig = Backbone.View.extend({
 	template: JST['widget/widgetConfig'],
 
 	initialize: function () {
+		// GET JSON from server
 	},
 
 	events: {
+		'click .widgetAdd' : 'onWidgetAdd'
+	},
+
+	onWidgetAdd: function() {
+		// POST JSON to server
 	},
 
 	onAddClick: function() {

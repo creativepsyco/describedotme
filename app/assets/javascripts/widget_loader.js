@@ -1,3 +1,6 @@
+// GLOBAL VARS
+var widgetForUseURL = "/widgets/users/";
+
 /**
  * 
  * [WidgetLoader description]
@@ -37,13 +40,14 @@
  		// Do not add multiple times
  		// FIX: possible security hole.
  		var enabledWidgetsObject = this.getEnabledWidgets(WidgetAPI.getCurrentUser()); 
- 		
- 		var enabled_widgets = JSON.parse(enabledWidgetsObject);
+ 		var enabled_widgets = enabledWidgetsObject;
+ 		//var enabled_widgets = JSON.parse(enabledWidgetsObject);
  		console.log("[addAllWidgets] Enabled Widgets" + enabled_widgets);
  		
  		var this_ = this;
- 		enabled_widgets.enabled_widgets.forEach(function (widget) {
- 			var path_of_config = "/widget/" + widget + "/config.json";
+ 		enabled_widgets.forEach(function (widget) {
+ 			// TODO: Use Real Widgets
+ 			var path_of_config = "/widget/" + "hello"+ "/config.json";
  			var config_json_string = null;
 
  			$.getJSON(path_of_config, function(data){
@@ -84,9 +88,19 @@
  	 getEnabledWidgets: function (user_id) {
  		// make a GET request
  		// Get the enabled add-ons
- 		// 
- 		// TODO: Fix the call, call the server 
- 		var sample = '{"enabled_widgets": ["hello", "hello"]}';
- 		return sample;
+ 		// Synchronous AJAX
+ 		// Copied shamelessly
+ 		var theData = null;
+ 		$.ajax({
+ 			url: widgetForUseURL+user_id+'.json',
+ 			async: false,
+ 			success: function(data) {
+ 				console.log("[getEnabledWidgets] " + data);
+ 				theData = data;
+ 			}
+ 		});
+ 		return theData;
+ 		//var sample = '{"enabled_widgets": ["hello", "hello"]}';
+ 		//return sample;
  	}
  }
