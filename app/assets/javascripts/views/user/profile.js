@@ -21,6 +21,7 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 
 	render: function() {
 		$(this.el).html(this.template(this.model.toJSON()));
+		WidgetLoader.addAllWidgets('#profile-widgets', null);
 		return this;
 	}
 });

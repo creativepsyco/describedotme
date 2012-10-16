@@ -1,5 +1,7 @@
 DescribeMe.Routers.Router = Backbone.Router.extend({
 	routes: {
+		'marketplace': 'showMarketplace',
+		'widget/upload' : 'addWidget',
 		'profile': 'showProfile',
 		'projects': 'showAllProjects',
 		'projects/new': 'newProject',
@@ -35,5 +37,25 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 
 	homePage: function() {
 		// code to display home page view.
+	},
+
+	/**
+	 * [showMarketplace Basically Show All Widgets]
+	 * @return {[type]} [description]
+	 */
+	showMarketplace: function() {
+		// Marketplace showing code
+		var w1 = new DescribeMe.Models.WidgetItem({title:'Widget Title 1', thumbnail: 'http://lorempixel.com/g/400/200/'});
+		var w2 = new DescribeMe.Models.WidgetItem({title:'Widget Title 2', thumbnail: 'http://lorempixel.com/g/400/200/'});
+		var w3 = new DescribeMe.Models.WidgetItem({title:'Widget Title 3', thumbnail: 'http://lorempixel.com/g/400/200/'});
+	
+		var widgets = new DescribeMe.Collections.WidgetList([w1, w2, w3]);
+		//widgets.fetch();
+		var marketplace = new DescribeMe.Views.WidgetList({model:widgets}).render();
+	},
+
+	addWidget: function() {
+		var aWidget = new DescribeMe.Models.WidgetItem();
+		var uploadWidget = new DescribeMe.Views.WidgetUpload({model: aWidget}).render();
 	} 
 });
