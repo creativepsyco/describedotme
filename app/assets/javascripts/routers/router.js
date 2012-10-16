@@ -3,7 +3,8 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'profile': 'showProfile',
 		'projects': 'showAllProjects',
 		'projects/new': 'newProject',
-		'' : 'homePage'
+		'' : 'homePage',
+		'dashboard': 'showDashboard'
 	},
   
 	initialize: function() {
@@ -35,6 +36,10 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	homePage: function() {
-		// code to display home page view.
-	} 
+		//var homeView = new DescribeMe.Views.Home().render();
+	},
+
+	showDashboard: function(){
+		var profileShow = new DescribeMe.Views.DashboardShow().render();
+	}
 });
