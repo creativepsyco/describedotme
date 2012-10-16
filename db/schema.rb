@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012092115) do
+ActiveRecord::Schema.define(:version => 20121016080639) do
 
   create_table "categories", :force => true do |t|
     t.string "name"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20121012092115) do
 
   add_index "categories", ["name"], :name => "index_categories_on_name", :unique => true
 
+  create_table "comments", :force => true do |t|
+    t.string   "content"
+    t.string   "item_id"
+    t.string   "creator_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "items", :force => true do |t|
     t.string   "title"
     t.string   "description"
@@ -27,6 +35,11 @@ ActiveRecord::Schema.define(:version => 20121012092115) do
     t.integer  "creator_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "items_tags", :id => false, :force => true do |t|
+    t.integer "item_id"
+    t.integer "tag_id"
   end
 
   create_table "photos", :force => true do |t|
@@ -72,9 +85,25 @@ ActiveRecord::Schema.define(:version => 20121012092115) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.string   "photo_url"
+    t.string   "description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_favorite_items", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users_kudo_items", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

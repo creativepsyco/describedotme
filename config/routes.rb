@@ -4,13 +4,27 @@ DescribeMe::Application.routes.draw do
   end
   root :to => "home#index"
 
-  resources :items
+  resources :items do
+    member do
+      delete 'favorite' => 'favorites#destroy'
+      delete 'kudo' => 'kudos#destroy'
+    end
+  end
+
+  resources :comments, :only => [:show, :create, :destroy]
 
   devise_for :users
   resources :users do
     resources :items, :only => [:index, :show]
+    resources :items do
+      resources :favorites, :only => [:index, :create]
+      resources :kudos, :only => [:index, :create]
+    end
   end
 
+  #routes for favorite and kudo:
+  match 'favourite_items' => 'users#favorite_items'
+  match 'kudo_items' => 'users#kudo_items'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
