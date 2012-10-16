@@ -6,6 +6,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'projects': 'showAllProjects',
 		'projects/new': 'newProject',
 		'' : 'homePage',
+		'dashboard': 'showDashboard'
 	},
   
 	initialize: function() {
@@ -79,6 +80,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 
 	homePage: function() {
 		// code to display home page view.
+		//var homeView = new DescribeMe.Views.Home().render();
 	},
 
 	/**
@@ -99,5 +101,11 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	addWidget: function() {
 		var aWidget = new DescribeMe.Models.WidgetItem();
 		var uploadWidget = new DescribeMe.Views.WidgetUpload({model: aWidget}).render();
-	} 
+	},
+
+	showDashboard: function(){
+		var self = this;
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
+		var profileShow = new DescribeMe.Views.DashboardShow({sidebar:self.sidebar}).render();
+	}
 });

@@ -83,3 +83,24 @@ hr {
 	line-height: 27px;
 	border-bottom: 1px solid #E5E5E5;
 }
+
+.dashboard-entry {
+	background: white;
+	margin:10px;
+	-webkit-box-shadow:  0px 1px 1px 0px #999;
+	box-shadow:  0px 1px 1px 0px #999;
+}
+
+.dashboard-entry img {
+	width:50px;
+	height:50px;
+	float:left;
+
+	float: left;
+	padding: 4px;
+	margin-right: 10px;
+}
+
+.dashboard-entry-text {
+	padding-top: 15px;
+}
