@@ -6,7 +6,8 @@ namespace :db do
     User.create(name: "Example User",
                 email: "example@describe.me",
                 password: "foobar",
-                password_confirmation: "foobar")
+                password_confirmation: "foobar",
+                description: "")
     20.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@describe.me"
@@ -14,7 +15,8 @@ namespace :db do
       User.create(name: name,
                   email: email,
                   password: password,
-                  password_confirmation: password)
+                  password_confirmation: password,
+                  description: "")
     end
     puts "Populate sample posts"
     users = User.all(limit: 6)
@@ -26,6 +28,7 @@ namespace :db do
                            description: description)
       end
     end
+
     puts "Populate sample photos"
     sample_photos = [
       'http://behance.vo.llnwd.net/profiles4/146258/projects/5480661/0970f716f3f81d5afbee8bcc0bdab799.jpg',
@@ -48,6 +51,36 @@ namespace :db do
           )
         end
       end
+    end
+
+    puts "Populate sample comments"
+    5.times do
+      users.each do |user|
+        user.items.each do |item|
+          creator = users.sample
+          comment = item.comments.create!(
+            creator_id: creator.id,
+            content: Faker::Lorem.sentence(7)
+          )
+        end
+      end
+    end
+  end
+
+  task populate_widget: :environment do
+    users = User.all()
+    10.times do
+      Widget.create(creator_id: users.sample.id, name: Faker::Lorem.sentence(1))
+    end
+    # create one for first user
+    widgets = Widget.all()
+    UsersWidgets.create(user_id: users[1].id,
+                        widget_id: widgets.sample.id,
+                        config_json: Faker::Lorem.sentence(3))
+    20.times do
+      UsersWidgets.create(user_id: users.sample.id,
+                          widget_id: widgets.sample.id,
+                          config_json: Faker::Lorem.sentence(3))
     end
   end
 end

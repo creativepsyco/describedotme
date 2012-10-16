@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
 
   before_create :set_default_role
+  before_save :default_values
+  
+  def default_values
+    self.photo_url ||= 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+    self.description ||= ''
+  end
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -9,7 +15,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :photo_url, :description
 
   # attr_accessible :title, :body
   validates :name, presence: true
@@ -18,6 +24,15 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
   has_many :items, :foreign_key => "creator_id"
+
+  has_many :user_favorite_items, :class_name => 'UserFavoriteItem'
+  has_many :favorite_items, :class_name => 'Item', :through => :user_favorite_items
+
+  has_many :user_kudo_items, :class_name => 'UserKudoItem'
+  has_many :kudo_items, :class_name => 'Item', :through => :user_kudo_items
+
+  has_many :users_widgets, :class_name => "UsersWidgets"
+  has_many :enabled_widgets, :class_name => "Widget", :through => :users_widgets, :source => :widget
 
   def has_role? (role)
     return !!self.roles.find_by_role(role.to_s)
@@ -29,4 +44,14 @@ class User < ActiveRecord::Base
     self.roles << Role.find_by_role('normal')
   end
 
+end
+
+class UserFavoriteItem < ActiveRecord::Base
+    belongs_to :favorite_user, :class_name => 'User',  :foreign_key => "user_id"
+    belongs_to :favorite_item, :class_name => 'Item',  :foreign_key => "item_id"
+end
+
+class UserKudoItem < ActiveRecord::Base
+    belongs_to :kudo_user, :class_name => 'User',  :foreign_key => "user_id"
+    belongs_to :kudo_item, :class_name => 'Item',  :foreign_key => "item_id"
 end

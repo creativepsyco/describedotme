@@ -22,4 +22,5 @@ role2 = Role.create! :role => 'normal'
 
 
 
+
 puts 'New roles created: ' << role.role, role1.role, role2.role

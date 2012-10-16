@@ -2,6 +2,8 @@ DescribeMe.Views.ProjectItem = Backbone.View.extend({
 	
 	template: JST['project/item'],
 
+	className: 'span4',
+
 	initialize: function () {
 	},
 

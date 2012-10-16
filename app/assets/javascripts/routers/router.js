@@ -32,7 +32,8 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	newProject: function() {
-		var newProject = new DescribeMe.Views.ProjectNew().render();
+		this.projectNewView = (this.projectNewView) ? this.projectNewView : new DescribeMe.Views.ProjectNew();
+		this.projectNewView.render();
 	},
 
 	homePage: function() {

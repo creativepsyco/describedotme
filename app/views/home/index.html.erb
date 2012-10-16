@@ -1,9 +1,35 @@
-<div id="main-content" class="row">
-	
+<div class="row">
+  <div class="span3">
+    <ul class="nav nav-tabs nav-stacked" style="background-color: #fff; position:fixed; width:220px;">
+      <li><a href="#dropdowns"> Dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+      <li><a href="#buttonDropdowns"> Button dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+      <li><a href="#dropdowns"> Dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+      <li><a href="#buttonDropdowns"> Button dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+      <li><a href="#dropdowns"> Dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+      <li><a href="#buttonDropdowns"> Button dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+      <li><a href="#dropdowns"> Dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+      <li><a href="#buttonDropdowns"> Button dropdowns <i class="icon-chevron-right pull-right"></i></a></li>
+    </ul>
+  </div>
+	<div id="main-content" class="row">
+		
+	</div>
 </div>
 
-<!--test-->
+<!--test
 <script type="text/javascript">
+	function upload(input)
+	{
+		if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img-upload-preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+	}
 	 function doTheUpload()
 	 {
 	 		var fileInput = document.getElementById('uploadFile');
@@ -16,8 +42,8 @@
             return false;
       }
 </script>
-<form enctype='multipart/form-data' >
+<!-<form enctype='multipart/form-data' >
 File to upload: <input id="uploadFile" type="file" name="upfile"><br>
 Notes about the file: 
 <a class="btn" href="#" onclick="doTheUpload()">Press</a> to upload the file!
-</form>
+</form>-->

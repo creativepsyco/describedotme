@@ -2,20 +2,120 @@ Current API route: add.json for json result
 
                     root        /                                        home#index
                     root        /                                        home#index
-For log in:
+User:
+For registration:
+                                
+       user_registration POST   /users(.:format)                         devise/registrations#create
+                                #params:
+                                {
+                                  "user": {
+                                    "name": string,
+                                    "email": string,
+                                    "password": string,
+                                    "password_confirmation": string
+                                  }
+                                }
+
+                                #return:
+                                {
+                                 "created_at": timestamp,
+                                 "email": string,
+                                 "id": int,
+                                 "name": string,
+                                 "updated_at": timestamp
+                                 }
+
+                                 on error:
+                                 {
+                                    "errors": {
+                                      :error_field: [string]
+                                    }
+                                  }
+
+                                  Example:
+                                  POST:
+                                  {
+                                    "user": {
+                                      "name": "Hoang",
+                                      "email": "Hoang@test.com",
+                                      "password": "testtest",
+                                      "password_confirmation": "testtest"
+                                    }
+                                  }
+
+                                  SUCCESS:
+                                  {
+                                    "created_at": "2012-10-12T13:55:02Z",
+                                    "email": "hoang@test.com",
+                                    "id": 4,
+                                    "name": "Hoang",
+                                    "updated_at": "2012-10-12T13:55:02Z"
+                                  }
+
+                                  ERROR:
+                                  {
+                                    "errors": {
+                                      "email": ["has already been taken"]
+                                    }
+                                  }
+
+                                  {
+                                    "errors": {
+                                      "password": ["is too short (minimum is 6 characters)"]
+                                    }
+                                  }
+
+For log in/ log out
           
 
                                 // haven't tested this part with JSON format (it should work, but need testing here!
                                 // Hoang: retest all sign in / up / out API with JSON
 
         new_user_session GET    /users/sign_in(.:format)                 devise/sessions#new
+                                // get log in form
+                                // not used?
+
+
             user_session POST   /users/sign_in(.:format)                 devise/sessions#create
+                                #param:
+                                {
+                                  "user": {
+                                    "email": string, 
+                                    "password": string, 
+                                    "remember_me": "1"/"0"
+                                  }
+                                }
+
+                                #return:
+                                {
+                                  "created_at": timestamp,
+                                  "email": string,
+                                  "id": int,
+                                  "name": string,
+                                  "updated_at": timestamp
+                                }
+
+                                # Error:
+                                {
+                                  "error": "Invalid email or password."
+                                }
+                                
+                                Example:
+                                POST
+
+                                { "user"=>{"email"=>"test@test.com", "password"=>"hihihi", "remember_me"=>"1"} }
+
+                                {
+                                  "created_at": "2012-10-12T10:26:33Z",
+                                  "email": "test@test.com",
+                                  "id": 2,
+                                  "name": "Hoang",
+                                  "updated_at": "2012-10-12T14:40:47Z"
+                                }
+
     destroy_user_session DELETE /users/sign_out(.:format)                devise/sessions#destroy
-           user_password POST   /users/password(.:format)                devise/passwords#create
-       new_user_password GET    /users/password/new(.:format)            devise/passwords#new
-      edit_user_password GET    /users/password/edit(.:format)           devise/passwords#edit
-                         PUT    /users/password(.:format)                devise/passwords#update
-cancel_user_registration GET    /users/cancel(.:format)                  devise/registrations#cancel
+                                // NO PARAM
+                                // Return: blank
 
 For user:
 
@@ -28,15 +128,60 @@ For user:
                                 # return: # i think we need to change name => first name / last name
                                 [{name: string, email: string, num_items: int}]
 
-       user_registration POST   /users(.:format)                         devise/registrations#create
-
 
    new_user_registration GET    /users/sign_up(.:format)                 devise/registrations#new
+                                // get the form
                                 // not used
 
   edit_user_registration GET    /users/edit(.:format)                    devise/registrations#edit
-                         PUT    /users(.:format)                         devise/registrations#update
+                                // get the form
+                                // not used
+
+     update_user_profile PUT    /users(.:format)                         devise/registrations#update
+                                #params:
+                                {
+                                  "user": {
+                                    "name": string,
+                                    "email": string,
+                                    "current_password": string,
+                                    "password": string,
+                                    "password_confirmation": string
+                                  }
+                                }
+
+                                #return:
+                                blank on successful
+
+                                 on error:
+                                 {
+                                    "errors": {
+                                      :error_field: [string]
+                                    }
+                                  }
+
+                                Example:
+                                  PUT:
+                                  {
+                                    "user": {
+                                      "name": "Hoang",
+                                      "email": "Hoang@test.com",
+                                      "password": "testtest",
+                                      "password_confirmation": "testtest"
+                                      "current_password": test
+                                    }
+                                  }
+
+                                  SUCCESS:
+
+                                  ERROR:
+                                  {
+                                      "errors": {
+                                          "current_password": ["is invalid"]
+                                      }
+                                  }
+
                          DELETE /users(.:format)                         devise/registrations#destroy
+                                  SUCCESS / ERROR: blank (>.<??)
 
 For user item: 
 
