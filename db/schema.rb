@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016080639) do
+ActiveRecord::Schema.define(:version => 20121016085037) do
 
   create_table "categories", :force => true do |t|
     t.string "name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20121016080639) do
   create_table "comments", :force => true do |t|
     t.string   "content"
     t.string   "item_id"
-    t.string   "creator_id"
+    t.integer  "creator_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -71,6 +71,20 @@ ActiveRecord::Schema.define(:version => 20121016080639) do
 
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
+  create_table "user_favorite_items", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_kudo_items", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -92,18 +106,22 @@ ActiveRecord::Schema.define(:version => 20121016080639) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
-  create_table "users_favorite_items", :force => true do |t|
-    t.integer  "item_id"
+  create_table "users_widgets", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "widget_id"
+    t.string   "config_json"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  create_table "users_kudo_items", :force => true do |t|
-    t.integer  "item_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "widgets", :force => true do |t|
+    t.integer  "creator_id"
+    t.string   "description"
+    t.string   "location"
+    t.string   "name"
+    t.string   "thumbnail"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
