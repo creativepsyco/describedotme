@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20121015153409) do
-=======
-ActiveRecord::Schema.define(:version => 20121014043220) do
->>>>>>> add_fav_kudo
 
   create_table "categories", :force => true do |t|
     t.string "name"

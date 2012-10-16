@@ -19,11 +19,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :items, :foreign_key => "creator_id"
 
-  has_many :user_favorite_items, :class_name => 'UsersFavoriteItem'
+  has_many :user_favorite_items, :class_name => 'UserFavoriteItem'
   has_many :favorite_items, :class_name => 'Item', :through => :user_favorite_items
 
- # has_many :user_kudo_items, :class_name => 'UserKudoItem'
- # has_many :kudo_items, :class_name => 'Item', :foreign_key => 'user_id', :through => 'user_kudo_items'
+  has_many :user_kudo_items, :class_name => 'UserKudoItem'
+  has_many :kudo_items, :class_name => 'Item', :through => :user_kudo_items
 
   def has_role? (role)
     return !!self.roles.find_by_role(role.to_s)
@@ -37,7 +37,12 @@ class User < ActiveRecord::Base
 
 end
 
-class UsersFavoriteItem < ActiveRecord::Base
+class UserFavoriteItem < ActiveRecord::Base
     belongs_to :favorite_user, :class_name => 'User',  :foreign_key => "user_id"
     belongs_to :favorite_item, :class_name => 'Item',  :foreign_key => "item_id"
+end
+
+class UserKudoItem < ActiveRecord::Base
+    belongs_to :kudo_user, :class_name => 'User',  :foreign_key => "user_id"
+    belongs_to :kudo_item, :class_name => 'Item',  :foreign_key => "item_id"
 end
