@@ -26,6 +26,12 @@ DescribeMe::Application.routes.draw do
   match 'favourite_items' => 'users#favorite_items'
   match 'kudo_items' => 'users#kudo_items'
 
+  # routes for widget
+  get 'widgets' => 'widgets#index'
+  get 'widgets/users/:user_id' => 'widgets#get_widget_for_user'
+  get 'widgets/:widget_id/users/:user_id' => 'widgets#get_config'
+  post 'widgets/:widget_id/users/:user_id' => 'widgets#set_config'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
