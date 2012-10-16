@@ -26,12 +26,12 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 
 	showAllProjects: function() {
 		var projects = new DescribeMe.Collections.ProjectList();
-		projects.fetch(null,
+		projects.fetch(
 		{
-    		success: function (model, response) {
+    		success: function () {
     			var projectList = new DescribeMe.Views.ProjectList({model:projects}).render();
     		},
-    		error: function(model, response) {
+    		error: function() {
     			console.log('Unable to load projects!');
     		}
 	    });
