@@ -36,6 +36,18 @@ hr {
 	text-align: right;
 }
 
+.mainitem {
+	background-color: #eee;
+}
+.mainitem a{
+	color: black;
+	font-weight: bold;
+}
+
+.subsitem a {
+	padding-left: 40px;
+}
+
 .profile-top{
 	background: #034482;
 	border-radius:4px 4px 0 0;
