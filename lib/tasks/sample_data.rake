@@ -66,4 +66,21 @@ namespace :db do
       end
     end
   end
+
+  task populate_widget: :environment do
+    users = User.all()
+    10.times do
+      Widget.create(creator_id: users.sample.id, name: Faker::Lorem.sentence(1))
+    end
+    # create one for first user
+    widgets = Widget.all()
+    UsersWidgets.create(user_id: users[1].id,
+                        widget_id: widgets.sample.id,
+                        config_json: Faker::Lorem.sentence(3))
+    20.times do
+      UsersWidgets.create(user_id: users.sample.id,
+                          widget_id: widgets.sample.id,
+                          config_json: Faker::Lorem.sentence(3))
+    end
+  end
 end
