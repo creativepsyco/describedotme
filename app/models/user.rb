@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   before_create :set_default_role
-  before_save :default_photo
+  before_save :default_values
   
   def default_values
     self.photo_url ||= 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
