@@ -1,6 +1,4 @@
 DescribeMe.Views.ProjectList = Backbone.View.extend({
-	
-	el: '#main-content',
 
 	template: JST['project/list'],
 
@@ -11,14 +9,12 @@ DescribeMe.Views.ProjectList = Backbone.View.extend({
 
 	add: function(item) {
         var self = this;
-        $(self.projectContainer).append(new DescribeMe.Views.ProjectItem({ model: item }).render().el);
+        $(self.el).append(new DescribeMe.Views.ProjectItem({ model: item }).render().el);
     },
 
     render: function() {
         var self = this;
-        $(this.el).html(this.template());
-        this.projectContainer = $(this.el).find('#project-container');
-        $(this.projectContainer).empty();
+        $(this.el).empty();
 
         _.each(this.model.models, function(item) {
             self.add(item);

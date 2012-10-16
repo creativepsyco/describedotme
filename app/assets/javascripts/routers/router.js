@@ -5,7 +5,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'profile': 'showProfile',
 		'projects': 'showAllProjects',
 		'projects/new': 'newProject',
-		'' : 'homePage'
+		'' : 'homePage',
 	},
   
 	initialize: function() {
@@ -22,17 +22,58 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	showProfile: function() {
-		var p1 = new DescribeMe.Models.Profile({username:'Mike Nicolas', profilePicture: 'http://a.dryicons.com/images/icon_sets/shine_icon_set/png/256x256/user.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'});
-		var profileShow = new DescribeMe.Views.ProfileShow({model:p1}).render();
+		var self = this;
+		var p1 = new DescribeMe.Models.Profile({username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'});
+		var projects = new DescribeMe.Collections.ProjectList();
+		projects.fetch(
+		{
+    		success: function () {
+    			p1.set({projects: projects});
+    			if(self.profileShow) {
+    				self.profileShow.model = p1;
+    			}
+    			else {
+					self.profileShow = new DescribeMe.Views.ProfileShow({model:p1});
+    			}
+    			self.profileShow.render();
+    		},
+    		error: function() {
+    			console.log('Unable to load projects!');
+    		}
+	    });
+		
 	},
 
 	showAllProjects: function() {
-		var projects = this.getDummy();
-		var projectList = new DescribeMe.Views.ProjectList({model:projects}).render();
+		var self = this;
+		//initialize sidebar if it is required for this page.
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
+
+		var projects = new DescribeMe.Collections.ProjectList();
+		projects.fetch(
+		{
+    		success: function () {
+    			if(self.projectList) {
+    				self.projectList.model = projects;
+    				console.log(projects.toJSON());
+    			}
+    			else {
+    				self.projectList = new DescribeMe.Views.Organizer({model:projects, sidebar: self.sidebar});
+    			}
+    			self.projectList.render();
+    		},
+    		error: function() {
+    			console.log('Unable to load projects!');
+    		}
+	    });
 	},
 
 	newProject: function() {
-		this.projectNewView = (this.projectNewView) ? this.projectNewView : new DescribeMe.Views.ProjectNew();
+		var self = this;
+		//initialize sidebar if it is required for this page.
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
+
+		this.projectNewView = (this.projectNewView) ? this.projectNewView : new DescribeMe.Views.ProjectNew({sidebar:self.sidebar});
 		this.projectNewView.render();
 	},
 

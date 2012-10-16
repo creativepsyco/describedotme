@@ -47,7 +47,8 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 	},
 
 	render: function() {
-		$(this.el).html(this.template());
+		$(this.el).html($(this.options.sidebar.el));
+		$(this.el).append(this.template());
 
 		this.imageUploadModal = $(this.el).find('#imageUploadModal');
 		this.imageUploadModal.modal();
