@@ -49,9 +49,9 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		var w1 = new DescribeMe.Models.WidgetItem({title:'Widget Title 1', thumbnail: 'http://lorempixel.com/g/400/200/'});
 		var w2 = new DescribeMe.Models.WidgetItem({title:'Widget Title 2', thumbnail: 'http://lorempixel.com/g/400/200/'});
 		var w3 = new DescribeMe.Models.WidgetItem({title:'Widget Title 3', thumbnail: 'http://lorempixel.com/g/400/200/'});
-	
-		var widgets = new DescribeMe.Collections.WidgetList([w1, w2, w3]);
-		//widgets.fetch();
+		var widgets = new DescribeMe.Collections.WidgetList();
+		//var widgets = new DescribeMe.Collections.WidgetList([w1, w2, w3]);
+		widgets.fetch();
 		var marketplace = new DescribeMe.Views.WidgetList({model:widgets}).render();
 	},
 

@@ -3,7 +3,8 @@
  * @type {[type]}
  */
 DescribeMe.Views.WidgetList = Backbone.View.extend({
-	
+    model: DescribeMe.Models.WidgetList,
+
 	el: '#main-content',
 
 	template: JST['widget/widgetMarketplaceList'],
