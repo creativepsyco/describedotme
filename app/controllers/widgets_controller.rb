@@ -62,7 +62,7 @@ class WidgetsController < ApplicationController
   def create
     puts params
     widget_data = {
-      :title => params[:title],
+      :name => params[:name],
       :description => params[:description],
       :thumbnail => params[:thumbnail],
       :location => params[:location],
