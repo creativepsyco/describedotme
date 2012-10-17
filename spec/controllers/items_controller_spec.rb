@@ -24,8 +24,8 @@ describe ItemsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      :description => '', 
-      :title => ''
+      :description => "description", 
+      :title => "title"
     }
   end
 
@@ -65,82 +65,103 @@ describe ItemsController do
       login_user
       it "creates a new Item" do
         user = subject.current_user
-
-        #puts "Current user is ", user, "list items", user.items
         expect {
           post :create, valid_attributes, valid_session
         }.to change(Item, :count).by(1)
       end
 
       it "assign values to newly created item" do
-        item = Item.create valid_attributes
-        post :create, {:format => :json, :item => valid_attributes}, valid_session
-        expected = subject.send(:convert_to_json, item)
-        response.body.should == expected.to_json
+        item = Item.new valid_attributes
+        user = subject.current_user
+        hash = {:format => :json}
+        hash = hash.merge valid_attributes
+        puts "POST REQUESTTTT", hash
+        post :create, hash, valid_session
+        item.creator = user
+        result = JSON.parse(response.body)
+        result.should include(
+          "description" => valid_attributes[:description],
+          "title" => valid_attributes[:title],
+          "creator_id" => user.id
+        )
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved item as @item" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Item.any_instance.stub(:save).and_return(false)
-        post :create, {:item => {}}, valid_session
-        assigns(:item).should be_a_new(Item)
-      end
-
-    end
   end
 
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested item" do
         item = Item.create! valid_attributes
+        user = subject.current_user
         # Assuming there are no other items in the database, this
         # specifies that the Item created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Item.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => item.to_param, :item => {'these' => 'params'}}, valid_session
+        Item.any_instance.should_receive(:update_attributes).with(
+          {
+            :description => "new desc", 
+            :title => "new title"})
+        new_attr = {
+          :format => :json,
+          :id => item.to_param,
+          :description => "new desc",
+          :title => "new title"
+        }
+        put :update, new_attr, valid_session
       end
 
       it "assigns the requested item as @item" do
         item = Item.create! valid_attributes
-        put :update, {:id => item.to_param, :item => valid_attributes}, valid_session
-        assigns(:item).should eq(item)
-      end
-
-      it "redirects to the item" do
-        item = Item.create! valid_attributes
-        put :update, {:id => item.to_param, :item => valid_attributes}, valid_session
-        response.should redirect_to(item)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the item as @item" do
-        item = Item.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Item.any_instance.stub(:save).and_return(false)
-        put :update, {:id => item.to_param, :item => {}}, valid_session
-        assigns(:item).should eq(item)
+        user = subject.current_user
+        new_attr = {
+          :format => :json,
+          :id => item.to_param,
+          :description => "new desc",
+          :title => "new title"
+        }
+        put :update, new_attr, valid_session
+        result = JSON.parse(response.body)
+        result.should include(
+          "description" => valid_attributes[:description],
+          "title" => valid_attributes[:title],
+        )
       end
 
     end
+
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested item" do
-      item = Item.create! valid_attributes
+    login_user
+    it "destroys the requested item when its creator is current user" do
+      item = Item.new valid_attributes
+      user = subject.current_user
+      item.creator = user
+      item.save
+
       expect {
-        delete :destroy, {:id => item.to_param}, valid_session
+        delete :destroy, {:format => :json, :id => item.to_param}, valid_session
       }.to change(Item, :count).by(-1)
     end
 
-    it "redirects to the items list" do
-      item = Item.create! valid_attributes
-      delete :destroy, {:id => item.to_param}, valid_session
-      response.should redirect_to(items_url)
+    it "destroys the requested item when its creator is not current user" do
+      item = Item.new valid_attributes
+      user = subject.current_user
+      
+      new_user = user.dup
+      new_user.email = "newemail@test.com"
+      new_user.save
+
+      item.creator = new_user
+      item.save
+
+      puts item.to_json
+      expect {
+        delete :destroy, {:format => :json, :id => item.to_param}, valid_session
+      }.to change(Item, :count).by(0)
     end
+
   end
 
 end
