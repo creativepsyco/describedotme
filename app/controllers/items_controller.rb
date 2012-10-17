@@ -35,6 +35,26 @@ class ItemsController < ApplicationController
     }
   end
 
+  def featured_items
+    default_photo = 'http://placehold.it/300x200'
+    @items = Item.all(limit: 50).shuffle.first(10)
+    @itemlist = @items.map do |item|
+      {
+        :id => item.id,
+        :title => item.title,
+        :desc => item.description,
+        :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
+        :creator_id => item.creator.id,
+        :creator_name => item.creator.name
+      }
+    end
+    respond_to do |format|
+      format.json { render :json => @itemlist }
+      format.xml  { render :xml => @items }
+      format.html { render text: "Unsupported Format", status: 404 }
+    end
+  end
+
   # GET /items
   # GET /items.xml
   # GET /items.json                                       HTML and AJAX
