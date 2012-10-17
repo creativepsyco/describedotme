@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
   has_many :users_kudo_items, :class_name => 'UsersKudoItem'
   has_many :kudo_items, :class_name => 'Item', :through => :users_kudo_items
 
+  has_many :users_widgets, :class_name => "UsersWidgets"
+  has_many :enabled_widgets, :class_name => "Widget", :through => :users_widgets, :source => :widget
+
   def has_role? (role)
     return !!self.roles.find_by_role(role.to_s)
   end

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Describe dot me" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Describe.Me" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Describe dot me" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
@@ -14,6 +14,22 @@
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="brand" href="#">Describe.Me</a>
+          <ul class="nav pull-right">
+            
+            <% if user_signed_in? %>
+              <li><a href="/#profile">Profile</a></li>
+              <li><a href="/#projects">Dashboard</a></li>
+              <li><a href="#">Settings</a></li>
+              <li>
+                <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+              </li>
+            <% else %>
+              <li>
+                <%= link_to('Login', new_user_session_path)  %>  
+              </li>
+            <% end %>
+            
+          </ul>
         </div>
       </div>
     </div>
