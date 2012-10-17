@@ -16,6 +16,7 @@ DescribeMe::Application.routes.draw do
 
   devise_for :users
   resources :users do
+    get 'profile' => 'users#profile', :on => :collection
     resources :items, :only => [:index, :show]
     resources :items do
       resources :favorites, :only => [:index, :create]

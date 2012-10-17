@@ -1,0 +1,332 @@
+SETTING UP DEFAULT USER LOGIN
+New roles created: super_admin
+admin
+normal
+*........FF..{"item"=>{}, "controller"=>"items", "action"=>"create"}
+F{"item"=>{}, "controller"=>"items", "action"=>"create"}
+F{"item"=>{}, "controller"=>"items", "action"=>"create"}
+F{"item"=>{}, "controller"=>"items", "action"=>"create"}
+F{"item"=>{}, "controller"=>"items", "action"=>"create"}
+FFFFFFFF.F**FFF.FFFFFFF{"name"=>"Hoang", "email"=>"test@test.com", "password"=>"testtest", "password_confirmation"=>"testtest"}
+#<User:0x007ff831dedcb8>F{"name"=>"Hoang", "email"=>"test@test.com", "password"=>"testtest", "password_confirmation"=>"testtest"}
+#<User:0x007ff831f553d0>F{"name"=>"Hoang", "email"=>"test@test.com", "password"=>"testtest", "password_confirmation"=>"testtest"}
+#<User:0x007ff8335eaf78>F{}
+#<User:0x007ff831a0cf68>F{}
+#<User:0x007ff8332bde40>FFFF***F*
+
+Pending:
+  CommentsController add some examples to (or delete) /Users/tranconghoang/Projects/RoR/describedotme/spec/controllers/comment_controller_spec.rb
+    # No reason given
+    # ./spec/controllers/comment_controller_spec.rb:4
+  User add some examples to (or delete) /Users/tranconghoang/Projects/RoR/describedotme/spec/models/user_spec.rb
+    # No reason given
+    # ./spec/models/user_spec.rb:4
+  CommentHelper add some examples to (or delete) /Users/tranconghoang/Projects/RoR/describedotme/spec/helpers/comment_helper_spec.rb
+    # No reason given
+    # ./spec/helpers/comment_helper_spec.rb:14
+  ItemsHelper add some examples to (or delete) /Users/tranconghoang/Projects/RoR/describedotme/spec/helpers/items_helper_spec.rb
+    # No reason given
+    # ./spec/helpers/items_helper_spec.rb:14
+  Item add some examples to (or delete) /Users/tranconghoang/Projects/RoR/describedotme/spec/models/item_spec.rb
+    # No reason given
+    # ./spec/models/item_spec.rb:4
+  Comment add some examples to (or delete) /Users/tranconghoang/Projects/RoR/describedotme/spec/models/comment_spec.rb
+    # No reason given
+    # ./spec/models/comment_spec.rb:4
+  Role add some examples to (or delete) /Users/tranconghoang/Projects/RoR/describedotme/spec/models/role_spec.rb
+    # No reason given
+    # ./spec/models/role_spec.rb:4
+
+Failures:
+
+  1) ItemsController GET index assigns all items as @items
+     Failure/Error: get :index, {}, valid_session
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:44:in `index'
+     # ./spec/controllers/items_controller_spec.rb:40:in `block (3 levels) in <top (required)>'
+
+  2) ItemsController GET new assigns a new item as @item
+     Failure/Error: get :new, {}, valid_session
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:61:in `new'
+     # ./spec/controllers/items_controller_spec.rb:55:in `block (3 levels) in <top (required)>'
+
+  3) ItemsController POST create with valid params creates a new Item
+     Failure/Error: post :create, {:item => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:134:in `create'
+     # ./spec/controllers/items_controller_spec.rb:72:in `block (5 levels) in <top (required)>'
+     # ./spec/controllers/items_controller_spec.rb:71:in `block (4 levels) in <top (required)>'
+
+  4) ItemsController POST create with valid params assigns a newly created item as @item
+     Failure/Error: post :create, {:item => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:134:in `create'
+     # ./spec/controllers/items_controller_spec.rb:77:in `block (4 levels) in <top (required)>'
+
+  5) ItemsController POST create with valid params redirects to the created item
+     Failure/Error: post :create, {:item => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:134:in `create'
+     # ./spec/controllers/items_controller_spec.rb:83:in `block (4 levels) in <top (required)>'
+
+  6) ItemsController POST create with invalid params assigns a newly created but unsaved item as @item
+     Failure/Error: post :create, {:item => {}}, valid_session
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:134:in `create'
+     # ./spec/controllers/items_controller_spec.rb:92:in `block (4 levels) in <top (required)>'
+
+  7) ItemsController POST create with invalid params re-renders the 'new' template
+     Failure/Error: post :create, {:item => {}}, valid_session
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:134:in `create'
+     # ./spec/controllers/items_controller_spec.rb:99:in `block (4 levels) in <top (required)>'
+
+  8) ItemsController DELETE destroy destroys the requested item
+     Failure/Error: delete :destroy, {:id => item.to_param}, valid_session
+     RuntimeError:
+       Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id
+     # ./app/controllers/items_controller.rb:103:in `destroy'
+     # ./spec/controllers/items_controller_spec.rb:153:in `block (4 levels) in <top (required)>'
+     # ./spec/controllers/items_controller_spec.rb:152:in `block (3 levels) in <top (required)>'
+
+  9) ItemsController DELETE destroy redirects to the items list
+     Failure/Error: delete :destroy, {:id => item.to_param}, valid_session
+     RuntimeError:
+       Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id
+     # ./app/controllers/items_controller.rb:103:in `destroy'
+     # ./spec/controllers/items_controller_spec.rb:159:in `block (3 levels) in <top (required)>'
+
+  10) ItemsController PUT update with valid params updates the requested item
+     Failure/Error: put :update, {:id => item.to_param, :item => {'these' => 'params'}}, valid_session
+     NoMethodError:
+       undefined method `errors' for nil:NilClass
+     # ./app/controllers/items_controller.rb:168:in `block in update'
+     # ./app/controllers/items_controller.rb:167:in `update'
+     # ./spec/controllers/items_controller_spec.rb:114:in `block (4 levels) in <top (required)>'
+
+  11) ItemsController PUT update with valid params assigns the requested item as @item
+     Failure/Error: put :update, {:id => item.to_param, :item => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `errors' for nil:NilClass
+     # ./app/controllers/items_controller.rb:168:in `block in update'
+     # ./app/controllers/items_controller.rb:167:in `update'
+     # ./spec/controllers/items_controller_spec.rb:119:in `block (4 levels) in <top (required)>'
+
+  12) ItemsController PUT update with valid params redirects to the item
+     Failure/Error: put :update, {:id => item.to_param, :item => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `errors' for nil:NilClass
+     # ./app/controllers/items_controller.rb:168:in `block in update'
+     # ./app/controllers/items_controller.rb:167:in `update'
+     # ./spec/controllers/items_controller_spec.rb:125:in `block (4 levels) in <top (required)>'
+
+  13) ItemsController PUT update with invalid params assigns the item as @item
+     Failure/Error: put :update, {:id => item.to_param, :item => {}}, valid_session
+     NoMethodError:
+       undefined method `errors' for nil:NilClass
+     # ./app/controllers/items_controller.rb:168:in `block in update'
+     # ./app/controllers/items_controller.rb:167:in `update'
+     # ./spec/controllers/items_controller_spec.rb:135:in `block (4 levels) in <top (required)>'
+
+  14) ItemsController PUT update with invalid params re-renders the 'edit' template
+     Failure/Error: put :update, {:id => item.to_param, :item => {}}, valid_session
+     NoMethodError:
+       undefined method `errors' for nil:NilClass
+     # ./app/controllers/items_controller.rb:168:in `block in update'
+     # ./app/controllers/items_controller.rb:167:in `update'
+     # ./spec/controllers/items_controller_spec.rb:143:in `block (4 levels) in <top (required)>'
+
+  15) items/index renders a list of items
+     Failure/Error: render
+     ActionView::Template::Error:
+       No route matches {:action=>"show", :controller=>"items", :user_id=>nil, :id=>#<Item id: 1003, title: nil, description: nil, category_id: nil, creator_id: nil, created_at: nil, updated_at: nil>}
+     # ./app/views/items/index.html.erb:9:in `block in _app_views_items_index_html_erb__3107178009777989948_70351981570300'
+     # ./app/views/items/index.html.erb:4:in `each'
+     # ./app/views/items/index.html.erb:4:in `each_with_index'
+     # ./app/views/items/index.html.erb:4:in `_app_views_items_index_html_erb__3107178009777989948_70351981570300'
+     # ./spec/views/items/index.html.erb_spec.rb:12:in `block (2 levels) in <top (required)>'
+
+  16) UsersController Loged in user should have a current_user
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/support/controller_macros.rb:12:in `block in login_user'
+
+  17) UsersController Loged in user should get index
+     Failure/Error: Unable to find matching line from backtrace
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/support/controller_macros.rb:12:in `block in login_user'
+
+  18) UsersController GET show assigns the requested user as @user
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:71:in `block (3 levels) in <top (required)>'
+
+  19) UsersController GET index assigns all users as @users
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:63:in `block (3 levels) in <top (required)>'
+
+  20) UsersController GET edit assigns the requested user as @user
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:86:in `block (3 levels) in <top (required)>'
+
+  21) UsersController PUT update with valid params updates the requested user
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:132:in `block (4 levels) in <top (required)>'
+
+  22) UsersController PUT update with valid params assigns the requested user as @user
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:142:in `block (4 levels) in <top (required)>'
+
+  23) UsersController PUT update with valid params redirects to the user
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:148:in `block (4 levels) in <top (required)>'
+
+  24) UsersController PUT update with invalid params assigns the user as @user
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:156:in `block (4 levels) in <top (required)>'
+
+  25) UsersController PUT update with invalid params re-renders the 'edit' template
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:164:in `block (4 levels) in <top (required)>'
+
+  26) UsersController POST create with valid params creates a new User
+     Failure/Error: post :create, {:user => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `each' for nil:NilClass
+     # ./app/controllers/users_controller.rb:112:in `create'
+     # ./spec/controllers/users_controller_spec.rb:96:in `block (5 levels) in <top (required)>'
+     # ./spec/controllers/users_controller_spec.rb:95:in `block (4 levels) in <top (required)>'
+
+  27) UsersController POST create with valid params assigns a newly created user as @user
+     Failure/Error: post :create, {:user => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `each' for nil:NilClass
+     # ./app/controllers/users_controller.rb:112:in `create'
+     # ./spec/controllers/users_controller_spec.rb:101:in `block (4 levels) in <top (required)>'
+
+  28) UsersController POST create with valid params redirects to the created user
+     Failure/Error: post :create, {:user => valid_attributes}, valid_session
+     NoMethodError:
+       undefined method `each' for nil:NilClass
+     # ./app/controllers/users_controller.rb:112:in `create'
+     # ./spec/controllers/users_controller_spec.rb:107:in `block (4 levels) in <top (required)>'
+
+  29) UsersController POST create with invalid params assigns a newly created but unsaved user as @user
+     Failure/Error: post :create, {:user => {}}, valid_session
+     NoMethodError:
+       undefined method `each' for nil:NilClass
+     # ./app/controllers/users_controller.rb:112:in `create'
+     # ./spec/controllers/users_controller_spec.rb:116:in `block (4 levels) in <top (required)>'
+
+  30) UsersController POST create with invalid params re-renders the 'new' template
+     Failure/Error: post :create, {:user => {}}, valid_session
+     NoMethodError:
+       undefined method `each' for nil:NilClass
+     # ./app/controllers/users_controller.rb:112:in `create'
+     # ./spec/controllers/users_controller_spec.rb:123:in `block (4 levels) in <top (required)>'
+
+  31) UsersController DELETE destroy destroys the requested user
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:175:in `block (3 levels) in <top (required)>'
+
+  32) UsersController DELETE destroy redirects to the users list
+     Failure/Error: user = User.create! valid_attributes
+     ActiveRecord::AssociationTypeMismatch:
+       Role(#70351983017500) expected, got NilClass(#70351979797640)
+     # ./app/models/user.rb:41:in `set_default_role'
+     # ./spec/controllers/users_controller_spec.rb:182:in `block (3 levels) in <top (required)>'
+
+  33) items/show renders attributes in <p>
+     Failure/Error: render
+     ActionView::Template::Error:
+       No route matches {:action=>"edit", :controller=>"items", :user_id=>nil, :id=>#<Item id: 1005, title: nil, description: nil, category_id: nil, creator_id: nil, created_at: nil, updated_at: nil>}
+     # ./app/views/items/show.html.erb:4:in `_app_views_items_show_html_erb___1603043102476416156_70352003956080'
+     # ./spec/views/items/show.html.erb_spec.rb:9:in `block (2 levels) in <top (required)>'
+
+  34) Items GET /items works! (now write some real specs)
+     Failure/Error: get items_path
+     NoMethodError:
+       undefined method `items' for nil:NilClass
+     # ./app/controllers/items_controller.rb:44:in `index'
+     # ./spec/requests/items_spec.rb:7:in `block (3 levels) in <top (required)>'
+
+Finished in 2.46 seconds
+53 examples, 34 failures, 7 pending
+
+Failed examples:
+
+rspec ./spec/controllers/items_controller_spec.rb:38 # ItemsController GET index assigns all items as @items
+rspec ./spec/controllers/items_controller_spec.rb:54 # ItemsController GET new assigns a new item as @item
+rspec ./spec/controllers/items_controller_spec.rb:70 # ItemsController POST create with valid params creates a new Item
+rspec ./spec/controllers/items_controller_spec.rb:76 # ItemsController POST create with valid params assigns a newly created item as @item
+rspec ./spec/controllers/items_controller_spec.rb:82 # ItemsController POST create with valid params redirects to the created item
+rspec ./spec/controllers/items_controller_spec.rb:89 # ItemsController POST create with invalid params assigns a newly created but unsaved item as @item
+rspec ./spec/controllers/items_controller_spec.rb:96 # ItemsController POST create with invalid params re-renders the 'new' template
+rspec ./spec/controllers/items_controller_spec.rb:150 # ItemsController DELETE destroy destroys the requested item
+rspec ./spec/controllers/items_controller_spec.rb:157 # ItemsController DELETE destroy redirects to the items list
+rspec ./spec/controllers/items_controller_spec.rb:107 # ItemsController PUT update with valid params updates the requested item
+rspec ./spec/controllers/items_controller_spec.rb:117 # ItemsController PUT update with valid params assigns the requested item as @item
+rspec ./spec/controllers/items_controller_spec.rb:123 # ItemsController PUT update with valid params redirects to the item
+rspec ./spec/controllers/items_controller_spec.rb:131 # ItemsController PUT update with invalid params assigns the item as @item
+rspec ./spec/controllers/items_controller_spec.rb:139 # ItemsController PUT update with invalid params re-renders the 'edit' template
+rspec ./spec/views/items/index.html.erb_spec.rb:11 # items/index renders a list of items
+rspec ./spec/controllers/users_controller_spec.rb:46 # UsersController Loged in user should have a current_user
+rspec ./spec/controllers/users_controller_spec.rb:51 # UsersController Loged in user should get index
+rspec ./spec/controllers/users_controller_spec.rb:70 # UsersController GET show assigns the requested user as @user
+rspec ./spec/controllers/users_controller_spec.rb:62 # UsersController GET index assigns all users as @users
+rspec ./spec/controllers/users_controller_spec.rb:85 # UsersController GET edit assigns the requested user as @user
+rspec ./spec/controllers/users_controller_spec.rb:131 # UsersController PUT update with valid params updates the requested user
+rspec ./spec/controllers/users_controller_spec.rb:141 # UsersController PUT update with valid params assigns the requested user as @user
+rspec ./spec/controllers/users_controller_spec.rb:147 # UsersController PUT update with valid params redirects to the user
+rspec ./spec/controllers/users_controller_spec.rb:155 # UsersController PUT update with invalid params assigns the user as @user
+rspec ./spec/controllers/users_controller_spec.rb:163 # UsersController PUT update with invalid params re-renders the 'edit' template
+rspec ./spec/controllers/users_controller_spec.rb:94 # UsersController POST create with valid params creates a new User
+rspec ./spec/controllers/users_controller_spec.rb:100 # UsersController POST create with valid params assigns a newly created user as @user
+rspec ./spec/controllers/users_controller_spec.rb:106 # UsersController POST create with valid params redirects to the created user
+rspec ./spec/controllers/users_controller_spec.rb:113 # UsersController POST create with invalid params assigns a newly created but unsaved user as @user
+rspec ./spec/controllers/users_controller_spec.rb:120 # UsersController POST create with invalid params re-renders the 'new' template
+rspec ./spec/controllers/users_controller_spec.rb:174 # UsersController DELETE destroy destroys the requested user
+rspec ./spec/controllers/users_controller_spec.rb:181 # UsersController DELETE destroy redirects to the users list
+rspec ./spec/views/items/show.html.erb_spec.rb:8 # items/show renders attributes in <p>
+rspec ./spec/requests/items_spec.rb:5 # Items GET /items works! (now write some real specs)
+
+Randomized with seed 45510
+
