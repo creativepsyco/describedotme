@@ -30,6 +30,9 @@ DescribeMe::Application.routes.draw do
   match 'favourite_items' => 'users#favorite_items'
   match 'kudo_items' => 'users#kudo_items'
 
+  # routes for community page
+  get 'featured_items' => 'items#featured_items'
+
   # routes for widget
   get 'widgets' => 'widgets#index'
   get 'widgets/users/:user_id' => 'widgets#get_widget_for_user'
