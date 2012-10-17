@@ -30,6 +30,9 @@ gem 'backbone-on-rails'
 # Bootstrap Rails
 gem "bootstrap-sass", "2.0.0"
 
+
+# this group is for testing only
+# delete them if cannot install
 gem 'guard-rspec'
 gem 'simplecov'
 group :test do
