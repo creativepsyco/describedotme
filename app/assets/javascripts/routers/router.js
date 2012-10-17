@@ -3,8 +3,8 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'profile': 'showProfile',
 		'projects': 'showAllProjects',
 		'projects/new': 'newProject',
-		'' : 'homePage',
-		'dashboard': 'showDashboard'
+		'dashboard' : 'homePage',
+		'': 'showDashboard'
 	},
   
 	initialize: function() {
