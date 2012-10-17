@@ -19,12 +19,14 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ItemsController do
-
   # This should return the minimal set of attributes required to create a valid
   # Item. As you add validations to Item, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :description => '', 
+      :title => ''
+    }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -34,54 +36,47 @@ describe ItemsController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all items as @items" do
-      item = Item.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:items).should eq([item])
+  describe "GET index" do  
+    login_user
+    it "should get index" do
+      # Note, rails 3.x scaffolding may add lines like get :index, {}, valid_session
+      # the valid_session overrides the devise login. Remove the valid_session from your specs
+      user = subject.current_user
+      get :index, :format => :json
+      response.should be_success
     end
   end
 
   describe "GET show" do
+    login_user
     it "assigns the requested item as @item" do
       item = Item.create! valid_attributes
-      get :show, {:id => item.to_param}, valid_session
-      assigns(:item).should eq(item)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new item as @item" do
-      get :new, {}, valid_session
-      assigns(:item).should be_a_new(Item)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested item as @item" do
-      item = Item.create! valid_attributes
-      get :edit, {:id => item.to_param}, valid_session
-      assigns(:item).should eq(item)
+      user = subject.current_user
+      user.items << item
+      user.save
+      get :show, {:format => :json, :id => item.to_param}
+      expected = subject.send(:convert_to_json, item)
+      response.body.should == expected.to_json
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
+      login_user
       it "creates a new Item" do
+        user = subject.current_user
+
+        #puts "Current user is ", user, "list items", user.items
         expect {
-          post :create, {:item => valid_attributes}, valid_session
+          post :create, valid_attributes, valid_session
         }.to change(Item, :count).by(1)
       end
 
-      it "assigns a newly created item as @item" do
-        post :create, {:item => valid_attributes}, valid_session
-        assigns(:item).should be_a(Item)
-        assigns(:item).should be_persisted
-      end
-
-      it "redirects to the created item" do
-        post :create, {:item => valid_attributes}, valid_session
-        response.should redirect_to(Item.last)
+      it "assign values to newly created item" do
+        item = Item.create valid_attributes
+        post :create, {:format => :json, :item => valid_attributes}, valid_session
+        expected = subject.send(:convert_to_json, item)
+        response.body.should == expected.to_json
       end
     end
 
@@ -93,12 +88,6 @@ describe ItemsController do
         assigns(:item).should be_a_new(Item)
       end
 
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Item.any_instance.stub(:save).and_return(false)
-        post :create, {:item => {}}, valid_session
-        response.should render_template("new")
-      end
     end
   end
 
@@ -136,13 +125,6 @@ describe ItemsController do
         assigns(:item).should eq(item)
       end
 
-      it "re-renders the 'edit' template" do
-        item = Item.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Item.any_instance.stub(:save).and_return(false)
-        put :update, {:id => item.to_param, :item => {}}, valid_session
-        response.should render_template("edit")
-      end
     end
   end
 
