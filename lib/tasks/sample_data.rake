@@ -2,12 +2,25 @@ namespace :db do
   desc "Fill database with sample data"
 
   task populate: :environment do
+    profile_url = [
+      "http://www.catsofaustralia.com/photogallery/Big%20Photos/czarnew.jpg",
+      "http://ec.comps.canstockphoto.com/can-stock-photo_csp9341208.jpg",
+      "http://www.tutorialsscripts.com/free-icons/funny-icons/black-funny-icon-256-x-256.png",
+      "http://cloudfront3.bostinno.com/wp-content/uploads/2012/09/large_funny_twitter_icon.jpeg"
+    ]
+
+    sample_desc = [
+      "I'm a solo coder, who like to draw as well :)",
+      "I love to draw, and sing. Well, cooking is also one of my big interest",
+      "A thinker, who loves to think about the meaning of life..."
+    ]
     puts "Populate sample users"
     User.create(name: "Example User",
                 email: "example@describe.me",
                 password: "foobar",
                 password_confirmation: "foobar",
-                description: "")
+                description: sample_desc.sample,
+                photo_url: profile_url.sample)
     20.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@describe.me"
@@ -16,7 +29,8 @@ namespace :db do
                   email: email,
                   password: password,
                   password_confirmation: password,
-                  description: "")
+                  description: sample_desc.sample,
+                  photo_url: profile_url.sample)
     end
     puts "Populate sample posts"
     users = User.all(limit: 6)
