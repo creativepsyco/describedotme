@@ -122,18 +122,47 @@ describe UsersController do
   end
 
   describe "DELETE destroy" do
-    login_user
-    it "destroys the requested user" do
-      user = subject.current_user
-      expect {
-        delete :destroy, {:id => user.to_param}, valid_session
-      }.to change(User, :count).by(-1)
+    describe "when log in" do
+      login_user
+      it "not destroys the requested user if it's not current user" do
+        user = User.create! valid_attributes
+        expect {
+          delete :destroy, {:id => user.to_param}, valid_session
+        }.to change(User, :count).by(0)
+      end
+
+      it "destroys the requested user if it's current user" do
+        user = subject.current_user
+        expect {
+          delete :destroy, {:id => user.to_param}, valid_session
+        }.to change(User, :count).by(-1)
+      end
+
+    end 
+
+    describe "when not log in " do
+      it " not destroys the requested user" do
+        user = User.create! valid_attributes
+        expect {
+          delete :destroy, {:id => user.to_param}, valid_session
+        }.to change(User, :count).by(0)
+      end
+    end
+  end
+
+  describe "GET profile" do
+    it "should get error when trying to get profile when not log in" do
+      get :profile, {:format => :json}
+      response.body.should include ("error")
     end
 
-    it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete :destroy, {:id => user.to_param}, valid_session
-      response.should redirect_to(root_url)
+    describe "when log in" do
+      login_user
+      it "should get the profile of current user" do
+        user = subject.current_user
+        get :profile, {:format => :json}
+        response.body.should == user.to_json
+      end
     end
   end
 
