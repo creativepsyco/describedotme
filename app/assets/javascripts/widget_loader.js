@@ -56,20 +56,49 @@ var widgetForUseURL = "/widgets/users/";
  			// FIX: Remove Hard code
  			var path_of_config = "/widget/" + widget.id + "/config.json";
  			var config_json_string = null;
-
- 			$.getJSON(path_of_config, function(data){
- 				config_json_string = data;
+ 			console.log('here', widget);
+ 			jQuery.ajax({
+ 			  url: path_of_config,
+ 			  type: 'GET',
+ 			  async: 'false',
+ 			  complete: function(xhr, textStatus) {
+ 			    //called when complete
+ 			  },
+ 			  success: function(data, textStatus, xhr) {
+ 			    //called when successful
+ 			    config_json_string = data;
  				// Assumption : File is alright
  				// TODO: implement a check
- 				console.log(config_json_string);
+ 				console.log('there',config_json_string);
  				//1. Load the start page
- 				var src = config_json_string.location + "/index.html";
+ 				var src = "/widget/" + widget.id + "/index.html";
  				//2. Load with default options
  				var options = {
  					width: config_json_string.default_width,
  					height: config_json_string.default_height
  				};
  				this_.addWidget(dom_element, src, options);
+ 			  },
+ 			  error: function(xhr, textStatus, errorThrown) {
+ 			    //called when there is an error
+ 			    console.log(textStatus, errorThrown);
+ 			  }
+ 			});
+ 			
+
+ 			$.getJSON(path_of_config, function(data){
+ 				// config_json_string = data;
+ 				// // Assumption : File is alright
+ 				// // TODO: implement a check
+ 				// console.log(config_json_string);
+ 				// //1. Load the start page
+ 				// var src = "/widget/" + widget.id + "/index.html";
+ 				// //2. Load with default options
+ 				// var options = {
+ 				// 	width: config_json_string.default_width,
+ 				// 	height: config_json_string.default_height
+ 				// };
+ 				// this_.addWidget(dom_element, src, options);
  			}); 			
  		});
 
@@ -106,6 +135,8 @@ var widgetForUseURL = "/widgets/users/";
  				theData = data;
  			}
  		});
+ 		console.log("[Total widgets]" + theData.length);
+ 		console.log("[Widgets]", theData);
  		return theData;
  		//var sample = '{"enabled_widgets": ["hello", "hello"]}';
  		//return sample;
