@@ -1,6 +1,6 @@
 class WidgetsController < ApplicationController
 
-  before_filter :user_signed_in?, :only => [:set_config]
+  before_filter :user_signed_in?, :only => [:set_config, :create]
 
     # Make the current item object available to views
   #----------------------------------------
@@ -56,6 +56,33 @@ class WidgetsController < ApplicationController
       format.json { render :json => @user_widget }
       format.xml  { render :xml => @user_widget }
       format.html { render text: "Unsupported Format", status: 404 }
+    end
+  end
+
+  def create
+    puts params
+    widget_data = {
+      :name => params[:name],
+      :description => params[:description],
+      :thumbnail => params[:thumbnail],
+      :location => params[:location],
+      :creator_id => current_user.id
+    }
+
+    @widget = Widget.new(widget_data)
+    
+    if @widget.save
+      respond_to do |format|
+        format.json { render :json => @widget.to_json, :status => 200 }
+        format.xml  { head :ok }
+        format.html { redirect_to :action => :index }
+      end
+    else
+      respond_to do |format|
+        format.json { render :text => "Could not create item", :status => :unprocessable_entity } # placeholder
+        format.xml  { head :ok }
+        format.html { render :action => :new, :status => :unprocessable_entity }
+      end
     end
   end
 end
