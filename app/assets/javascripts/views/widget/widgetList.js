@@ -21,7 +21,8 @@ DescribeMe.Views.WidgetList = Backbone.View.extend({
 
     render: function() {
         var self = this;
-        $(this.el).html(this.template());
+        $(this.el).html($(this.options.sidebar.el));
+        $(this.el).append(this.template());
         this.widgetContainer = $(this.el).find('#widget-container');
         $(this.widgetContainer).empty();
 

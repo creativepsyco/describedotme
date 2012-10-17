@@ -30,11 +30,3 @@ gem 'backbone-on-rails'
 # Bootstrap Rails
 gem "bootstrap-sass", "2.0.0"
 
-gem 'guard-rspec'
-gem 'simplecov'
-group :test do
-	gem 'spork', '~> 0.9.0.rc'
-  gem 'spork-testunit'
-  gem 'guard-spork'
-  gem 'guard-test'
-end

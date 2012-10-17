@@ -1,17 +1,16 @@
 <div class="row-fluid">
-<div class="span7">
-	<div class="hero-unit">
-        <h1>Describe.me</h1>
-        <p>Welcome to Descibe.Me. It is a platform for passion expression, which allows you to share your creations and products, and showcase your talents and passions.</p>
-        <p>Start building up your profile, and share your creations globally.</p>
+<div class="span8">
+	<div class="hero-unit" style="background-color:#fff">
+        <h1 style="color:#317EAC">Welcome to Describe.me</h1>
+        <p style="padding: 20px 0;">Descibe.Me is a platform for passion expression. It allows you to share your creations and products, and showcase your talents and passions. With cool social features and a unique ability to include add-ons, its the perfect place for you to build your portfolio and share your personality. </p><p> Start building up your profile, and share your creations globally.</p>
         <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
   	</div>
 </div>
 
-<div class="span5" style="padding:5px;padding-top:20px; border: 2px solid #E5E5E5">
-	<form class="form-horizontal" action="/users/sign_in" class="new_user" id="new_user" method="post">
+<div class="span4">
+	<form class="form-vertical hero-unit" action="/users/sign_in" class="new_user" id="new_user" method="post" style="background:#fff;">
 
-		<legend>Log in</legend>
+		<legend><h4>Log in</h4></legend>
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 	    <div class="control-group">
 	   		<label class="control-label" for="inputEmail"><%= f.label :email %></label>

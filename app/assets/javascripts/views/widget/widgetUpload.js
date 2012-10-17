@@ -44,7 +44,8 @@ DescribeMe.Views.WidgetUpload = Backbone.View.extend({
 
     render: function() {
         var self = this;
-        $(this.el).html(this.template());
+        $(this.el).html($(this.options.sidebar.el));
+        $(this.el).append(this.template());
         // this.projectContainer = $(this.el).find('#project-container');
         // $(this.projectContainer).empty();
 
