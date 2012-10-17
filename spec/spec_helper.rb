@@ -1,5 +1,19 @@
 require 'rubygems'
 require 'spork'
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/lib/'
+  add_filter '/vendor/'
+  add_filter '/test/'
+
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
+  add_group 'Views', 'app/views'
+  add_group 'Helpers', 'app/helpers'
+  add_group 'Mailers', 'app/mailers'
+end
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
