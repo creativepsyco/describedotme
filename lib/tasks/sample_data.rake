@@ -63,6 +63,7 @@ namespace :db do
     end
     puts "Populate sample posts"
     users = User.all(limit: 6)
+    users.shift
     10.times do
       description = Faker::Lorem.sentence(5)
       title = Faker::Lorem.sentence(1)
