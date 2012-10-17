@@ -24,7 +24,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 
 	showProfile: function() {
 		var self = this;
-		var profile = new DescribeMe.Models.Profile({id:"1"});
+		var profile = new DescribeMe.Models.Profile();
 		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
 		var projects = new DescribeMe.Collections.ProjectList();
 
