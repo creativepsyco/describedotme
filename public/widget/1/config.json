@@ -7,7 +7,7 @@
 	
 	"description": "A Hello plugin for demonstrating loading of javascript and css",
 	
-	"location": "/widget/hello",
+	"location": "/widget/1",
 	
 	"has_js": true,
 	

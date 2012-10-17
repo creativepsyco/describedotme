@@ -7,7 +7,7 @@
 	
 	"description": "Display a cool clock on your profile.",
 	
-	"location": "/widget/clock",
+	"location": "/widget/2",
 	
 	"has_js": true,
 	
@@ -15,5 +15,5 @@
 	
 	"default_width": 400,
 	
-	"default_height": 400,
+	"default_height": 200
 }
