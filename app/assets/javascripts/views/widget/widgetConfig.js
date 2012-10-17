@@ -1,12 +1,11 @@
 DescribeMe.Views.WidgetConfig = Backbone.View.extend({
 	el: '#widget-config-container',
 
-	model: DescribeMe.Models.WidgetConfig,
-
 	template: JST['widget/widgetConfig'],
 
 	initialize: function () {
 		// GET JSON from server
+		
 	},
 
 	events: {
@@ -15,6 +14,16 @@ DescribeMe.Views.WidgetConfig = Backbone.View.extend({
 
 	onWidgetAdd: function() {
 		// POST JSON to server
+		var widget_id = this.model.get('id');
+		
+		var user_id = window.id;
+
+		var URL = '/widgets/' + widget_id + '/users/' + user_id;
+		var sample_JSON = '{}';
+		jQuery.post(URL, {config_json: sample_JSON}, 
+			function(data, textStatus, xhr) {
+				alert("Successfully added widget");
+		});
 	},
 
 	onAddClick: function() {

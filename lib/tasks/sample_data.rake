@@ -83,9 +83,10 @@ namespace :db do
 
   task populate_widget: :environment do
     users = User.all()
-    10.times do
-      Widget.create(creator_id: users.sample.id, name: Faker::Lorem.sentence(1))
-    end
+    #2.times do
+      Widget.create(creator_id: users.sample.id, thumbnail:"http://lorempixel.com/g/400/200", name: "Hello")
+      Widget.create(creator_id: users.sample.id, thumbnail:"", name: "Clock")
+    #end
     # create one for first user
     widgets = Widget.all()
     UsersWidgets.create(user_id: users[1].id,
