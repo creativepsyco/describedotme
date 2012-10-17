@@ -53,6 +53,7 @@ var widgetForUseURL = "/widgets/users/";
  		var this_ = this;
  		enabled_widgets.forEach(function (widget) {
  			// TODO: Use Real Widgets
+ 			// FIX: Remove Hard code
  			var path_of_config = "/widget/" + "hello"+ "/config.json";
  			var config_json_string = null;
 

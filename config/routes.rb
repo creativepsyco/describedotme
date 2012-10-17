@@ -34,6 +34,7 @@ DescribeMe::Application.routes.draw do
   get 'widgets/users/:user_id' => 'widgets#get_widget_for_user'
   get 'widgets/:widget_id/users/:user_id' => 'widgets#get_config'
   post 'widgets/:widget_id/users/:user_id' => 'widgets#set_config'
+  post 'widgets' => 'widgets#create'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
