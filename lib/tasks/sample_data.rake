@@ -114,7 +114,7 @@ namespace :db do
     users = User.all()
     #2.times do
       Widget.create(creator_id: users.sample.id, thumbnail:"http://lorempixel.com/g/400/200", name: "Hello")
-      Widget.create(creator_id: users.sample.id, thumbnail:"", name: "Clock")
+      Widget.create(creator_id: users.sample.id, thumbnail:"http://cl.ly/image/3i2p3q2f2N1e", name: "Clock")
     #end
     # create one for first user
     widgets = Widget.all()
