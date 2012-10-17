@@ -4,3 +4,10 @@ DescribeMe.Models.Profile = Backbone.Model.extend({
 
     url : '/users/profile.json',
 });
+
+DescribeMe.Models.UserProfile = Backbone.Model.extend({
+    initialize:function () {
+    },
+
+    urlRoot : '/users',
+});
