@@ -18,7 +18,9 @@ then
     rake db:reset
     rake db:migrate RAILS_ENV=$ENV
     #rake db:seed
+    rake db:populate_demo_user
     rake db:populate
+    rake db:populate_widget
     rails server -e $ENV 
     #thin -p 8888 -d -e $ENV start;
 fi

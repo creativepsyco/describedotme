@@ -1,13 +1,13 @@
 {
 	"_comments" : "This consists of the different settings loaded up at runtime for a widget. These settings are global defined by the developer and cant be changed at a later date",
 
-	"name": "Hello",
+	"name": "Cool Clock",
 
-	"unique_name": "hello",
+	"unique_name": "cool_clock",
 	
-	"description": "A Hello plugin for demonstrating loading of javascript and css",
+	"description": "Display a cool clock on your profile.",
 	
-	"location": "/widget/hello",
+	"location": "/widget/2",
 	
 	"has_js": true,
 	

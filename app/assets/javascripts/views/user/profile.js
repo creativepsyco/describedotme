@@ -30,7 +30,9 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	renderProfile: function() {
 		this.userProfileView = new DescribeMe.Views.UserProfile({model: this.profileModel}).render();
 		$(this.el).find('#profile-container').append($(this.userProfileView.el));
-
+		// HACK 
+		window.id = this.profileModel.get('id');
+		
 		WidgetLoader.addAllWidgets('#addon-container', this.profileModel.get('id') ,null);
 	},
 
