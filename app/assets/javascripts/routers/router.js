@@ -76,7 +76,6 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
     		success: function () {
     			if(self.projectList) {
     				self.projectList.model = projects;
-    				console.log(projects.toJSON());
     			}
     			else {
     				self.projectList = new DescribeMe.Views.Organizer({model:projects, sidebar: self.sidebar});
@@ -108,19 +107,29 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	 * @return {[type]} [description]
 	 */
 	showMarketplace: function() {
-		// Marketplace showing code
-		var w1 = new DescribeMe.Models.WidgetItem({title:'Widget Title 1', thumbnail: 'http://lorempixel.com/g/400/200/'});
-		var w2 = new DescribeMe.Models.WidgetItem({title:'Widget Title 2', thumbnail: 'http://lorempixel.com/g/400/200/'});
-		var w3 = new DescribeMe.Models.WidgetItem({title:'Widget Title 3', thumbnail: 'http://lorempixel.com/g/400/200/'});
+		var self = this;
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 		var widgets = new DescribeMe.Collections.WidgetList();
-		//var widgets = new DescribeMe.Collections.WidgetList([w1, w2, w3]);
-		widgets.fetch();
-		var marketplace = new DescribeMe.Views.WidgetList({model:widgets}).render();
+		widgets.fetch({
+			success: function () {
+    			if(self.marketplace) {
+    				self.marketplace.model = widgets;
+    			}
+    			else {
+    				self.marketplace = new DescribeMe.Views.WidgetList({model:widgets, sidebar: self.sidebar});
+    			}
+    			self.marketplace.render();
+    		},
+    		error: function() {
+    			console.log('Unable to load marketplace!');
+    		}
+    	});
 	},
 
 	addWidget: function() {
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 		var aWidget = new DescribeMe.Models.WidgetItem();
-		var uploadWidget = new DescribeMe.Views.WidgetUpload({model: aWidget}).render();
+		var uploadWidget = new DescribeMe.Views.WidgetUpload({model: aWidget, sidebar:this.sidebar}).render();
 	},
 
 	showDashboard: function(){

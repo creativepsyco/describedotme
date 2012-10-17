@@ -9,6 +9,13 @@ body {
 .toolbar-search {
 	margin: 20px 0 20px;
 }
+#widget-container .span4 {
+	width: 290px;
+}
+
+#widget-upload input, textarea{
+	width: 100%;
+}
 
 hr {
 	margin-top: 10px;
