@@ -17,6 +17,7 @@ DescribeMe.Views.WidgetList = Backbone.View.extend({
 	add: function(item) {
         var self = this;
         $(self.widgetContainer).append(new DescribeMe.Views.WidgetItem({ model: item }).render().el);
+        console.log(item.toJSON());
     },
 
     render: function() {

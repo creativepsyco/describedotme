@@ -10,7 +10,7 @@ DescribeMe.Views.WidgetItem = Backbone.View.extend({
 	},
 
 	onAddClick: function() {
-		var aConfigModel = new DescribeMe.Models.WidgetConfig();
+		var aConfigModel = new DescribeMe.Models.WidgetConfig({id: this.model.get('id')});
 		var xConfigView = new DescribeMe.Views.WidgetConfig({model:aConfigModel}).render();
 	},
 
