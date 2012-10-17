@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :get_user, :only => [:index,:new,:edit]
-  before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
+  before_filter :get_user, :only => [:index,:new,:edit, :profile]
+  before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create,:profile]
   load_and_authorize_resource :only => [:show,:new,:destroy,:edit,:update]
 
   # Get roles accessible by the current user
@@ -55,6 +55,26 @@ class UsersController < ApplicationController
       format.json { render :json => @user }
       format.xml  { render :xml => @user }
       format.html
+    end
+  end
+
+  # GET /users/profile
+  # GET /users/profile.xml
+  # GET /users/profile.json                                     HTML AND AJAX
+  #-------------------------------------------------------------------
+  def profile
+    if (!@current_user)
+      respond_to do |format|
+        format.json { render :json => {:error => "User not logged in"}, :status => 200}
+        format.html { redirect_to root_url }
+      end
+    elsif
+      @user = @current_user
+      respond_to do |format|
+        format.json { render :json => @user }
+        format.xml  { render :xml => @user }
+        format.html
+      end
     end
   end
 
