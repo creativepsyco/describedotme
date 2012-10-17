@@ -91,18 +91,21 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	communityProjects: function(){
+		var self = this;
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
+
 		var projects = new DescribeMe.Collections.ProjectList();
 		projects.url = '/featured_items.json';
 		projects.fetch(
 		{
     		success: function () {
-    			if(self.projectList) {
-    				self.projectList.model = projects;
+    			if(self.communityProjectList) {
+    				self.communityProjectList.model = projects;
     			}
     			else {
-    				self.projectList = new DescribeMe.Views.CommunityProjectList({model:projects});
+    				self.communityProjectList = new DescribeMe.Views.CommunityProjectList({model:projects, sidebar:self.sidebar});
     			}
-    			self.projectList.render();
+    			self.communityProjectList.render();
     		},
     		error: function() {
     			console.log('Unable to load projects!');

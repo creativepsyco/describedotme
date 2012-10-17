@@ -14,7 +14,8 @@ DescribeMe.Views.CommunityProjectList = Backbone.View.extend({
 
     render: function() {
         var self = this;
-        $(this.el).html(this.template());
+        $(this.el).html($(this.options.sidebar.el));
+        $(this.el).append(this.template());
 
         _.each(this.model.models, function(item) {
             self.add(item);
