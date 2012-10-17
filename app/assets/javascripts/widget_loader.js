@@ -29,17 +29,23 @@ var widgetForUseURL = "/widgets/users/";
  	/**
  	 * [addAllWidgets description]
  	 * @param {[type]}   dom_element [description]
+ 	 * @param {[type]}   user_id     [description]
  	 * @param {Function} callback    [description]
  	 */
- 	 addAllWidgets: function(dom_element, callback) {
+ 	 addAllWidgets: function(dom_element, user_id, callback) {
+ 	 	if(!user_id) {
+ 	 		user_id = WidgetAPI.getCurrentUser();
+ 	 	}
+ 	 	
  	 	var error_message = null;
+
  	 	/*	Remove all the add-ons from the container */
  	 	$(dom_element).empty();
 
  		// Gets the enabled widgets
  		// Do not add multiple times
  		// FIX: possible security hole.
- 		var enabledWidgetsObject = this.getEnabledWidgets(WidgetAPI.getCurrentUser()); 
+ 		var enabledWidgetsObject = this.getEnabledWidgets(user_id); 
  		var enabled_widgets = enabledWidgetsObject;
  		//var enabled_widgets = JSON.parse(enabledWidgetsObject);
  		console.log("[addAllWidgets] Enabled Widgets" + enabled_widgets);
