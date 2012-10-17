@@ -1,13 +1,55 @@
 namespace :db do
   desc "Fill database with sample data"
 
+  task populate_demo_user: :environment do
+    user = User.create(name: "Robinson Cravents",
+                       email: "example@describe.me",
+                       password: "foobar",
+                       password_confirmation: "foobar",
+                       description: 'I love to draw, and sing. Well, cooking is also one of my big interest',
+                       photo_url: 'http://behance.vo.llnwd.net/profiles/58036/b9d4960785150ab2cb73e48efb923ff2.png')
+
+    project_name = [
+      'Verticals', 'Metrio Tea', 'Metrio Coffee Packagin', 'Missile, Energy drink identity',
+      'Hindukusch - Identity', 'Cooper Motorsport - Identity', 'BABILLA - Corporate Visual Identity',
+    ]
+
+    cover_photo = [
+      'http://behance.vo.llnwd.net/profiles/58036/projects/5413899/096b7d0c26ca4e849a000a9b6e135b01.png',
+      'http://behance.vo.llnwd.net/profiles/58036/projects/4249443/3d1ee0d0096dcd4498447f093c48278e.png',
+      'http://behance.vo.llnwd.net/profiles/58036/projects/2718311/e0145200f2813c3ec2938af8719e47d0.png',
+      'http://behance.vo.llnwd.net/profiles/58036/projects/280878/0580361249667515.png',
+      'http://behance.vo.llnwd.net/profiles/58036/projects/206542/0580361238946490.png',
+      'http://behance.vo.llnwd.net/profiles/58036/projects/365133/0580361261179463.png',
+      'http://behance.vo.llnwd.net/profiles/58036/projects/330673/0580361258650119.png'
+    ]
+
+    project_name.length.times do |n|
+      description = Faker::Lorem.sentence(5)
+      item = user.items.create!(title: project_name[n],
+                                description: description)
+      photo = item.photos.create!(
+        caption: Faker::Lorem.sentence(3),
+        photo_url: cover_photo[n]
+      )
+    end
+  end
+
   task populate: :environment do
+    profile_url = [
+      "http://www.catsofaustralia.com/photogallery/Big%20Photos/czarnew.jpg",
+      "http://ec.comps.canstockphoto.com/can-stock-photo_csp9341208.jpg",
+      "http://www.tutorialsscripts.com/free-icons/funny-icons/black-funny-icon-256-x-256.png",
+      "http://cloudfront3.bostinno.com/wp-content/uploads/2012/09/large_funny_twitter_icon.jpeg"
+    ]
+
+    sample_desc = [
+      "I'm a solo coder, who like to draw as well :)",
+      "I love to draw, and sing. Well, cooking is also one of my big interest",
+      "A thinker, who loves to think about the meaning of life..."
+    ]
+
     puts "Populate sample users"
-    User.create(name: "Example User",
-                email: "example@describe.me",
-                password: "foobar",
-                password_confirmation: "foobar",
-                description: "")
     20.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@describe.me"
@@ -16,10 +58,12 @@ namespace :db do
                   email: email,
                   password: password,
                   password_confirmation: password,
-                  description: "")
+                  description: sample_desc.sample,
+                  photo_url: profile_url.sample)
     end
     puts "Populate sample posts"
     users = User.all(limit: 6)
+    users.shift
     10.times do
       description = Faker::Lorem.sentence(5)
       title = Faker::Lorem.sentence(1)
