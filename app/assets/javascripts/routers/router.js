@@ -6,7 +6,8 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'projects': 'showAllProjects',
 		'projects/new': 'newProject',
 		'dashboard' : 'homePage',
-		'': 'showDashboard'
+		'': 'showDashboard',
+		'community': 'communityProjects',
 	},
   
 	initialize: function() {
@@ -79,6 +80,25 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
     			}
     			else {
     				self.projectList = new DescribeMe.Views.Organizer({model:projects, sidebar: self.sidebar});
+    			}
+    			self.projectList.render();
+    		},
+    		error: function() {
+    			console.log('Unable to load projects!');
+    		}
+	    });
+	},
+
+	communityProjects: function(){
+		var projects = new DescribeMe.Collections.ProjectList();
+		projects.fetch(
+		{
+    		success: function () {
+    			if(self.projectList) {
+    				self.projectList.model = projects;
+    			}
+    			else {
+    				self.projectList = new DescribeMe.Views.CommunityProjectList({model:projects});
     			}
     			self.projectList.render();
     		},

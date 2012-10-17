@@ -112,3 +112,32 @@ hr {
 .dashboard-entry-text {
 	padding-top: 15px;
 }
+
+.project-name a{
+	font-weight: bold;
+	color: #005CFF;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.project-cover-info {
+	padding:5px;
+	padding-left: 10px;
+}
+
+.category-info {
+	padding:5px;
+	padding-left: 10px;
+	font-size: 80%;
+}
+
+.social-info {
+	background-color: #F6F6F6;
+	padding: 5px;
+	padding-left: 10px;
+	text-align: right;
+}
+
+.cover-favorite {
+	margin-right: 10px;
+}
