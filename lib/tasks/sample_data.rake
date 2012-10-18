@@ -38,6 +38,7 @@ namespace :db do
     #2.times do
     Widget.create(creator_id: users.sample.id, thumbnail:"http://lorempixel.com/g/400/200", name: "Hello")
     Widget.create(creator_id: users.sample.id, thumbnail:"http://goo.gl/YpH0I", name: "Clock")
+    Widget.create(creator_id: users.sample.id, thumbnail:"http://devfiles.myopera.com/articles/1281/widget_control_buttons.png", name: "Twitter Widget")
   end
 
   task populate: :environment do
