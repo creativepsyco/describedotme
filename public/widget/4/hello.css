@@ -1,0 +1,40 @@
+body { padding:50px 100px; font:12px Verdana, Geneva, sans-serif;
+ }
+
+input, textarea {
+ padding: 8px;
+ border: solid 1px #E5E5E5;
+font: normal 12px Verdana, Tahoma, sans-serif;
+ width: 200px;
+
+ }
+
+textarea {
+ width: 400px;
+ max-width: 400px;
+ height: 150px;
+ line-height: 150%;
+ }
+
+.form label {
+ margin-left: 10px;
+ color: #999999;
+ }
+
+.submit input {
+ width: auto;
+ padding: 9px 15px;
+ background: #617798;
+ font-size: 14px;
+ color: #FFFFFF;
+ cursor:pointer;
+ }
+#form-div {
+background-color:#F5F5F5;
+padding:15px;
+}
+
+#wrapper {
+margin:30px auto;
+width:500px;
+}
