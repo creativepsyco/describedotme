@@ -26,6 +26,17 @@ DescribeMe::Application.routes.draw do
 
   match 'profile' => 'home#profile'
 
+  # routes for favorite and kudo for an item
+  get 'items/:item_id/kudos' => 'kudos#index'
+  get 'items/:item_id/favorites' => 'favorites#index'
+
+  # post t favorite and kudo for an item
+  post 'items/:item_id/kudos'     => 'kudos#create'
+  post 'items/:item_id/favorites' => 'favorites#create'
+
+  # destroy kudos
+  delete 'items/:item_id/kudos'  => 'kudos#destroy'
+
   #routes for favorite and kudo:
   match 'favourite_items' => 'users#favorite_items'
   match 'kudo_items' => 'users#kudo_items'
