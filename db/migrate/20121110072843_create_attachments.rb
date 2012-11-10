@@ -4,9 +4,9 @@ class CreateAttachments < ActiveRecord::Migration
       t.string :description
       t.string :thumbnail_url
       t.integer :creator_id
-      t.string :type
       t.string :alt
       t.integer :item_id
+      t.string :att_type
 
       t.timestamps
     end

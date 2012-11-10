@@ -5,8 +5,13 @@ class AttachmentsController < ApplicationController
     @attachment = Attachment.create(params[:attachment]);
 
     if @attachment.save
+      resp = {
+        att_id: @attachment.id,
+        img_url: @attachment.attfile.url
+      }
+
       respond_to do |format|
-        format.json { render :json => @attachment.attfile.url, :status => 200 }
+        format.json { render :json => resp, :status => 200 }
       end
     else
       respond_to do |format|

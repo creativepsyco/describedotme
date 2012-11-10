@@ -3,7 +3,7 @@ class Attachment < ActiveRecord::Base
   # url: photo / video / file => have an url attachment
   # type: the type of the attachment (photo, video, code, etc)
   # thumbnail_url: hmm, extra, may not be necessary
-  attr_accessible :alt, :attfile, :creator_id, :description, :item_id, :thumbnail_url, :type
+  attr_accessible :alt, :attfile, :att_type, :creator_id, :description, :item_id, :thumbnail_url
 
   has_attached_file :attfile,
       :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
