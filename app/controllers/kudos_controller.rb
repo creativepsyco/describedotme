@@ -24,10 +24,22 @@ class KudosController < ApplicationController
     puts params
     @item = Item.find(params[:item_id])
     item_id = params[:item_id]
+
+    # Current user cannot kudo twice
+    @kudos = UserKudoItem.find_by_user_id_and_item_id(@current_user.id, item_id)
+
+    if !@kudos.nil? 
+      puts " Kudos already exists for this user"
+      respond_to do|format|
+        format.all { return render :text => "Current User has already done kudo", :status => :unprocessable_entity } # placeholder
+      end
+    end 
+
+  
     @user_kudo_item = @current_user.user_kudo_items.build({
       item_id: item_id
     })
-    
+
 
     if @user_kudo_item.save
       respond_to do |format|
@@ -49,13 +61,20 @@ class KudosController < ApplicationController
     
     puts @user_kudo_item
     
+    # check if the item exists or not
+    if @user_kudo_item.nil?
+      respond_to do |format|
+        format.all {return render :text => "Current User has not kudos this item", :status => 404 }
+      end 
+    end
+
     if @user_kudo_item.destroy
       respond_to do |format|
         format.all { render :json => {:result => :ok}, :status => 200 }
       end
     else
       respond_to do |format|
-        format.all { render :text => "Could not remove this item from favorite list", :status => :unprocessable_entity } # placeholder
+        format.all { render :text => "Could not remove this item from Kudos list", :status => :unprocessable_entity } # placeholder
       end
     end
   end
