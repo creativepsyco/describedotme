@@ -38,6 +38,7 @@
 ``` bash
        $ rake db:populate_demo_user
 ```
+
 ##API
 
 Current API route: add.json for json result
