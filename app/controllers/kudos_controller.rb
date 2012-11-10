@@ -27,6 +27,7 @@ class KudosController < ApplicationController
     @user_kudo_item = @current_user.user_kudo_items.build({
       item_id: item_id
     })
+    
 
     if @user_kudo_item.save
       respond_to do |format|
@@ -44,8 +45,10 @@ class KudosController < ApplicationController
   end
 
   def destroy
-    @user_kudo_item = UserKudoItem.find(:first, :conditions => ["user_id = ? and item_id = ?", @current_user.id, params[:id]])
-
+    @user_kudo_item = UserKudoItem.find(:first, :conditions => ["user_id = ? and item_id = ?", @current_user.id, params[:item_id]])
+    
+    puts @user_kudo_item
+    
     if @user_kudo_item.destroy
       respond_to do |format|
         format.all { render :json => {:result => :ok}, :status => 200 }
