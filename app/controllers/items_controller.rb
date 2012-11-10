@@ -32,6 +32,7 @@ class ItemsController < ApplicationController
       :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
       :photos => item.photos,
       :comments => item.comments,
+      :kudos_count => item.kudos_count
     }
   end
 
@@ -45,7 +46,8 @@ class ItemsController < ApplicationController
         :desc => item.description,
         :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
         :creator_id => item.creator.id,
-        :creator_name => item.creator.name
+        :creator_name => item.creator.name,
+        :kudos_count => item.kudos_count
       }
     end
     respond_to do |format|
