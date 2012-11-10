@@ -8,9 +8,9 @@ class Item < ActiveRecord::Base
   has_many :photos
   has_many :comments
 
-  has_many :users_favorite_item, :class_name => 'UsersFavoriteItem'
+  has_many :users_favorite_item, :class_name => 'UserFavoriteItem'
   has_many :favorite_users, :class_name => 'User', :through => :users_favorite_item
 
-  has_many :users_kudo_item, :class_name => 'UsersKudoItem'
+  has_many :users_kudo_item, :class_name => 'UserKudoItem'
   has_many :kudo_users, :class_name => 'User', :through => :users_kudo_item
 end

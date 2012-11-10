@@ -25,11 +25,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :items, :foreign_key => "creator_id"
 
-  has_many :users_favorite_items, :class_name => 'UsersFavoriteItem'
-  has_many :favorite_items, :class_name => 'Item', :through => :users_favorite_items
+  has_many :user_favorite_items, :class_name => 'UserFavoriteItem'
+  has_many :favorite_items, :class_name => 'Item', :through => :user_favorite_items
 
-  has_many :users_kudo_items, :class_name => 'UsersKudoItem'
-  has_many :kudo_items, :class_name => 'Item', :through => :users_kudo_items
+  has_many :user_kudo_items, :class_name => 'UserKudoItem'
+  has_many :kudo_items, :class_name => 'Item', :through => :user_kudo_items
 
   has_many :users_widgets, :class_name => "UsersWidgets"
   has_many :enabled_widgets, :class_name => "Widget", :through => :users_widgets, :source => :widget
@@ -46,12 +46,11 @@ class User < ActiveRecord::Base
 
 end
 
-class UsersFavoriteItem < ActiveRecord::Base
+# The classname should match the table created for the items 
+# check the model names and the migration
+# Follow Rails Conventions
+class UserFavoriteItem < ActiveRecord::Base
     belongs_to :favorite_user, :class_name => 'User',  :foreign_key => "user_id"
     belongs_to :favorite_item, :class_name => 'Item',  :foreign_key => "item_id"
 end
 
-class UsersKudoItem < ActiveRecord::Base
-    belongs_to :kudo_user, :class_name => 'User',  :foreign_key => "user_id"
-    belongs_to :kudo_item, :class_name => 'Item',  :foreign_key => "item_id"
-end
