@@ -43,7 +43,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @user_favorite_item = UserFavoriteItem.find(:first, :conditions => ["user_id = ? and item_id = ?", @current_user.id, params[:id]])
+    @user_favorite_item = UserFavoriteItem.find(:first, :conditions => ["user_id = ? and item_id = ?", @current_user.id, params[:item_id]])
 
     if @user_favorite_item.destroy
       respond_to do |format|
