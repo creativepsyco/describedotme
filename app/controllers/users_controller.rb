@@ -163,6 +163,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.errors[:base].empty? and @user.update_attributes(params[:user])
         flash[:notice] = "Your account has been updated"
+
+        puts (params[:user])
+        puts (params)
+        puts flash[:notice]
+        
         format.json { render :json => @user.to_json, :status => 200 }
         format.xml  { head :ok }
         format.html { render :action => :edit }
