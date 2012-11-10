@@ -102,6 +102,12 @@ For user item:
                                 # return:
                                 {result: "ok"}  /  {result: "not_ok", error_message: string}
 
+For Kudos
+
+              kudo_items (Current) GET /kudo_items(.:format)                              users#kudo_items
+              user_item_kudos      GET    /users/:user_id/items/:item_id/kudos(.:format)     kudos#index
+                                   POST   /users/:user_id/items/:item_id/kudos(.:format)     kudos#create
+
 
 == Welcome to Rails
 
