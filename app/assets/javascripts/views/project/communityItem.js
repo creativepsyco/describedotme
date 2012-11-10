@@ -8,6 +8,11 @@ DescribeMe.Views.CommunityItem = Backbone.View.extend({
 	},
 
 	events : {
+		'click .kudos' : 'onKudosClick',
+	},
+
+	onKudosClick: function(){
+		alert("Kudos");
 	},
 
 	render: function() {

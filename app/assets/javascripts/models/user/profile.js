@@ -2,7 +2,7 @@ DescribeMe.Models.Profile = Backbone.Model.extend({
     initialize:function () {
     },
 
-    url : '/users/profile.json',
+    url : '/users/profile',
 });
 
 DescribeMe.Models.UserProfile = Backbone.Model.extend({

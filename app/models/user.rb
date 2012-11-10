@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :photo_url, :description
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :photo_url, :description, :theme
 
   # attr_accessible :title, :body
   validates :name, presence: true
@@ -45,12 +45,3 @@ class User < ActiveRecord::Base
   end
 
 end
-
-# The classname should match the table created for the items 
-# check the model names and the migration
-# Follow Rails Conventions
-class UserFavoriteItem < ActiveRecord::Base
-    belongs_to :favorite_user, :class_name => 'User',  :foreign_key => "user_id"
-    belongs_to :favorite_item, :class_name => 'Item',  :foreign_key => "item_id"
-end
-
