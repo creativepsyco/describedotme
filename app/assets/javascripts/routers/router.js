@@ -24,7 +24,12 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		return projects;
 	},
 
+	routeTriggered: function() {
+		$('.navbar-inverse .navbar-inner').css('background-image','-webkit-linear-gradient(top, #04498C, #033C73)');
+	},
+
 	showProfile: function() {
+		this.routeTriggered();
 		var self = this;
 		var profile = new DescribeMe.Models.Profile();
 		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
@@ -43,7 +48,6 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
     			}
     			self.profileShow.renderProfile();
-				console.log(profile.toJSON());
 			},
 			error: function() {
 				console.log('Unable to load profile!');
@@ -68,6 +72,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	showAllProjects: function() {
+		this.routeTriggered();
 		var self = this;
 		//initialize sidebar if it is required for this page.
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
@@ -91,6 +96,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	communityProjects: function(){
+		this.routeTriggered();
 		var self = this;
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 
@@ -114,6 +120,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	showUserProfile: function(id) {
+		this.routeTriggered();
 		var self = this;
 		var profile = new DescribeMe.Models.UserProfile({id:id});
 		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
@@ -158,6 +165,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	newProject: function() {
+		this.routeTriggered();
 		var self = this;
 		//initialize sidebar if it is required for this page.
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
@@ -176,6 +184,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	 * @return {[type]} [description]
 	 */
 	showMarketplace: function() {
+		this.routeTriggered();
 		var self = this;
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 		var widgets = new DescribeMe.Collections.WidgetList();
@@ -196,12 +205,14 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	addWidget: function() {
+		this.routeTriggered();
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 		var aWidget = new DescribeMe.Models.WidgetItem();
 		var uploadWidget = new DescribeMe.Views.WidgetUpload({model: aWidget, sidebar:this.sidebar}).render();
 	},
 
 	showDashboard: function(){
+		this.routeTriggered();
 		var self = this;
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 		
