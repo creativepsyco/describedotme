@@ -17,12 +17,14 @@ DescribeMe::Application.routes.draw do
   devise_for :users
   resources :users do
     get 'profile' => 'users#profile', :on => :collection
+    put 'profile' => 'users#updatecurrentuser', :on => :collection
     resources :items, :only => [:index, :show]
     resources :items do
       resources :favorites, :only => [:index, :create]
       resources :kudos, :only => [:index, :create]
     end
   end
+
 
   match 'profile' => 'home#profile'
 

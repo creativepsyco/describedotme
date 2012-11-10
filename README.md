@@ -68,8 +68,8 @@ For user:
 ```
 
 ####User Update Settings
-```
-PUT /users/:id
+``` bash
+PUT /users/profile
 ```
 Data to send 
 
