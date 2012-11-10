@@ -20,7 +20,7 @@
             <% if user_signed_in? %>
               <li><a id="profile-nav" href="/#profile">Profile</a></li>
               <li><a id="dashboard-nav" href="/#">Dashboard</a></li>
-              <li><a href="#">Settings</a></li>
+              <li><a href="#settings">Settings</a></li>
               <li>
                 <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
               </li>

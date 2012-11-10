@@ -5,7 +5,10 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	template: JST['user/profile'],
 
 	initialize: function () {
-		this.theme = new DescribeMe.Views.Theme({el:this.el});
+		if(!this.options.theme)
+			this.theme = new DescribeMe.Views.Theme({el:this.el});
+		else
+			this.theme = new DescribeMe.Views.Theme({el:this.el, theme:this.options.theme});
 	},
 
 	events : {
