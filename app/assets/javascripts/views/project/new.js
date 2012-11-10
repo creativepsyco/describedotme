@@ -6,7 +6,7 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 
 	initialize: function () {
 		this.model = new DescribeMe.Models.ProjectItem();
-		DescribeMe.imgarr = [];
+		DescribeMe.attachments = [];
 	},
 
 	events : {
@@ -20,10 +20,12 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		var description = this.titleDOM.val();
 		var tag = this.tagDOM.val();
 
+    console.log(DescribeMe.attachments);
+
 		this.model.set({title:title});
 		this.model.set({description: description});
 		this.model.set({tag:tag});
-		this.model.set({photos:DescribeMe.imgarr});
+		this.model.set({attachments:DescribeMe.attachments});
 		this.model.save(null,
 	    {
 	    	success: function (model, response) {
@@ -38,18 +40,19 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		
 	},
 
-	onUploadComplete: function(img_url, message) {
+	onUploadComplete: function(img_url, att_id, message) {
+    console.log(img_url);
 		$('#img-upload-preview').attr('src', img_url);
 		var imagerow = "<tr><td><img src='"+ img_url +"' style='height:40px'/></td><td style='padding-top:15px;'><a class='btn btn-small delete-img pull-right' ><i class='icon-remove-sign'></i></a></td></tr>";
 		$('#image-table').append(imagerow);
-		DescribeMe.imgarr.push({photo_url: img_url, description: 'none'});
+		DescribeMe.attachments.push(att_id);
 	},
 
 	uploadImage: function() {
 		var input = document.getElementById('img-uploader');
 		if (input.files && input.files[0]) {
          	$('#img-upload-preview').attr('src', 'http://i293.photobucket.com/albums/mm49/oficinademultimedia/Loading_Animation.gif');
-            Upload.doUpload(input.files[0], this.onUploadComplete);
+            PaperUpload.doUpload(input.files[0], this.onUploadComplete);
         }
 	},
 

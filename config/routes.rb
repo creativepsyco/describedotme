@@ -12,6 +12,8 @@ DescribeMe::Application.routes.draw do
     end
   end
 
+  resources :attachments
+
   resources :comments, :only => [:show, :create, :destroy]
 
   devise_for :users
