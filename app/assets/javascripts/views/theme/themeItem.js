@@ -10,26 +10,25 @@ DescribeMe.Views.ThemeItem = Backbone.View.extend({
 	},
 
 	clickSelect: function() {
-		
 		for(i=0;i<this.allView.length;i++)
 		{
 			this.allView[i].unselect();
 		}
-		this.item.css('overflow','hidden');
-		this.item.css('border','2px solid #080');
+		this.item.text('Selected');
+		this.item.addClass('btn-success');
 		this.isSelected = true;
 		
 	},
 
 	unselect: function() {
-		this.item.css('overflow','hidden');
-		this.item.css('border','0px solid #080');
+		this.item.text('Select');
+		this.item.removeClass('btn-success');
 		this.isSelected = false;
 	},
 
 	render: function() {
 		$(this.el).html(this.template(this.model.toJSON()));
-		this.item = $(this.el).find('.theme-item');
+		this.item = $(this.el).find('.select');
 		return this;
 	}
 });

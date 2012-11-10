@@ -6,6 +6,7 @@ DescribeMe.Views.Settings = Backbone.View.extend({
 
 	initialize: function () {
 		this.themeView = [];
+        this.loadThemes();
 	},
 
 	events: {
@@ -48,16 +49,25 @@ DescribeMe.Views.Settings = Backbone.View.extend({
 		{
 			desc = $('#summary-input').val();
 		}
-		this.model.set({name:$('#name-input').val()});
-		this.model.set({description:$('#summary-input').val()});
+		this.model.set({name:name});
+		this.model.set({description:desc});
 		var selectedTheme;
 		for(i=0;i<this.themeView.length;i++) {
-			if(this.themeView.isSelected)
-				selectedTheme = this.themeView.model.get('name');
+			if(this.themeView[i].isSelected)
+				selectedTheme = this.themeView[i].model.get('name');
 		}
-		this.model.set({theme:'GreenGrid'});
+		this.model.set({theme:selectedTheme});
 		console.log(this.model.toJSON());
-		//this.model.save();
+		var self = this;
+		this.model.save(null,
+		{
+			success: function() {
+				DescribeMe.router.navigate('#profile',{trigger:true});
+			},
+			error: function() {
+				console.log('Unable to load profile!');
+			}
+		});
     },
 
     loadThemes: function() {
@@ -77,17 +87,21 @@ DescribeMe.Views.Settings = Backbone.View.extend({
 		this.themeView.push(new DescribeMe.Views.ThemeItem({model:theme5, parent:self}).render());
 		this.themeView.push(new DescribeMe.Views.ThemeItem({model:theme6, parent:self}).render());
 
-		for(i=0;i<this.themeView.length;i++) {
-			$(this.el).find('.themesr').append(this.themeView[i].el);
-		}
-
     },
 
 	render: function() {
 		$(this.el).empty();
 		$(this.el).html($(this.options.sidebar.el));
         $(this.el).append(this.template(this.model.toJSON()));
-        this.loadThemes();
+        var sel;
+        for(i=0;i<this.themeView.length;i++) {
+			$(this.el).find('.themesr').append(this.themeView[i].el);
+			if(this.model.get('theme') == this.themeView[i].model.get('name'))
+			{
+				sel = this.themeView[i];
+			}
+		}
+		sel.clickSelect();
 		return this;
 	}
 

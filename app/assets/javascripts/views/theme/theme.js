@@ -93,9 +93,9 @@ DescribeMe.Views.Theme = Backbone.View.extend({
 			this.applyBluePhoto();
 		if(this.options.theme == "GreenPhoto")
 			this.applyGreenPhoto();
-		if(this.options.theme == "Bluelist")
+		if(this.options.theme == "BlueList")
 			this.applyBlueList();
-		if(this.options.theme == "Greenlist")
+		if(this.options.theme == "GreenList")
 			this.applyGreenList();
 
 		return this;

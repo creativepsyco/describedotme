@@ -38,6 +38,7 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 		window.id = this.profileModel.get('id');
 		WidgetLoader.addAllWidgets('#addon-container', this.profileModel.get('id') ,null);
 		//apply the theme
+		this.theme.options.theme = this.profileModel.get('theme');
 		this.theme.render();
 		
 		
