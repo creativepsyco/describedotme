@@ -1,28 +1,43 @@
 ##Configuration for database:
 
 1. Install mysql server
-2. Create db user: describedotme, pass: describedotme (subject to change upon deployment)
+2. Enter these commands into the bash 
+```
+       Create db user: describedotme, pass: describedotme (subject to change upon deployment)
        CREATE USER 'describedotme'@'localhost' IDENTIFIED BY 'describedotme';
+```
 
 3. Open mysql
 4. Create 3 database: describedotme_development, describedotme_test, describedotme_production
+```
        CREATE DATABASE IF NOT EXISTS describedotme_development;
        CREATE DATABASE IF NOT EXISTS describedotme_test;
        CREATE DATABASE IF NOT EXISTS describedotme_production;
+```
 
 4. Grant all priviliges for user describedotme
+```
        GRANT ALL PRIVILEGES ON describedotme_development.* TO describedotme@localhost;
        GRANT ALL PRIVILEGES ON describedotme_test.* TO describedotme@localhost;
        GRANT ALL PRIVILEGES ON describedotme_production.* TO describedotme@localhost;
+```
 
 5. Setup
+``` bash
       $ bundle install
       $ rake db:migrate
       $ rake db:seed
+```
 
-6. For Testing one more additional step
+6. (Ignore if not running automated testing) For Testing one more additional step
+``` bash
       $ rake db:populate
+```
 
+7. Populate 
+``` bash
+       $ rake db:populate_demo_user
+```
 ##API
 
 Current API route: add.json for json result
