@@ -64,7 +64,8 @@ For user:
   edit_user_registration GET    /users/edit(.:format)                    devise/registrations#edit
                          PUT    /users(.:format)                         devise/registrations#update
                          DELETE /users(.:format)                         devise/registrations#destroy
-#### User Update Settings
+####User Update Settings
+
 ``` javascript
         PUT /users/:id
         /* Example JSON */
