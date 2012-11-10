@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   belongs_to :creator, :class_name => "User"
 
   has_and_belongs_to_many :tags
+  has_many :attachments
   has_many :photos
   has_many :comments
 
