@@ -65,9 +65,12 @@ For user:
                          PUT    /users(.:format)                         devise/registrations#update
                          DELETE /users(.:format)                         devise/registrations#destroy
 ####User Update Settings
+```
+PUT /users/:id
+```
+Data to send 
 
 ``` javascript
-PUT /users/:id
 /* Example JSON */
 {
   "user":{
