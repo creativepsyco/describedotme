@@ -14,14 +14,18 @@ DescribeMe.Views.CommunityItem = Backbone.View.extend({
 	},
 
 	onKudosClick: function(){
+		var self = this;
 		this.kudos.save(null,
 	    {
 	    	success: function (model, response) {
-	        	console.log(response);
+	        	var kudo = self.model.get('kudos_count');
+	        	var int_kudo = parseInt(kudo) + 1;
+
+	        	$(self.el).find('#stat-value').text(int_kudo);
 	    	},
 
 	    	error: function(model, response){
-	    		alert("Failure - " + response);
+	    		console.log("Cannot kudos");
 	    	}
 	    });
 	},
