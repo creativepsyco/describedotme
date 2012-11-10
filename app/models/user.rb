@@ -45,12 +45,3 @@ class User < ActiveRecord::Base
   end
 
 end
-
-# The classname should match the table created for the items 
-# check the model names and the migration
-# Follow Rails Conventions
-class UserFavoriteItem < ActiveRecord::Base
-    belongs_to :favorite_user, :class_name => 'User',  :foreign_key => "user_id"
-    belongs_to :favorite_item, :class_name => 'Item',  :foreign_key => "item_id"
-end
-
