@@ -11,6 +11,7 @@ class FavoritesController < ApplicationController
     # if item id exist => list all favorite users for this item
 
     @item = Item.find(params[:item_id])
+    puts @item
     @favorites = @item.favorite_users
 
     respond_to do |format|
@@ -28,7 +29,7 @@ class FavoritesController < ApplicationController
 
     if @user_favorite_item.save
       respond_to do |format|
-        format.json { render :json => @comment.to_json, :status => 200 }
+        format.json { render :json => @user_favorite_item.to_json, :status => 200 }
         format.xml  { head :ok }
         format.html { redirect_to :action => :index }
       end
@@ -42,7 +43,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @user_favorite_item = UserFavoriteItem.find(:first, :conditions => ["user_id = ? and item_id = ?", @current_user.id, params[:id]])
+    @user_favorite_item = UserFavoriteItem.find(:first, :conditions => ["user_id = ? and item_id = ?", @current_user.id, params[:item_id]])
 
     if @user_favorite_item.destroy
       respond_to do |format|

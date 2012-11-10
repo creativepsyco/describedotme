@@ -163,6 +163,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.errors[:base].empty? and @user.update_attributes(params[:user])
         flash[:notice] = "Your account has been updated"
+
+        puts (params[:user])
+        puts (params)
+        puts flash[:notice]
+        
         format.json { render :json => @user.to_json, :status => 200 }
         format.xml  { head :ok }
         format.html { render :action => :edit }
@@ -177,4 +182,24 @@ class UsersController < ApplicationController
   def home # for dashboard
     @user = User.find(params[:id])
   end
+
+  def favorite_items
+    @user = current_user
+    @fav_items = @user.favorite_items
+    respond_to do |format|
+      format.json { render :json => @fav_items, status: 200 }
+      format.xml  { render xml: "Unsupported Format", status: 404 }
+      format.html { render html: "Unsupported Format", status: 404 }
+    end 
+  end
+
+  def kudo_items
+    @user = current_user
+    @kudo_items = @user.kudo_items
+    respond_to do |format|
+      format.json { render :json => @kudo_items, status: 200 }
+      format.xml  { render xml: "Unsupported Format", status: 404 }
+      format.html { render html: "Unsupported Format", status: 404 }
+    end
+  end 
 end
