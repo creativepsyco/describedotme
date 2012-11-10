@@ -46,6 +46,7 @@ cancel_user_registration GET    /users/cancel(.:format)                  devise/
 
 For user:
 
+``` javascript
              user profile GET   /users(.:format)                         users#profile
                                 # return: 
                                 {id: int, name: string, email: string, num_items: int, 
@@ -64,6 +65,8 @@ For user:
   edit_user_registration GET    /users/edit(.:format)                    devise/registrations#edit
                          PUT    /users(.:format)                         devise/registrations#update
                          DELETE /users(.:format)                         devise/registrations#destroy
+```
+
 ####User Update Settings
 ```
 PUT /users/:id
