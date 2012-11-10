@@ -134,8 +134,7 @@ For user item:
                                 # return:
                                 {result: "ok"}  /  {result: "not_ok", error_message: string}
 
-For Kudos
-
+###For Kudos
 
               kudo_items (Current) GET      /kudo_items(.:format)                              users#kudo_items
               current_user_kudos   GET      /items/:item_id/kudos(.:format)     kudos#index
