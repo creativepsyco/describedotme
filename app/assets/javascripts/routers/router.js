@@ -5,6 +5,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'profile': 'showProfile',
 		'profile/:id': 'showUserProfile',
 		'projects': 'showAllProjects',
+		'project/:uid/:pid': 'showProjectDetail',
 		'projects/new': 'newProject',
 		'dashboard' : 'homePage',
 		'': 'showDashboard',
@@ -116,7 +117,6 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	showUserProfile: function(id) {
 		var self = this;
 		var profile = new DescribeMe.Models.UserProfile({id:id});
-		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
 		var projects = new DescribeMe.Collections.UserProjectList();
 		projects.userid = id;
 
@@ -155,6 +155,50 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
     		}
 	    });
 		
+	},
+
+	showProjectDetail: function(uid, pid) {
+		var self = this;
+		var profile = new DescribeMe.Models.UserProfile({id:uid});
+		var project = new DescribeMe.Models.UserProjectItem();
+		project.uid = uid;
+		project.pid  = pid;
+
+		this.projectDetail = new DescribeMe.Views.ProjectDetail();
+
+		project.fetch(
+		{
+			success: function() {
+				if(self.projectDetail) {
+    				self.projectDetail.model = project;
+    			}
+    			else {
+					self.projectDetail = new DescribeMe.Views.ProjectDetail({model:project});
+    			}
+    			self.projectDetail.render();
+
+    			profile.fetch(
+				{
+					success: function() {
+						if(self.projectDetail) {
+		    				self.projectDetail.profileModel = profile;
+		    			}
+		    			else {
+							self.projectDetail = new DescribeMe.Views.ProjectDetail({profileModel:profile});
+		    			}
+		    			self.projectDetail.renderProfile();
+						console.log(profile.toJSON());
+					},
+					error: function() {
+						console.log('Unable to load profile!');
+					}
+				});
+				console.log(project.toJSON());
+			},
+			error: function() {
+				console.log('Unable to load project!');
+			}
+		});
 	},
 
 	newProject: function() {

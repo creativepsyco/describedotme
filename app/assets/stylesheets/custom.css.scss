@@ -146,3 +146,40 @@ hr {
 .cover-favorite {
 	margin-right: 10px;
 }
+
+.kudos {
+	cursor:pointer;
+}
+
+.sidebar-label{
+	-webkit-box-shadow: 0 1px 0 white;
+	-moz-box-shadow: 0 1px 0 white;
+	box-shadow: 0 1px 0 white;
+	border-radius: 0 0 3px 3px;
+	border: 1px solid #E5E5E5;
+	border-top: none;
+	color: #797979;
+	cursor: default;
+	font-size: 10px;
+	font-weight: bold;
+	left: 21px;
+	line-height: 16px;
+	padding: 0 7px 1px;
+	position: absolute;
+	text-transform: uppercase;
+	top: 0;
+	font-family: Arial, sans-serif;
+}
+
+.sidebar-block{
+	margin-top:20px;
+	position: relative;
+	padding: 32px 24px 20px 22px;
+	border-top: 1px solid white;
+	border-bottom: 1px solid #DFDFDF;
+}
+
+.sidebar-container{
+	background: #F8F8F8;
+	border-left: 1px solid #E7E7E7;
+}
