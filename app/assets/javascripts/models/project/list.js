@@ -14,3 +14,4 @@ DescribeMe.Collections.UserProjectList = Backbone.Collection.extend({
     } 
 
 });
+
