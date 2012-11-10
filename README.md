@@ -1,4 +1,4 @@
-== Configuration for database:
+##Configuration for database:
 
 1. Install mysql server
 2. Create db user: describedotme, pass: describedotme (subject to change upon deployment)
@@ -23,7 +23,7 @@
 6. For Testing one more additional step
       $ rake db:populate
 
-== API
+##API
 
 Current API route: add.json for json result
 
@@ -67,13 +67,13 @@ For user:
 ####User Update Settings
 
 ``` javascript
-        PUT /users/:id
-        /* Example JSON */
-        {
-        "user":{
-        "theme": "AAHFDAFD"
-        }
-        }
+PUT /users/:id
+/* Example JSON */
+{
+  "user":{
+    "theme": "AAHFDAFD"
+  }
+}
 ```
 
 For user item: 
