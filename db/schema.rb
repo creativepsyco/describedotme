@@ -13,6 +13,21 @@
 
 ActiveRecord::Schema.define(:version => 20121110124022) do
 
+  create_table "attachments", :force => true do |t|
+    t.string   "description"
+    t.string   "thumbnail_url"
+    t.integer  "creator_id"
+    t.string   "alt"
+    t.integer  "item_id"
+    t.string   "att_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "attfile_file_name"
+    t.string   "attfile_content_type"
+    t.integer  "attfile_file_size"
+    t.datetime "attfile_updated_at"
+  end
+
   create_table "categories", :force => true do |t|
     t.string "name"
     t.string "description"
