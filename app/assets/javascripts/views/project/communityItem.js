@@ -5,6 +5,8 @@ DescribeMe.Views.CommunityItem = Backbone.View.extend({
 	className: 'span4',
 
 	initialize: function () {
+		this.kudos = new DescribeMe.Models.Kudos();
+		this.kudos.pid = this.model.id;
 	},
 
 	events : {
@@ -12,7 +14,16 @@ DescribeMe.Views.CommunityItem = Backbone.View.extend({
 	},
 
 	onKudosClick: function(){
-		alert("Kudos");
+		this.kudos.save(null,
+	    {
+	    	success: function (model, response) {
+	        	console.log(response);
+	    	},
+
+	    	error: function(model, response){
+	    		alert("Failure - " + response);
+	    	}
+	    });
 	},
 
 	render: function() {

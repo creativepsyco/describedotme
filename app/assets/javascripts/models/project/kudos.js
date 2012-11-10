@@ -5,7 +5,7 @@ DescribeMe.Models.Kudos = Backbone.Model.extend({
     },
 
     url: function() {
-    	return 'users/' + this.userid + '/items';
+    	return '/items/' + this.pid + '/kudos';
     } 
 
 });
