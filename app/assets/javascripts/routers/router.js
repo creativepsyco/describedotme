@@ -4,16 +4,61 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'widget/upload' : 'addWidget',
 		'profile': 'showProfile',
 		'profile/:id': 'showUserProfile',
+		'profile/preview/:id': 'previewTheme',
 		'projects': 'showAllProjects',
 		'project/:uid/:pid': 'showProjectDetail',
 		'projects/new': 'newProject',
 		'dashboard' : 'homePage',
 		'': 'showDashboard',
+		'settings': 'showSettings',
 		'community': 'communityProjects',
 	},
   
 	initialize: function() {
 		//alert('init');
+	},
+
+	previewTheme: function(theme) {
+		this.routeTriggered();
+		var self = this;
+		var profile = new DescribeMe.Models.Profile();
+		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
+		var projects = new DescribeMe.Collections.ProjectList();
+
+		this.profileShow = new DescribeMe.Views.ProfileShow({theme:theme});
+		this.profileShow.render();
+
+		profile.fetch(
+		{
+			success: function() {
+				if(self.profileShow) {
+    				self.profileShow.profileModel = profile;
+    			}
+    			else {
+					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
+    			}
+    			self.profileShow.renderProfile();
+			},
+			error: function() {
+				console.log('Unable to load profile!');
+			}
+		});
+		projects.fetch(
+		{
+    		success: function () {
+    			if(self.profileShow) {
+    				self.profileShow.projectsModel = projects;
+    			}
+    			else {
+					self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
+    			}
+    			self.profileShow.renderProject();
+    		},
+    		error: function() {
+    			console.log('Unable to load projects!');
+    		}
+	    });
+		
 	},
 
 	getDummy: function() {
@@ -140,7 +185,6 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
     			}
     			self.profileShow.renderProfile();
-				console.log(profile.toJSON());
 			},
 			error: function() {
 				console.log('Unable to load profile!');
@@ -162,6 +206,29 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
     		}
 	    });
 		
+	},
+
+	showSettings: function() {
+		this.routeTriggered();
+		var self = this;
+		var profile = new DescribeMe.Models.Profile();
+
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
+		profile.fetch(
+		{
+			success: function() {
+				if(self.Settings) {
+    				self.Settings.profileModel = profile;
+    			}
+    			else {
+					self.Settings = new DescribeMe.Views.Settings({model:profile, sidebar:self.sidebar});
+    			}
+    			self.Settings.render();
+			},
+			error: function() {
+				console.log('Unable to load profile!');
+			}
+		});
 	},
 
 	showProjectDetail: function(uid, pid) {
@@ -207,6 +274,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 			}
 		});
 	},
+
 
 	newProject: function() {
 		this.routeTriggered();

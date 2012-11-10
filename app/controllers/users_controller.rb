@@ -154,6 +154,7 @@ class UsersController < ApplicationController
   # PUT /users/1.json                                            HTML AND AJAX
   #----------------------------------------------------------------------------
   def update
+
     if params[:user][:password].blank?
       [:password,:password_confirmation,:current_password].collect{|p| params[:user].delete(p) }
     else
@@ -172,6 +173,25 @@ class UsersController < ApplicationController
         format.xml  { head :ok }
         format.html { render :action => :edit }
       else
+        format.json { render :text => "Could not update user", :status => :unprocessable_entity } #placeholder
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.html { render :action => :edit, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def updatecurrentuser
+    @user = current_user
+    puts @user
+
+    if @user.update_attributes(params[:user])
+      respond_to do |format|
+        format.json { render :json => @user.to_json, :status => 200 }
+        format.xml  { head :ok }
+        format.html { render :action => :edit }
+      end
+    else
+      respond_to do |format|
         format.json { render :text => "Could not update user", :status => :unprocessable_entity } #placeholder
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
         format.html { render :action => :edit, :status => :unprocessable_entity }

@@ -42,6 +42,9 @@ class KudosController < ApplicationController
 
 
     if @user_kudo_item.save
+      @item.kudos_count = @item.kudos_count + 1
+      @item.save
+
       respond_to do |format|
         format.json { render :json => @user_kudo_item.to_json, :status => 200 }
         format.xml  { head :ok }
@@ -59,6 +62,13 @@ class KudosController < ApplicationController
   def destroy
     @user_kudo_item = UserKudoItem.find(:first, :conditions => ["user_id = ? and item_id = ?", @current_user.id, params[:item_id]])
     
+    @item = Item.find(params[:item_id])
+    @item.kudos_count = @item.kudos_count - 1
+    if @item.kudos_count < 0
+      @item.kudos_count = 0
+    end
+    @item.save
+
     puts @user_kudo_item
     
     # check if the item exists or not
