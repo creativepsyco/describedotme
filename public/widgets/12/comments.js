@@ -53,18 +53,24 @@ function loadComments() {
   });
 
   WidgetAPI_log(json.comments.length);
-    commentJSON = json;
+  commentJSON = json;
+  renderComments();
+}
 
-    $("#comment-widget-desc").html(commentJSON.desc);
+function renderComments() {
 
-    function writeComment(element, index, array) {
-      var theComment = element.comment;
-      var theUser = element.name;
+  $("#comment-widget-container").html("");
 
-      var html = '<div class="comment"> <div class="user">' + theUser + '</div> <div class="comment_text"><p>' + theComment + '</p></div></div>';
-      $("#comment-widget-container").append(html);
-    }
-    commentJSON.comments.forEach(writeComment);
+  $("#comment-widget-desc").html('<h2>' + commentJSON.desc + '</h2>');
+
+  function writeComment(element, index, array) {
+    var theComment = element.comment;
+    var theUser = element.name;
+
+    var html = '<hr><div class="comment"> <div class="user"><h4>' + theUser + '</h4></div> <div class="comment_text"><p>' + theComment + '</p></div></div>';
+    $("#comment-widget-container").append(html);
+  }
+  commentJSON.comments.forEach(writeComment);
 }
 
 $(document).ready(function($) {
@@ -90,6 +96,7 @@ function onCommentSave() {
     "config_json": JSON.stringify(commentJSON)
   }, function(data, textStatus, xhr) {
     alert("Comment Successfully Made");
+    renderComments();
   });
 }
 
