@@ -271,8 +271,23 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		var self = this;
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 		var followingModel = new DescribeMe.Models.Following();
-		var followingView = new DescribeMe.Views.FollowingView({model: followingModel, sidebar:self.sidebar});
-		followingView.render();
+
+		if(!this.followingView){
+			this.followingView = new DescribeMe.Views.FollowingView({sidebar:self.sidebar});
+		}
+
+		followingModel.fetch(
+		{
+			success: function() {
+				if(self.followingView) {
+    				self.followingView.model = followingModel;
+    			}
+    			self.followingView.render();
+			},
+			error: function() {
+				console.log('Unable to load project!');
+			}
+		});
 	},
 
 	showProjectDetail: function(uid, pid) {

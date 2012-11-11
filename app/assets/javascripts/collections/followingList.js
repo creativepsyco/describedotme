@@ -4,6 +4,5 @@ DescribeMe.Collections.FollowingList = Backbone.Collection.extend({
 
     initialize:function () {
     },
-
 });
 
