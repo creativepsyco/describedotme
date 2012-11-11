@@ -4,8 +4,14 @@ DescribeMe.Models.ProjectItem = Backbone.Model.extend({
     	//this.set({thumbnail:"http://www.ordnung-statt-chaos.de/wp-content/themes/thesis/rotator/sample-2.jpg"});
     },
 
-    urlRoot: '/items'
+    urlRoot: '/items',
 
+    getAttachmentList: function () {
+        if(!this.attachmentList)
+            this.attachmentList = new DescribeMe.Collections.AttachmentList(this.get('photos'));
+            
+        return this.attachmentList;
+    },
 });
 
 DescribeMe.Models.UserProjectItem = Backbone.Model.extend({

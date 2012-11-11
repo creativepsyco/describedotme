@@ -31,7 +31,7 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	},
 
 	renderProfile: function() {
-		this.userProfileView = new DescribeMe.Views.UserProfile({model: this.profileModel}).render();
+		this.userProfileView = new DescribeMe.Views.UserProfile({model: this.profileModel, myProfile:this.options.myProfile}).render();
 		//render the view
 		$(this.el).find('#profile-container').append($(this.userProfileView.el));
 		//load the widgets
@@ -44,9 +44,8 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	},
 
 	renderProject: function(editable) {
-		this.projectList = new DescribeMe.Views.ProjectList({model: this.projectsModel});
+		this.projectList = new DescribeMe.Views.ProjectList({model: this.projectsModel, editable: this.options.myProfile});
 		this.projectList.uid = this.profileModel.get('id');
-		this.projectList.editable = editable;
 		$(this.el).find('#project-container').append($(this.projectList.render().el));
 		//apply the theme
 		this.theme.render();

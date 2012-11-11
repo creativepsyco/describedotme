@@ -6,6 +6,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		'profile/:id': 'showUserProfile',
 		'profile/preview/:id': 'previewTheme',
 		'projects': 'showAllProjects',
+		'project/:pid': 'showMyProjectDetail',
 		'project/:uid/:pid': 'showProjectDetail',
 		'projects/new': 'newProject',
 		'dashboard' : 'homePage',
@@ -25,7 +26,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
 		var projects = new DescribeMe.Collections.ProjectList();
 
-		this.profileShow = new DescribeMe.Views.ProfileShow({theme:theme});
+		this.profileShow = new DescribeMe.Views.ProfileShow({theme:theme, myProfile:true});
 		this.profileShow.render();
 
 		profile.fetch(
@@ -47,7 +48,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		    			else {
 							self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
 		    			}
-		    			self.profileShow.renderProject(true);
+		    			self.profileShow.renderProject();
 		    		},
 		    		error: function() {
 		    			console.log('Unable to load projects!');
@@ -81,7 +82,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
 		var projects = new DescribeMe.Collections.ProjectList();
 
-		this.profileShow = new DescribeMe.Views.ProfileShow();
+		this.profileShow = new DescribeMe.Views.ProfileShow({myProfile: true});
 		this.profileShow.render();
 
 		profile.fetch(
@@ -98,7 +99,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		    			if(self.profileShow) {
 		    				self.profileShow.projectsModel = projects;
 		    			}
-		    			self.profileShow.renderProject(true);
+		    			self.profileShow.renderProject();
 		    		},
 		    		error: function() {
 		    			console.log('Unable to load projects!');
@@ -130,7 +131,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		    				self.projectList.model = projects;
 		    			}
 		    			else {
-		    				self.projectList = new DescribeMe.Views.Organizer({model:projects, sidebar: self.sidebar});
+		    				self.projectList = new DescribeMe.Views.Organizer({model:projects, sidebar: self.sidebar, editable:true});
 		    			}
 		    			self.projectList.profile = profile;
 		    			self.projectList.render();
@@ -177,7 +178,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		var projects = new DescribeMe.Collections.UserProjectList();
 		projects.userid = id;
 
-		this.profileShow = new DescribeMe.Views.ProfileShow();
+		this.profileShow = new DescribeMe.Views.ProfileShow({myProfile: false});
 		this.profileShow.render();
 
 		profile.fetch(
@@ -195,7 +196,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		    			if(self.profileShow) {
 		    				self.profileShow.projectsModel = projects;
 		    			}
-		    			self.profileShow.renderProject(false);
+		    			self.profileShow.renderProject();
 		    		},
 		    		error: function() {
 		    			console.log('Unable to load projects!');
@@ -231,23 +232,18 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		});
 	},
 
-	showProjectDetail: function(uid, pid) {
+	showMyProjectDetail: function(pid){
 		var self = this;
-		var profile = new DescribeMe.Models.UserProfile({id:uid});
-		var project = new DescribeMe.Models.UserProjectItem();
-		project.uid = uid;
-		project.pid  = pid;
+		var profile = new DescribeMe.Models.Profile();
+		var project = new DescribeMe.Models.ProjectItem({id:pid});
 
-		this.projectDetail = new DescribeMe.Views.ProjectDetail();
+		this.projectDetail = new DescribeMe.Views.ProjectDetail({myProfile:true});
 
 		project.fetch(
 		{
 			success: function() {
 				if(self.projectDetail) {
     				self.projectDetail.model = project;
-    			}
-    			else {
-					self.projectDetail = new DescribeMe.Views.ProjectDetail({model:project});
     			}
     			self.projectDetail.render();
 
@@ -256,9 +252,6 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 					success: function() {
 						if(self.projectDetail) {
 		    				self.projectDetail.profileModel = profile;
-		    			}
-		    			else {
-							self.projectDetail = new DescribeMe.Views.ProjectDetail({profileModel:profile});
 		    			}
 		    			self.projectDetail.renderProfile();
 					},
@@ -269,6 +262,60 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 			},
 			error: function() {
 				console.log('Unable to load project!');
+			}
+		});
+	},
+
+	showProjectDetail: function(uid, pid) {
+		var self = this;
+		var myProfile = new DescribeMe.Models.Profile();
+		var profile = new DescribeMe.Models.UserProfile({id:uid});
+		var project = new DescribeMe.Models.UserProjectItem();
+		project.uid = uid;
+		project.pid  = pid;
+
+		console.log(myProfile);
+
+		myProfile.fetch(
+		{
+			success: function() {
+				var myId = myProfile.get('id');
+
+				if(myId == uid){
+					self.projectDetail = new DescribeMe.Views.ProjectDetail({myProfile:true});
+				}
+				else{
+					self.projectDetail = new DescribeMe.Views.ProjectDetail({myProfile:false});
+				}
+
+				project.fetch(
+				{
+					success: function() {
+						if(self.projectDetail) {
+		    				self.projectDetail.model = project;
+		    			}
+		    			self.projectDetail.render();
+
+		    			profile.fetch(
+						{
+							success: function() {
+								if(self.projectDetail) {
+				    				self.projectDetail.profileModel = profile;
+				    			}
+				    			self.projectDetail.renderProfile();
+							},
+							error: function() {
+								console.log('Unable to load profile!');
+							}
+						});
+					},
+					error: function() {
+						console.log('Unable to load project!');
+					}
+				});
+			},
+			error: function() {
+				console.log('Unable to load profile!');
 			}
 		});
 	},
