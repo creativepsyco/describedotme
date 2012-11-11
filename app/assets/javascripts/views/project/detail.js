@@ -9,8 +9,39 @@ DescribeMe.Views.ProjectDetail = Backbone.View.extend({
 	},
 
 	events : {
-		
-	},
+        'click #followMe' : 'onFollow',
+    },
+
+    onFollow: function(){
+        var self = this;
+        this.follow = new DescribeMe.Models.Follow();
+        this.follow.uid = this.uid;
+        if(!this.followed){
+            this.follow.save(null,
+            {
+                success: function (model, response) {
+                    self.isFollowed(true);
+                },
+
+                error: function(model, response){
+                    console.log("Cannot follow");
+                }
+            });
+        }
+        else{
+            this.follow.id = this.follow.uid;
+            this.follow.destroy(
+            {
+                success: function (model, response) {
+                    self.isFollowed(false);
+                },
+
+                error: function(model, response){
+                    console.log("Cannot unfollow");
+                }
+            });
+        }
+    },
 	
 	add: function(item) {
         var self = this;
@@ -34,6 +65,20 @@ DescribeMe.Views.ProjectDetail = Backbone.View.extend({
 
 		return this;
 	},
+
+	isFollowed:function(followed){
+        this.followed = followed;
+        if(followed){
+            $(this.el).find('#followMe').attr("class", "btn btn-warning");
+            $(this.el).find('#followMe').css("display", "inline");
+            $(this.el).find('#followMe').html("<i class='icon-plus'></i> Unfollow User");
+        }
+        else{
+            $(this.el).find('#followMe').attr("class", "btn btn-primary");
+            $(this.el).find('#followMe').css("display", "inline");
+            $(this.el).find('#followMe').html("<i class='icon-plus'></i> Follow User");
+        }
+    },
 
 	renderProfile: function() {
 		this.userProfileView = new DescribeMe.Views.UserProfileBrief({model: this.profileModel}).render();

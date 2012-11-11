@@ -27,7 +27,13 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
 		var projects = new DescribeMe.Collections.ProjectList();
 
-		this.profileShow = new DescribeMe.Views.ProfileShow({theme:theme, myProfile:true});
+		if(!this.profileShow){
+			this.profileShow = new DescribeMe.Views.ProfileShow({theme:theme, myProfile:true});
+		}
+		else{
+			this.profileShow.options.theme = theme;
+			this.profileShow.options.myProfile = true;
+		}
 		this.profileShow.render();
 
 		profile.fetch(
@@ -36,9 +42,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 				if(self.profileShow) {
     				self.profileShow.profileModel = profile;
     			}
-    			else {
-					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
-    			}
+
     			self.profileShow.renderProfile();
     			projects.fetch(
 				{
@@ -46,9 +50,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		    			if(self.profileShow) {
 		    				self.profileShow.projectsModel = projects;
 		    			}
-		    			else {
-							self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
-		    			}
+
 		    			self.profileShow.renderProject();
 		    		},
 		    		error: function() {
@@ -80,10 +82,14 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		this.routeTriggered();
 		var self = this;
 		var profile = new DescribeMe.Models.Profile();
-		// , username:'Mike Nicolas', profilePicture: 'http://500px.com/graphics/userpic.png', aboutMe: 'I work on mobile application project, and like to take photograph with my DSLR'}
 		var projects = new DescribeMe.Collections.ProjectList();
 
-		this.profileShow = new DescribeMe.Views.ProfileShow({myProfile: true});
+		if(!this.profileShow){
+			this.profileShow = new DescribeMe.Views.ProfileShow({myProfile: true});
+		}
+		else{
+			this.profileShow.options.myProfile = true;
+		}
 		this.profileShow.render();
 
 		profile.fetch(
@@ -93,7 +99,8 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
     				self.profileShow.profileModel = profile;
     			}
 
-    			self.profileShow.renderProfile();
+				self.profileShow.renderProfile();
+
 		    	projects.fetch(
 				{
 		    		success: function () {
@@ -179,8 +186,16 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		var projects = new DescribeMe.Collections.UserProjectList();
 		projects.userid = id;
 
-		this.profileShow = new DescribeMe.Views.ProfileShow({myProfile: false});
+		if(!this.profileShow){
+			this.profileShow = new DescribeMe.Views.ProfileShow({myProfile: false});
+		}
+		else{
+			this.profileShow.options.myProfile = false;
+		}
 		this.profileShow.render();
+
+		// Check whether if this user has follow this user
+		var following = new DescribeMe.Models.Following();
 
 		profile.fetch(
 		{
@@ -189,7 +204,21 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
     				self.profileShow.profileModel = profile;
     			}
 
-				self.profileShow.renderProfile();
+    			self.profileShow.renderProfile();
+
+				following.fetch({
+					success:function(){
+						var followings = new DescribeMe.Collections.FollowingList(following.get('followings'));
+
+						self.profileShow.isFollowed(false);
+
+						_.each(followings.models, function(item) {
+				            if(id == item.get('id')){
+				            	self.profileShow.isFollowed(true);
+				            }
+				        }, this);
+					}
+				});
 
     			projects.fetch(
 				{
@@ -298,19 +327,30 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		project.uid = uid;
 		project.pid  = pid;
 
-		console.log(myProfile);
+		// Check whether if this user has follow this user
+		var following = new DescribeMe.Models.Following();
 
 		myProfile.fetch(
 		{
 			success: function() {
 				var myId = myProfile.get('id');
 
-				if(myId == uid){
-					self.projectDetail = new DescribeMe.Views.ProjectDetail({myProfile:true});
-				}
-				else{
-					self.projectDetail = new DescribeMe.Views.ProjectDetail({myProfile:false});
-				}
+				if(!self.projectDetail)
+					if(myId == uid){
+						self.projectDetail = new DescribeMe.Views.ProjectDetail({myProfile:true});
+					}
+					else{
+						self.projectDetail = new DescribeMe.Views.ProjectDetail({myProfile:false});
+					}
+				else
+					if(myId == uid){
+						self.projectDetail.options.myProfile = true;
+					}
+					else{
+						self.projectDetail.options.myProfile = false;
+					}
+
+				self.projectDetail.uid = uid;
 
 				project.fetch(
 				{
@@ -319,6 +359,20 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		    				self.projectDetail.model = project;
 		    			}
 		    			self.projectDetail.render();
+
+		    			following.fetch({
+							success:function(){
+								var followings = new DescribeMe.Collections.FollowingList(following.get('followings'));
+
+								self.projectDetail.isFollowed(false);
+								
+								_.each(followings.models, function(item) {
+						            if(uid == item.get('id')){
+						            	self.projectDetail.isFollowed(true);
+						            }
+						        }, this);
+							}
+						});
 
 		    			profile.fetch(
 						{
