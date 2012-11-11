@@ -14,7 +14,7 @@ function getParentFunction(funcName) {
     try { func = eval("top."+funcName); } catch (error) { }
   }
   if (!(func)) {
-    throw new Error("function \""+funcName+"\" is not in parent window.");
+    //throw new Error("function \""+funcName+"\" is not in parent window.");
   }
   return func; 
 }
@@ -26,5 +26,4 @@ var WidgetAPI_log = getParentFunction("WidgetAPI.log");
 
 $(document).ready(function($) {
 	// Stuff to do as soon as the DOM is ready. Use $() w/o colliding with other libs;
-	WidgetAPI_log("hello from the widget");
 });

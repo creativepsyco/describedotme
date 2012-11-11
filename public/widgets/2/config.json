@@ -1,0 +1,19 @@
+{
+	"_comments" : "This consists of the different settings loaded up at runtime for a widget. These settings are global defined by the developer and cant be changed at a later date",
+
+	"name": "Cool Clock",
+
+	"unique_name": "cool_clock",
+	
+	"description": "Display a cool clock on your profile.",
+	
+	"location": "/widget/2",
+	
+	"has_js": true,
+	
+	"has_css": true,
+	
+	"default_width": 400,
+	
+	"default_height": 220
+}
