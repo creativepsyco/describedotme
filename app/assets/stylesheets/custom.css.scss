@@ -147,12 +147,16 @@ hr {
 	padding-top: 15px;
 }
 
+.project-name{
+	height: 20px;
+	overflow:hidden;
+}
+
 .project-name a{
 	font-weight: bold;
 	color: #005CFF;
 	text-decoration: none;
 	cursor: pointer;
-	overflow:hidden;
 }
 
 .project-cover-info {
