@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111072918) do
+ActiveRecord::Schema.define(:version => 20121111091136) do
 
   create_table "attachments", :force => true do |t|
     t.string   "description"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(:version => 20121111072918) do
     t.integer "item_id"
     t.integer "tag_id"
   end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_type"
+    t.string   "data"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   create_table "photos", :force => true do |t|
     t.string   "caption"
