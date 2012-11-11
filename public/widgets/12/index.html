@@ -5,18 +5,22 @@
 		<link href="hello.css" rel="stylesheet" type="text/css">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-		<link href="jquery.minitwitter.css" rel="stylesheet" type="text/css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
-		<script type="text/javascript" src="twitter.js"></script>
-		<script src="jquery.minitwitter.js" type="text/javascript"></script>
+		<script type="text/javascript" src="comments.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			loadTweets();
+			loadComments();
 		});
 		</script>
 	</head>
 	<body>
-		<div id="twitter-widget-container">
+		<div id="comment-widget-desc"></div>	
+		<form  id="comment-input">
+			<input type="text" id="comment_desc" placeholder="Enter A Comment">
+			<input type="text" id="author" placeholder="Your Name">
+			<a href="#" onclick="onCommentSave()" class="btn btn-primary">Comment</a>
+		</form>
+		<div id="comment-widget-container">
 		</div>
 	</body>
 </html>
