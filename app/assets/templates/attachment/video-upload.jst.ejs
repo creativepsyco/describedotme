@@ -1,0 +1,18 @@
+<div class="modal" id="videoUploadModal" tabindex="-1" data-show="false" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Video Upload</h3>
+  </div>
+  <div class="modal-body">
+    <input type="hidden" name="att_type" value="video"></input>
+    <!-- <div style="text-align:center;"><a class="btn" onclick="$('#video-uploader').click()">Select Video</a></div> -->
+    <span>Select Video</span>
+    <input id="video-uploader" type="file"><br/>
+    <span>Description</span>
+    <input id="video-description" name="description" type="text"><br/>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button id="video-save" class="btn btn-primary">Save changes</button>
+  </div>
+</div>

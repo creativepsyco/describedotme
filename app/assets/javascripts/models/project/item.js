@@ -7,9 +7,9 @@ DescribeMe.Models.ProjectItem = Backbone.Model.extend({
     urlRoot: '/items',
 
     getAttachmentList: function () {
-        if(!this.attachmentList)
-            this.attachmentList = new DescribeMe.Collections.AttachmentList(this.get('photos'));
-            
+        if (!this.attachmentList) {
+            this.attachmentList = new DescribeMe.Collections.AttachmentList(this.get('attachments'));
+        }
         return this.attachmentList;
     },
 });
@@ -25,7 +25,6 @@ DescribeMe.Models.UserProjectItem = Backbone.Model.extend({
     },
 
     getAttachmentList: function () {
-      console.log(this.get('attachments'));
       if (!this.attachmentList) {
         this.attachmentList = new DescribeMe.Collections.AttachmentList(this.get('attachments'));
       }

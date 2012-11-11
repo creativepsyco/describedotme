@@ -11,8 +11,6 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 
 	events : {
 		'submit form' : 'onSave',
-		'change #img-uploader': 'uploadImage',
-    'change #video-uploader': 'uploadVideo'
 	},
 
 	onSave: function() {
@@ -40,41 +38,21 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		
 	},
 
-	onUploadComplete: function(img_url, att_id, message) {
-    console.log(img_url);
-		$('#img-upload-preview').attr('src', img_url);
-		var imagerow = "<tr><td><img src='"+ img_url +"' style='height:40px'/></td><td style='padding-top:15px;'><a class='btn btn-small delete-img pull-right' ><i class='icon-remove-sign'></i></a></td></tr>";
+	onAttachmentCreated: function(att, message) {
+		$('#img-upload-preview').attr('src', att.url);
+		var imagerow = "<tr><td><img src='"+ att.url +"' style='height:40px'/></td><td style='padding-top:15px;'><span>" + att.description +
+      "<a class='btn btn-small delete-img pull-right' ><i class='icon-remove-sign'></i></a></td></tr>";
 		$('#image-table').append(imagerow);
-		DescribeMe.attachments.push(att_id);
-	},
-
-	uploadImage: function() {
-		var input = document.getElementById('img-uploader');
-		if (input.files && input.files[0]) {
-         	$('#img-upload-preview').attr('src', 'http://i293.photobucket.com/albums/mm49/oficinademultimedia/Loading_Animation.gif');
-            PaperUpload.doUpload(input.files[0], 'photo', this.onUploadComplete);
-        }
-	},
-
-	uploadVideo: function() {
-		var input = document.getElementById('video-uploader');
-		if (input.files && input.files[0]) {
-         	$('#video-upload-preview').attr('src', 'http://i293.photobucket.com/albums/mm49/oficinademultimedia/Loading_Animation.gif');
-            PaperUpload.doUpload(input.files[0], 'video', this.onUploadComplete);
-        }
+		DescribeMe.attachments.push(att.id);
 	},
 
 	render: function() {
 		$(this.el).html($(this.options.sidebar.el));
 		$(this.el).append(this.template());
 
-		this.imageUploadModal = $(this.el).find('#imageUploadModal');
-		this.imageUploadModal.modal();
-		this.imageUploadModal.modal('hide');
-    
-    this.videoUploadModal = $(this.el).find("#videoUploadModal");
-    this.videoUploadModal.modal();
-    this.videoUploadModal.modal('hide');
+    var att_container = $(this.el).find('#attachment-upload-container');
+    att_container.append((new DescribeMe.Views.Attachment()).getUploadForms(
+      this.onAttachmentCreated));
 		
 		this.titleDOM = $(this.el).find('#title');
 		this.descriptionDOM = $(this.el).find('#description');
