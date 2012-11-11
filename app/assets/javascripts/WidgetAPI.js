@@ -13,6 +13,7 @@ window.WidgetAPI = {
 	 * @type {Number}
 	 */
 	currentUserId:0,
+	widgetid: 0,
 
 	/**
 	 * [fetchUserConfig User config for a paticular type of app]
@@ -50,6 +51,19 @@ window.WidgetAPI = {
 			// TODO: Fix the user
 			this.currentUserId = 1;
 			return this.currentUserId;
+		}
+	},
+
+	getWidgetId: function widget_api_widget_id (location) {
+		if (this.widgetid) {
+			return this.widgetid;
+		} else {
+			var index = location.indexOf('/widgets/');
+			var s = location.substring(index+9, location.length);
+			index = s.indexOf('/');
+			var id = s.substring(0, index);
+			this.widgetid = id;
+			return id;
 		}
 	},
 

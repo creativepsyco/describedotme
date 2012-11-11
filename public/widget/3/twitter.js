@@ -18,11 +18,16 @@ function getParentFunction(funcName) {
   }
   return func; 
 }
+/* Exported functions from the widget API */
+var WidgetAPI_log = getParentFunction("WidgetAPI.log");
+var WidgetAPI_getCurrentUser = getParentFunction("WidgetAPI.getCurrentUser");
+var WidgetAPI_getWidgetId = getParentFunction("WidgetAPI.getWidgetId");
+
 // TODO: Remove the above function once it goes into production
 //////////////////////////////
 //
 
-var WidgetAPI_log = getParentFunction("WidgetAPI.log");
+
 
 $(document).ready(function($) {
 	// Stuff to do as soon as the DOM is ready. Use $() w/o colliding with other libs;

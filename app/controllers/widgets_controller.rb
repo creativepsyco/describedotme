@@ -87,6 +87,7 @@ class WidgetsController < ApplicationController
 
     if @widget.save
       location = "public/widgets/#{@widget.id}"
+      puts location
       unzip_file(params[:zipFile].tempfile,location)
       puts "File unzipped"
 
