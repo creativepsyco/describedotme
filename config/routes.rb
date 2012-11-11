@@ -21,13 +21,20 @@ DescribeMe::Application.routes.draw do
     get 'profile' => 'users#profile', :on => :collection
     put 'profile' => 'users#updatecurrentuser', :on => :collection
     resources :items, :only => [:index, :show]
+    resources :follows, :only => [:index, :create]
+
     resources :items do
       resources :favorites, :only => [:index, :create]
       resources :kudos, :only => [:index, :create]
     end
   end
 
-
+  # follow
+  authenticated :user do
+    delete 'users/:user_id/follows' => 'follows#destroy'
+    get 'followers' => 'follows#follower_index'
+    get 'followings' => 'follows#following_index'
+  end
   match 'profile' => 'home#profile'
 
   # routes for favorite and kudo for an item
