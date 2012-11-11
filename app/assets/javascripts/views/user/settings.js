@@ -6,7 +6,6 @@ DescribeMe.Views.Settings = Backbone.View.extend({
 
 	initialize: function () {
 		this.themeView = [];
-        this.loadThemes();
 	},
 
 	events: {
@@ -94,6 +93,8 @@ DescribeMe.Views.Settings = Backbone.View.extend({
 		$(this.el).html($(this.options.sidebar.el));
         $(this.el).append(this.template(this.model.toJSON()));
         var sel;
+        this.themeView = [];
+        this.loadThemes();
         for(i=0;i<this.themeView.length;i++) {
 			$(this.el).find('.themesr').append(this.themeView[i].el);
 			if(this.model.get('theme') == this.themeView[i].model.get('name'))
