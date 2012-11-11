@@ -160,7 +160,7 @@ class ItemsController < ApplicationController
         @item.attachments.push(@att)
       end
     end
-
+    
     if @item.save
       respond_to do |format|
         format.json { render :json => @item.to_json, :status => 200 }
