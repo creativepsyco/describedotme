@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121110124022) do
+ActiveRecord::Schema.define(:version => 20121111091136) do
+
+  create_table "attachments", :force => true do |t|
+    t.string   "description"
+    t.string   "thumbnail_url"
+    t.integer  "creator_id"
+    t.string   "alt"
+    t.integer  "item_id"
+    t.string   "att_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "attfile_file_name"
+    t.string   "attfile_content_type"
+    t.integer  "attfile_file_size"
+    t.datetime "attfile_updated_at"
+  end
 
   create_table "categories", :force => true do |t|
     t.string "name"
@@ -42,6 +57,16 @@ ActiveRecord::Schema.define(:version => 20121110124022) do
     t.integer "item_id"
     t.integer "tag_id"
   end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_type"
+    t.string   "data"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   create_table "photos", :force => true do |t|
     t.string   "caption"
@@ -77,6 +102,13 @@ ActiveRecord::Schema.define(:version => 20121110124022) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_follow_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "follower_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "user_kudo_items", :force => true do |t|

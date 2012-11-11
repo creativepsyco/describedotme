@@ -154,12 +154,13 @@ class ItemsController < ApplicationController
       :description => params[:description]
     }
     @item = current_user.items.build(item_data)
-    if params[:photos]
-      params[:photos].each do |photo|
-        @item.photos.build(photo)
+    if params[:attachments]
+      params[:attachments].each do |att_id|
+        @att = Attachment.find(att_id)
+        @item.attachments.push(@att)
       end
     end
-
+    
     if @item.save
       respond_to do |format|
         format.json { render :json => @item.to_json, :status => 200 }

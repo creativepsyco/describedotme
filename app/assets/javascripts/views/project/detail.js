@@ -21,6 +21,10 @@ DescribeMe.Views.ProjectDetail = Backbone.View.extend({
 		var self = this;
 		$(this.el).empty();
 		$(this.el).html(this.template(this.model.toJSON()));
+
+		if(this.options.myProfile){
+			$(this.el).find('#controls').css("display", "none");
+		}
 		
 		this.attachmentList = this.model.getAttachmentList();
 		

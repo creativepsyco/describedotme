@@ -1,8 +1,8 @@
 <div class="project-item">
-	<h4 class="title"><%= title %></h4>
+	<h4 class="title"><a id="projectLink" href="#project/<%= id %>"><%= title %></a></h4>
 	<p class="desc"><%= desc %></p>
-	<div class="thmb" style="height:154px; overflow:hidden;"><img src="<%= thumbnail %>" style="width:100%"/></div>
-	<div class="controls">
+	<div class="thmb" style="height:154px; overflow:hidden;"><a id="projectLink" href="#project/<%= id %>"><img src="<%= thumbnail %>" style="width:100%"/></a></div>
+	<div id="controls" class="controls">
 		<a class="btn btn-small edit"><i class="icon-pencil"></i></a>
 		<a class="btn btn-small delete"><i class="icon-trash"></i></a>
 	</div>

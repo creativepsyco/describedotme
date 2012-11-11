@@ -9,7 +9,10 @@ DescribeMe.Views.ProjectList = Backbone.View.extend({
 
 	add: function(item) {
         var self = this;
-        $(self.el).append(new DescribeMe.Views.ProjectItem({ model: item }).render().el);
+        var projectItem = new DescribeMe.Views.ProjectItem({ model: item});
+        projectItem.editable = this.options.editable;
+        projectItem.uid = this.uid;
+        $(self.el).append(projectItem.render().el);
     },
 
     render: function() {

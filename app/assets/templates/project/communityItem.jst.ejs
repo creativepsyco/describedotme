@@ -3,7 +3,7 @@
 		<div class="project-name"><a href="#project/<%= creator_id %>/<%= id %>"><%= title %></a></div>
 		<div class="project-creator">by <a href="#profile/<%= creator_id %>"><%= creator_name%></a></div>
 	</div>
-	<div style="height:154px; overflow:hidden;"><img src="<%= thumbnail %>" style="width:100%"/></div>
+	<div style="height:154px; overflow:hidden;"><a href="#project/<%= creator_id %>/<%= id %>"><img src="<%= thumbnail %>" style="width:100%"/></a></div>
 	<div class="category-info">
 		Open-source, Software
 	</div>
@@ -12,7 +12,7 @@
 		<span class="cover-favorite">
 			<span class="kudos">
 				<i class="icon-star"></i>
-				<span class="stat-value">231</span>
+				<span id="stat-value" class="stat-value"><%= kudos_count%></span>
 			</span>
 		</span>
 	</div>
