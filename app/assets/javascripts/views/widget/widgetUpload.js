@@ -6,33 +6,60 @@ DescribeMe.Views.WidgetUpload = Backbone.View.extend({
     template: JST['widget/widgetUpload'],
 
     events: {
-        'click .createWidget' : "onCreateWidgetClicked"
+        'click .createWidget': "onCreateWidgetClicked"
     },
 
-    onCreateWidgetClicked: function () {
+    onCreateWidgetClicked: function() {
+        var self = this;
         var name = $('#widgetName').val();
         var desc = $('#description').val();
         var thumbnail = $('#thumbnail').val();
         var location = $('#location').val();
 
         var aModel = new DescribeMe.Models.WidgetItem({
-            name: name, 
-            description: desc, 
-            thumbnail: thumbnail, 
+            name: name,
+            description: desc,
+            thumbnail: thumbnail,
             location: location
         });
 
-        aModel.save(null, {
-            success: function (model, response){
-                alert("successfully saved");
-            }, 
-            error: function (model, response){
-                alert("error");
-            }
-        });
+        var fd = new FormData();
+        fd.append("name", $('#widgetName').val());
+        fd.append("description", $('#description').val());
+        fd.append("thumbnail", $('#thumbnail').val());
+        var input = document.getElementById('zipFile');
+        fd.append("zipFile", input.files[0]);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "widgets");
+        xhr.onload = function() {
+            console.log(xhr.responseText);
+            self.uploadSuccess(xhr);
+        }
+
+        xhr.send(fd);
+
+        // aModel.save(null, {
+        //     success: function(model, response) {
+        //         alert("successfully saved");
+        //     },
+        //     error: function(model, response) {
+        //         alert("error");
+        //     }
+        // });
     },
 
-    initialize: function () {
+    uploadSuccess: function(response) {
+        if(response.status == 200)
+        {
+            alert("Success");
+        } else
+        {
+            alert("Unsuccessful");
+        }
+    },
+
+    initialize: function() {
         //this.model.bind("reset", this.render, this);
         //this.model.bind("add", this.add);
     },
@@ -48,11 +75,9 @@ DescribeMe.Views.WidgetUpload = Backbone.View.extend({
         $(this.el).append(this.template());
         // this.projectContainer = $(this.el).find('#project-container');
         // $(this.projectContainer).empty();
-
         // _.each(this.model.models, function(item) {
         //     self.add(item);
         // }, this);
-
-return this;
-}
+        return this;
+    }
 });

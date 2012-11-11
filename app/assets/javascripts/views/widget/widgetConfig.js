@@ -39,7 +39,7 @@ DescribeMe.Views.WidgetConfig = Backbone.View.extend({
 
 	render: function() {
 		console.log(this.model);
-		var url = "/widget/" + this.model.get('id') + '/config.html';
+		var url = "/widgets/" + this.model.get('id') + '/config.html';
 		this.model.set('iframeSource', url); 
 		this.widgetConfigContainer = $(this.el);
 		this.widgetConfigContainer.empty();
