@@ -29,6 +29,10 @@ DescribeMe::Application.routes.draw do
     end
   end
 
+  
+  resources :notifications, :only => [:index, :destroy]    
+
+
   # follow
   authenticated :user do
     delete 'users/:user_id/follows' => 'follows#destroy'
