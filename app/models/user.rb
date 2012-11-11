@@ -34,6 +34,13 @@ class User < ActiveRecord::Base
   has_many :users_widgets, :class_name => "UsersWidgets"
   has_many :enabled_widgets, :class_name => "Widget", :through => :users_widgets, :source => :widget
 
+  # Follower relationship
+  has_many :follows, :class_name => 'UserFollowUser'
+  has_many :followers, :through => :follows
+
+  has_many :followings, :class_name => 'UserFollowUser', :foreign_key => 'follower_id'
+  has_many :following_users, :through => :followings, :source => :user
+
   def has_role? (role)
     return !!self.roles.find_by_role(role.to_s)
   end
