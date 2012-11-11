@@ -2,6 +2,12 @@ class FollowsController < ApplicationController
   before_filter :get_user, :only => [:create, :destroy, :follower_index, :following_index]
   before_filter :user_signed_in?, :only => [:create, :destroy, :follower_index, :following_index]
 
+
+  def convert_to_list_id(list_user)
+    result = Array.new
+    list_user.each {|user| result.push(user.id)}
+    result
+  end
   # Make the current item object available to views
   #----------------------------------------
   def get_user
@@ -15,7 +21,7 @@ class FollowsController < ApplicationController
 
     if @user
       respond_to do |format|
-        format.json { render :json => @user.followers}
+        format.json { render :json => { :followers => convert_to_list_id(@user.followers)} }
         format.xml  { render text: "Unsupported Format", status: 404 }
         format.html { render text: "Unsupported Format", status: 404 }
       end
@@ -99,7 +105,7 @@ class FollowsController < ApplicationController
 
   def follower_index
     respond_to do |format|
-      format.json { render :json => @current_user.followers}
+      format.json { render :json => { :followers => convert_to_list_id(@current_user.followers)}}
       format.xml  { render text: "Unsupported Format", status: 404 }
       format.html { render text: "Unsupported Format", status: 404 }
     end
@@ -107,7 +113,7 @@ class FollowsController < ApplicationController
 
   def following_index
     respond_to do |format|
-      format.json { render :json => @current_user.following_users}
+      format.json { render :json => { :followers => convert_to_list_id(@current_user.followers)}}
       format.xml  { render text: "Unsupported Format", status: 404 }
       format.html { render text: "Unsupported Format", status: 404 }
     end
