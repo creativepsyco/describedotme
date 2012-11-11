@@ -12,15 +12,10 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	},
 
 	events : {
-		
 	},
 
-	onEditClick: function() {
-		
-	},
-
-	onDeleteClick: function() {
-
+	isFollowed:function(followed){
+		this.userProfileView.isFollowed(followed);
 	},
 
 	render: function() {
@@ -31,6 +26,7 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	},
 
 	renderProfile: function() {
+		//this.profileModel.set('followersCount', this.followModel.get('followers').length);
 		this.userProfileView = new DescribeMe.Views.UserProfile({model: this.profileModel, myProfile:this.options.myProfile}).render();
 		//render the view
 		$(this.el).find('#profile-container').append($(this.userProfileView.el));
