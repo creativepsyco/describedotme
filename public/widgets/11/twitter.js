@@ -30,5 +30,5 @@ var WidgetAPI_getWidgetId = getParentFunction("WidgetAPI.getWidgetId");
 
 $(document).ready(function($) {
 	// Stuff to do as soon as the DOM is ready. Use $() w/o colliding with other libs;
-	WidgetAPI_log("hello from the widget" + WidgetAPI_getWidgetId(document.location));
+	WidgetAPI_log("hello from the widget" + WidgetAPI_getWidgetId(document.location.pathname));
 });
