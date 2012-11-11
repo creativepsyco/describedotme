@@ -2,6 +2,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	routes: {
 		'marketplace': 'showMarketplace',
 		'widget/upload' : 'addWidget',
+		'following': 'showFollowingUsers',
 		'profile': 'showProfile',
 		'profile/:id': 'showUserProfile',
 		'profile/preview/:id': 'previewTheme',
@@ -264,6 +265,14 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 				console.log('Unable to load project!');
 			}
 		});
+	},
+
+	showFollowingUsers: function(){
+		var self = this;
+		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
+		var followingModel = new DescribeMe.Models.Following();
+		var followingView = new DescribeMe.Views.FollowingView({model: followingModel, sidebar:self.sidebar});
+		followingView.render();
 	},
 
 	showProjectDetail: function(uid, pid) {
