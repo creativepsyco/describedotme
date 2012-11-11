@@ -44,6 +44,8 @@ class Notification < ActiveRecord::Base
 			  "COMMENT_CREATED"
 			when KUDO_CREATED	
 				"KUDO_CREATED"
+      when FAVORITE_CREATED
+        "FAVORITE_CREATED"
 		end
   end
 end

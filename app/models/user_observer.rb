@@ -1,8 +1,7 @@
-class ItemObserver < ActiveRecord::Observer
-  require "NotificationData/item_notification_data"
+class UserFollowUserObserver < ActiveRecord::Observer
+	require "NotificationData/follow_notification_data"
   	# ITEM_CREATED
   def after_create(item)
-		print "OBSERVER HEREEEEEEEEEEEEEEEEE"
 		item.creator.followers.each do |user|
     	Notification.add(user,  Notification::ITEM_CREATED, ItemNotificationData.encode(item))
 	  end
