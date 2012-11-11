@@ -4,6 +4,7 @@ class FollowsController < ApplicationController
 
 
   def convert_to_list_id(list_user)
+    return list_user
     result = Array.new
     list_user.each {|user| result.push(user.id)}
     result
@@ -113,7 +114,7 @@ class FollowsController < ApplicationController
 
   def following_index
     respond_to do |format|
-      format.json { render :json => { :followers => convert_to_list_id(@current_user.followers)}}
+      format.json { render :json => { :followings => convert_to_list_id(@current_user.following_users)}}
       format.xml  { render text: "Unsupported Format", status: 404 }
       format.html { render text: "Unsupported Format", status: 404 }
     end

@@ -41,14 +41,30 @@ class User < ActiveRecord::Base
   has_many :followings, :class_name => 'UserFollowUser', :foreign_key => 'follower_id'
   has_many :following_users, :through => :followings, :source => :user
 
+  # Notification
+  has_many :notifications
+
   def has_role? (role)
     return !!self.roles.find_by_role(role.to_s)
   end
 
+  def recent_notifications(limit = 20)
+    result = Array.new
+    self.notifications.each do |notification|
+      result.push ({
+          type: notification.name,
+          data: notification.data,
+          created_at: notification.created_at
+      })
+    end
+    
+    return result
+  end
 
   private
   def set_default_role
     self.roles << Role.find_by_role('normal')
   end
 
+  
 end

@@ -5,7 +5,8 @@ class CreateNotification < ActiveRecord::Migration
       t.integer :notification_type 	#different type of notification
       t.string  :data				#json-encoded associated data object string
       								# depend on the notification type, it structure is describe in notification class
-      t.timestamps
+
+      t.timestamps :created_at
     end
     add_index :notifications, :user_id
   end

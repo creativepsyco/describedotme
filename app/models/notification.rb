@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
   belongs_to :user
   
-  attr_accessible :user, :notification_type, :data
+  attr_accessible :user, :notification_type, :data, :created_at
 
   #alternate design: we can use a another table to hold the notification data
   #instead of using the associated data-string
@@ -10,9 +10,9 @@ class Notification < ActiveRecord::Base
   # when retriving: order by timestamp (reverse-chronological)
   default_scope :order => 'notifications.created_at DESC', :limit => 20
   
-  USER_FOLLOWED				= 0 # user follows you
+  USER_FOLLOWED							= 0 # user follows you
   ITEM_CREATED	            = 1 # followed user create new item
-  COMMENT_CREATED		    = 2 # your item has new comment
+  COMMENT_CREATED		 		    = 2 # your item has new comment
   KUDO_CREATED	            = 3 # your item has new kudo
   FAVORITE_CREATED          = 4 # your item has new favorite
   
@@ -32,5 +32,18 @@ class Notification < ActiveRecord::Base
 
     sql = "INSERT INTO notifications ('user_id', 'notification_type', 'data', 'created_at') VALUES #{inserts.join(", ")}"
     ActiveRecord::Base.connection.execute sql
+  end
+
+  def name
+  	case self.notification_type
+	  	when USER_FOLLOWED
+	  		"USER_FOLLOWED"
+	  	when ITEM_CREATED
+	  		"ITEM_CREATED"
+	  	when COMMENT_CREATED
+			  "COMMENT_CREATED"
+			when KUDO_CREATED	
+				"KUDO_CREATED"
+		end
   end
 end
