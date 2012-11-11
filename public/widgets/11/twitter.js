@@ -21,6 +21,7 @@ function getParentFunction(funcName) {
 /* Exported functions from the widget API */
 var WidgetAPI_log = getParentFunction("WidgetAPI.log");
 var WidgetAPI_getCurrentUser = getParentFunction("WidgetAPI.getCurrentUser");
+var WidgetAPI_getProfileUser = getParentFunction("WidgetAPI.getProfileUser");
 var WidgetAPI_getWidgetId = getParentFunction("WidgetAPI.getWidgetId");
 
 // TODO: Remove the above function once it goes into production
@@ -30,5 +31,6 @@ var WidgetAPI_getWidgetId = getParentFunction("WidgetAPI.getWidgetId");
 
 $(document).ready(function($) {
 	// Stuff to do as soon as the DOM is ready. Use $() w/o colliding with other libs;
-	WidgetAPI_log("hello from the widget" + WidgetAPI_getWidgetId(document.location.pathname));
+	WidgetAPI_log("hello from the widget id = " + WidgetAPI_getWidgetId(document.location.pathname) 
+    + "\n For User id  " + WidgetAPI_getProfileUser());
 });

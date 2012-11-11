@@ -67,6 +67,16 @@ window.WidgetAPI = {
 		}
 	},
 
+	getProfileUser: function widget_api_widget_id() {
+		var profileString = document.location.pathname;
+		var index = profileString.indexOf("#profile/");
+		var str = profileString.substring(index+9, profileString.length);
+		if (str.length)
+			return str; 
+		else 
+			return window.WidgetAPI.getCurrentUser();
+	},
+
 	/**
 	 * [log description]
 	 * @param  {[string]} message [Message to put]
