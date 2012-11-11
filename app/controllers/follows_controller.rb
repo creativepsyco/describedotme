@@ -1,6 +1,6 @@
 class FollowsController < ApplicationController
-  before_filter :get_user, :only => [:create, :destroy, :follower_index, :following_index]
-  before_filter :user_signed_in?, :only => [:create, :destroy, :follower_index, :following_index]
+  before_filter :get_user, :only => [:create, :destroy, :follower_index, :following_index, :is_follow]
+  before_filter :user_signed_in?, :only => [:create, :destroy, :follower_index, :following_index, :is_follow]
 
 
   def convert_to_list_id(list_user)
@@ -116,6 +116,26 @@ class FollowsController < ApplicationController
       format.json { render :json => { :followers => convert_to_list_id(@current_user.followers)}}
       format.xml  { render text: "Unsupported Format", status: 404 }
       format.html { render text: "Unsupported Format", status: 404 }
+    end
+  end
+
+  def is_follow
+     # i am the follower
+    @user = User.find_by_id(params[:user_id])
+    if !@user 
+      respond_to do |format|
+        format.all { render :json => { :error => "User not found" }, :status => :unprocessable_entity } # placeholder
+      end
+      return
+    end
+    if @current_user.following_users.include? @user
+      respond_to do |format|
+        format.all { render :json => { :result => "true" }, :status => :unprocessable_entity } # placeholder
+      end
+    else 
+      respond_to do |format|
+        format.all { render :json => { :result => "false" }, :status => :unprocessable_entity } # placeholder
+      end
     end
   end
 

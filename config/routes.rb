@@ -32,6 +32,7 @@ DescribeMe::Application.routes.draw do
   # follow
   authenticated :user do
     delete 'users/:user_id/follows' => 'follows#destroy'
+    get 'users/:user_id/is_follow' => 'follows#is_follow'
     get 'followers' => 'follows#follower_index'
     get 'followings' => 'follows#following_index'
   end

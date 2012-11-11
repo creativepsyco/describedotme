@@ -1,7 +1,7 @@
 class ItemNotificationData
   def self.encode(item)
     data = {
-      id: item.id,
+      item_id: item.id,
       creator_id: item.creator.id
     }
     print "Encoded data: ", JSON.generate(data)
