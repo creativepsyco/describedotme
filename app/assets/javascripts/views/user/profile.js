@@ -39,14 +39,15 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 		WidgetLoader.addAllWidgets('#addon-container', this.profileModel.get('id') ,null);
 		//apply the theme
 		this.theme.options.theme = this.profileModel.get('theme');
+		console.log(this.profileModel.get('theme'));
 		this.theme.render();
-		
-		
 	},
 
-	renderProject: function() {
-		this.projectList = new DescribeMe.Views.ProjectList({model: this.projectsModel}).render();
-		$(this.el).find('#project-container').append($(this.projectList.el));
+	renderProject: function(editable) {
+		this.projectList = new DescribeMe.Views.ProjectList({model: this.projectsModel});
+		this.projectList.uid = this.profileModel.get('id');
+		this.projectList.editable = editable;
+		$(this.el).find('#project-container').append($(this.projectList.render().el));
 		//apply the theme
 		this.theme.render();
 
