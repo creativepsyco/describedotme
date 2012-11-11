@@ -43,11 +43,12 @@ class WidgetsController < ApplicationController
     respond_to do |format|
       format.json { render :json => @user_widget.config_json }
       format.xml  { render :xml => @user_widget.config_json }
-      format.html { render text: "Unsupported Format", status: 404 }
+      format.html { render text: @user_widget.config_json, status: 404 }
     end
   end
 
   def set_config
+    puts params[:config_json]
     user_widget = UsersWidgets.where(widget_id: params[:widget_id], user_id: current_user.id).first
     if user_widget.nil?
       user_widget = UsersWidgets.create(widget_id: params[:widget_id], user_id: current_user.id)
