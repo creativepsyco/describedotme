@@ -11,7 +11,8 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 
 	events : {
 		'submit form' : 'onSave',
-		'change #img-uploader': 'uploadImage'
+		'change #img-uploader': 'uploadImage',
+    'change #video-uploader': 'uploadVideo'
 	},
 
 	onSave: function() {
@@ -26,8 +27,7 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		this.model.set({description: description});
 		this.model.set({tag:tag});
 		this.model.set({attachments:DescribeMe.attachments});
-		this.model.save(null,
-	    {
+		this.model.save(null, {
 	    	success: function (model, response) {
 	        	DescribeMe.router.navigate('#projects',{trigger:true});
 	    	},
@@ -52,7 +52,15 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		var input = document.getElementById('img-uploader');
 		if (input.files && input.files[0]) {
          	$('#img-upload-preview').attr('src', 'http://i293.photobucket.com/albums/mm49/oficinademultimedia/Loading_Animation.gif');
-            PaperUpload.doUpload(input.files[0], this.onUploadComplete);
+            PaperUpload.doUpload(input.files[0], 'photo', this.onUploadComplete);
+        }
+	},
+
+	uploadVideo: function() {
+		var input = document.getElementById('video-uploader');
+		if (input.files && input.files[0]) {
+         	$('#video-upload-preview').attr('src', 'http://i293.photobucket.com/albums/mm49/oficinademultimedia/Loading_Animation.gif');
+            PaperUpload.doUpload(input.files[0], 'video', this.onUploadComplete);
         }
 	},
 
@@ -63,6 +71,10 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		this.imageUploadModal = $(this.el).find('#imageUploadModal');
 		this.imageUploadModal.modal();
 		this.imageUploadModal.modal('hide');
+    
+    this.videoUploadModal = $(this.el).find("#videoUploadModal");
+    this.videoUploadModal.modal();
+    this.videoUploadModal.modal('hide');
 		
 		this.titleDOM = $(this.el).find('#title');
 		this.descriptionDOM = $(this.el).find('#description');

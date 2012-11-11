@@ -1,7 +1,7 @@
 var PaperUpload = {
-  doUpload: function(file, callback) {
+  doUpload: function(file, att_type, callback) {
     var fd = new FormData();
-    fd.append("attachment[atttype]", "photo");
+    fd.append("attachment[att_type]", att_type);
     fd.append("attachment[attfile]", file);
 
     var xhr = new XMLHttpRequest();
@@ -9,7 +9,7 @@ var PaperUpload = {
     xhr.onload = function() {
       resp = JSON.parse(xhr.responseText);
       console.log(resp);
-      callback(resp.img_url, resp.att_id);
+      callback(resp.url, resp.id);
     }
 
     xhr.send(fd);

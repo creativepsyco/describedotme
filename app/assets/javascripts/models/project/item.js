@@ -24,12 +24,11 @@ DescribeMe.Models.UserProjectItem = Backbone.Model.extend({
     	return 'users/' + this.uid + '/items/' + this.pid;
     },
 
-	getAttachmentList: function () {
-		if(!this.attachmentList)
-			this.attachmentList = new DescribeMe.Collections.AttachmentList(this.get('photos'));
-			
-		return this.attachmentList;
+    getAttachmentList: function () {
+      console.log(this.get('attachments'));
+      if (!this.attachmentList) {
+        this.attachmentList = new DescribeMe.Collections.AttachmentList(this.get('attachments'));
+      }
+      return this.attachmentList;
     },
 });
-
-

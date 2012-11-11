@@ -1,6 +1,6 @@
-DescribeMe.Views.PictureAttachment = Backbone.View.extend({
+DescribeMe.Views.VideoAttachment = Backbone.View.extend({
 	
-	template: JST['project/picture-attachment'],
+	template: JST['attachment/video-attachment'],
 
 	initialize: function () {
 	},
