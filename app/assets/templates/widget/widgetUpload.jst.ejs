@@ -3,7 +3,7 @@
       <h1>Upload A Widget</h1>
       <hr/>
   </div>
-  <form id="widget-upload" class="form-vertical row"> 
+  <form id="widget-upload" class="form-vertical row" enctype="multipart/form-data"> 
       <div class="control-group">
         <label class="control-label" for="widgetName">Widget Name</label>
         <div class="controls">
@@ -34,8 +34,16 @@
       </div>
 
       <div class="control-group">
+        <label class="control-label" for="zipFile">Widget File</label>
         <div class="controls">
-          <button type="submit" class="btn btn-primary createWidget pull-right">Upload Widget</button>
+          <input type="file" id="zipFile" name="zipFile">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <a href="#" class="btn btn-primary createWidget pull-right">Upload Widget</a>
+          <!-- <button type="#" class="btn btn-primary createWidget pull-right">Upload Widget</button> -->
         </div>
       </div>
 

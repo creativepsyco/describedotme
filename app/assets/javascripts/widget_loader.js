@@ -54,7 +54,7 @@ var widgetForUseURL = "/widgets/users/";
  		enabled_widgets.forEach(function (widget) {
  			// TODO: Use Real Widgets
  			// FIX: Remove Hard code
- 			var path_of_config = "/widget/" + widget.id + "/config.json";
+ 			var path_of_config = "/widgets/" + widget.id + "/config.json";
  			var config_json_string = null;
  			console.log('here', widget);
  			jQuery.ajax({
@@ -71,7 +71,7 @@ var widgetForUseURL = "/widgets/users/";
  				// TODO: implement a check
  				console.log('there',config_json_string);
  				//1. Load the start page
- 				var src = "/widget/" + widget.id + "/index.html";
+ 				var src = "/widgets/" + widget.id + "/index.html";
  				//2. Load with default options
  				var options = {
  					width: config_json_string.default_width,
