@@ -26,7 +26,12 @@ DescribeMe.Views.ProjectItem = Backbone.View.extend({
 	},
 
 	render: function() {
+		this.model.set('uid', this.uid);
 		$(this.el).html(this.template(this.model.toJSON()));
+
+		if(!this.editable){
+			$(this.el).find('#controls').css("display", "none");
+		}
 		return this;
 	}
 });

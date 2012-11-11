@@ -38,26 +38,26 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
     			}
     			self.profileShow.renderProfile();
+    			projects.fetch(
+				{
+		    		success: function () {
+		    			if(self.profileShow) {
+		    				self.profileShow.projectsModel = projects;
+		    			}
+		    			else {
+							self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
+		    			}
+		    			self.profileShow.renderProject(true);
+		    		},
+		    		error: function() {
+		    			console.log('Unable to load projects!');
+		    		}
+			    });
 			},
 			error: function() {
 				console.log('Unable to load profile!');
 			}
 		});
-		projects.fetch(
-		{
-    		success: function () {
-    			if(self.profileShow) {
-    				self.profileShow.projectsModel = projects;
-    			}
-    			else {
-					self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
-    			}
-    			self.profileShow.renderProject();
-    		},
-    		error: function() {
-    			console.log('Unable to load projects!');
-    		}
-	    });
 		
 	},
 
@@ -90,31 +90,25 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 				if(self.profileShow) {
     				self.profileShow.profileModel = profile;
     			}
-    			else {
-					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
-    			}
+
     			self.profileShow.renderProfile();
+		    	projects.fetch(
+				{
+		    		success: function () {
+		    			if(self.profileShow) {
+		    				self.profileShow.projectsModel = projects;
+		    			}
+		    			self.profileShow.renderProject(true);
+		    		},
+		    		error: function() {
+		    			console.log('Unable to load projects!');
+		    		}
+			    });
 			},
 			error: function() {
 				console.log('Unable to load profile!');
 			}
-		});
-		projects.fetch(
-		{
-    		success: function () {
-    			if(self.profileShow) {
-    				self.profileShow.projectsModel = projects;
-    			}
-    			else {
-					self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
-    			}
-    			self.profileShow.renderProject();
-    		},
-    		error: function() {
-    			console.log('Unable to load projects!');
-    		}
-	    });
-		
+		});		
 	},
 
 	showAllProjects: function() {
@@ -124,21 +118,32 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 
 		var projects = new DescribeMe.Collections.ProjectList();
-		projects.fetch(
+		var profile = new DescribeMe.Models.Profile();
+
+		profile.fetch(
 		{
-    		success: function () {
-    			if(self.projectList) {
-    				self.projectList.model = projects;
-    			}
-    			else {
-    				self.projectList = new DescribeMe.Views.Organizer({model:projects, sidebar: self.sidebar});
-    			}
-    			self.projectList.render();
-    		},
-    		error: function() {
-    			console.log('Unable to load projects!');
-    		}
-	    });
+			success: function() {
+				projects.fetch(
+				{
+		    		success: function () {
+		    			if(self.projectList) {
+		    				self.projectList.model = projects;
+		    			}
+		    			else {
+		    				self.projectList = new DescribeMe.Views.Organizer({model:projects, sidebar: self.sidebar});
+		    			}
+		    			self.projectList.profile = profile;
+		    			self.projectList.render();
+		    		},
+		    		error: function() {
+		    			console.log('Unable to load projects!');
+		    		}
+			    });	
+			},
+			error: function() {
+				console.log('Unable to load profile!');
+			}
+		});
 	},
 
 	communityProjects: function(){
@@ -181,31 +186,26 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 				if(self.profileShow) {
     				self.profileShow.profileModel = profile;
     			}
-    			else {
-					self.profileShow = new DescribeMe.Views.ProfileShow({profileModel:profile});
-    			}
-    			self.profileShow.renderProfile();
+
+				self.profileShow.renderProfile();
+
+    			projects.fetch(
+				{
+		    		success: function () {
+		    			if(self.profileShow) {
+		    				self.profileShow.projectsModel = projects;
+		    			}
+		    			self.profileShow.renderProject(false);
+		    		},
+		    		error: function() {
+		    			console.log('Unable to load projects!');
+		    		}
+			    });
 			},
 			error: function() {
 				console.log('Unable to load profile!');
 			}
-		});
-		projects.fetch(
-		{
-    		success: function () {
-    			if(self.profileShow) {
-    				self.profileShow.projectsModel = projects;
-    			}
-    			else {
-					self.profileShow = new DescribeMe.Views.ProfileShow({projectsModel:projects});
-    			}
-    			self.profileShow.renderProject();
-    		},
-    		error: function() {
-    			console.log('Unable to load projects!');
-    		}
-	    });
-		
+		});		
 	},
 
 	showSettings: function() {
@@ -261,13 +261,11 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 							self.projectDetail = new DescribeMe.Views.ProjectDetail({profileModel:profile});
 		    			}
 		    			self.projectDetail.renderProfile();
-						console.log(profile.toJSON());
 					},
 					error: function() {
 						console.log('Unable to load profile!');
 					}
 				});
-				console.log(project.toJSON());
 			},
 			error: function() {
 				console.log('Unable to load project!');
