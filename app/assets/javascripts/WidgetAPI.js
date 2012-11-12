@@ -48,8 +48,7 @@ window.WidgetAPI = {
 			return this.currentUserId;
 		} else {
 			// Get the user
-			// TODO: Fix the user
-			this.currentUserId = 1;
+			this.currentUserId = window.CurrentUser;
 			return this.currentUserId;
 		}
 	},
