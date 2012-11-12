@@ -84,7 +84,8 @@ namespace :db do
     puts "Creating sample notifications for Kudos"
     user2.kudo_item_ids=[user.items.find_first()]
 
-
+    puts "Making Emma follow Robinson" 
+    user2.following_user_ids = [1]
   end
 
   task populate: :environment do
