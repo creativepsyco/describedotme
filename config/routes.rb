@@ -29,6 +29,10 @@ DescribeMe::Application.routes.draw do
     end
   end
 
+  
+  resources :notifications, :only => [:index, :destroy]    
+
+
   # follow
   authenticated :user do
     delete 'users/:user_id/follows' => 'follows#destroy'
@@ -58,8 +62,10 @@ DescribeMe::Application.routes.draw do
 
   # routes for widget
   get 'widgets' => 'widgets#index'
+
   get 'widgets/users/:user_id' => 'widgets#get_widget_for_user'
   get 'widgets/:widget_id/users/:user_id' => 'widgets#get_config'
+  get 'widgets/:widget_id/delete' => 'widgets#delete_widget'
   post 'widgets/:widget_id/users/:user_id' => 'widgets#set_config'
   post 'widgets' => 'widgets#create'
 

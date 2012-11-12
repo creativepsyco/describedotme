@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
       :title => item.title,
       :desc => item.description,
       :thumbnail => item.photos.empty? ? default_photo : item.photos[0].photo_url,
-      :photos => item.photos,
+      :attachments => item.attachments || item.photos, # todo: cange to item.attachments
       :comments => item.comments,
       :kudos_count => item.kudos_count
     }
@@ -181,15 +181,10 @@ class ItemsController < ApplicationController
   # PUT /items/1.json                                            HTML AND AJAX
   #----------------------------------------------------------------------------
   def update
-    if params[:item][:password].blank?
-      [:password,:password_confirmation,:current_password].collect{|p| params[:item].delete(p) }
-    else
-      @item.errors[:base] << "The password you entered is incorrect" unless @item.valid_password?(params[:item][:current_password])
-    end
-
+    @item = Item.find(params[:id])
     respond_to do |format|
-      if @item.errors[:base].empty? and @item.update_attributes(params[:item])
-        flash[:notice] = "Your account has been updated"
+      if @item.update_attributes(params[:item])
+        flash[:notice] = "Item has been updated"
         format.json { render :json => @item.to_json, :status => 200 }
         format.xml  { head :ok }
         format.html { render :action => :edit }

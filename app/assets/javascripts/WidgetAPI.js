@@ -13,6 +13,7 @@ window.WidgetAPI = {
 	 * @type {Number}
 	 */
 	currentUserId:0,
+	widgetid: 0,
 
 	/**
 	 * [fetchUserConfig User config for a paticular type of app]
@@ -51,6 +52,29 @@ window.WidgetAPI = {
 			this.currentUserId = 1;
 			return this.currentUserId;
 		}
+	},
+
+	getWidgetId: function widget_api_widget_id (location) {
+		if (this.widgetid) {
+			return this.widgetid;
+		} else {
+			var index = location.indexOf('/widgets/');
+			var s = location.substring(index+9, location.length);
+			index = s.indexOf('/');
+			var id = s.substring(0, index);
+			this.widgetid = id;
+			return id;
+		}
+	},
+
+	getProfileUser: function widget_api_widget_id() {
+		var profileString = document.location.pathname;
+		var index = profileString.indexOf("#profile/");
+		var str = profileString.substring(index+9, profileString.length);
+		if (str.length)
+			return str; 
+		else 
+			return window.WidgetAPI.getCurrentUser();
 	},
 
 	/**
