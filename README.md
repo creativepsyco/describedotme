@@ -1,5 +1,5 @@
 ##Deployment
-1. Install Ruby on Rails.
+1. Install Ruby on Rails version ~> 3.2.8, RubyGem ~> v1.8.24.
 2. Configure database following the steps below.
 3. Setup
 ```
