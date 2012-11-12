@@ -8,19 +8,19 @@ DescribeMe.Views.CommunityProjectList = Backbone.View.extend({
 	},
 
 	add: function(item) {
-        var self = this;
-        $(self.el).find('#project-container').append(new DescribeMe.Views.CommunityItem({ model: item }).render().el);
-    },
+      var self = this;
+      $(self.el).find('#project-container').append(new DescribeMe.Views.CommunityItem({ model: item }).render().el);
+  },
 
-    render: function() {
-        var self = this;
-        $(this.el).html($(this.options.sidebar.el));
-        $(this.el).append(this.template());
+  render: function() {
+      var self = this;
+      $(this.el).html($(this.options.sidebar.el));
+      $(this.el).append(this.template());
 
-        _.each(this.model.models, function(item) {
-            self.add(item);
-        }, this);
+      _.each(this.model.models, function(item) {
+          self.add(item);
+      }, this);
 
-        return this;
-    }
+      return this;
+  }
 });

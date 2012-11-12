@@ -2,16 +2,12 @@ class AttachmentsController < ApplicationController
 
   def create
     print params[:attachment]
-    @attachment = Attachment.create(params[:attachment]);
+    @attachment = Attachment.create(params[:attachment])
+    @attachment.url = @attachment.attfile.url
 
     if @attachment.save
-      resp = {
-        att_id: @attachment.id,
-        img_url: @attachment.attfile.url
-      }
-
       respond_to do |format|
-        format.json { render :json => resp, :status => 200 }
+        format.json { render :json => @attachment, :status => 200 }
       end
     else
       respond_to do |format|
