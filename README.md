@@ -1,3 +1,24 @@
+##Deployment
+1. Install Ruby on Rails.
+2. Configure database following the steps below.
+3. Setup
+``` bash
+      bundle install
+      rake db:migrate
+      rake db:seed
+```
+4. Populate sample data for testing. (Ignore if not running automated testing).
+``` bash
+      rake db:populate_demo_user
+      rake db:populate
+```
+5. Start the server
+``` bash
+      rails server
+```
+6. Server will be up and running at localhost:3000
+
+
 ##Configuration for database:
 
 1. Install mysql server
@@ -21,23 +42,6 @@
        GRANT ALL PRIVILEGES ON describedotme_development.* TO describedotme@localhost;
        GRANT ALL PRIVILEGES ON describedotme_test.* TO describedotme@localhost;
        GRANT ALL PRIVILEGES ON describedotme_production.* TO describedotme@localhost;
-```
-
-5. Setup
-``` bash
-      bundle install
-      rake db:migrate
-      rake db:seed
-```
-
-6. (Ignore if not running automated testing) For Testing one more additional step
-``` bash
-      rake db:populate
-```
-
-7. Populate 
-``` bash
-       $ rake db:populate_demo_user
 ```
 
 ##API
