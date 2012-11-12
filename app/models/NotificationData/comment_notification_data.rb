@@ -2,7 +2,7 @@ class CommentNotificationData
   def self.encode(comment)
     data = {
       comment_id: comment.id,
-      creator_id: comment.creator.id,
+      user_id: comment.creator.id,
       item_id:    comment.item.id
     }
     return JSON.generate(data)
