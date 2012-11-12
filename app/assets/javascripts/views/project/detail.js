@@ -46,7 +46,8 @@ DescribeMe.Views.ProjectDetail = Backbone.View.extend({
 	add: function(item) {
     var self = this;
     console.log(item);
-    $(self.el).find('#project-container').append(new DescribeMe.Views.Attachment({ model: item }).render().el);
+    var att = AttachmentFactory.getAttachmentForModel(item);
+    $(self.el).find('#project-container').append(att.render().el);
   },
 
 	render: function() {

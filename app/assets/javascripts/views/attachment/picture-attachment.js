@@ -41,7 +41,7 @@ DescribeMe.Views.PictureAttachment = Backbone.View.extend({
     $(document).on('click', '#picture-save', function() {
       self.upload(self);
     });
-    return this.uploadForm;;
+    return this.uploadForm;
   },
 
 	render: function() {
