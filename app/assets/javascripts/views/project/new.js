@@ -51,11 +51,13 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		$(this.el).append(this.template());
 
     var att_container = $(this.el).find('#attachment-upload-container');
+    var att_triggers = $(this.el).find('#attachment-triggers');
     this.atts = AttachmentFactory.getAllAttachments();
 
     for (i in this.atts) {
       var att = this.atts[i];
       att.registerUploadCallback(this.onAttachmentCreated);
+      att_triggers.append(att.renderTrigger());
       att_container.append(att.renderUpload());
     }
 
