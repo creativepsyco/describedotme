@@ -74,9 +74,29 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		return projects;
 	},
 
+	loadNotifications: function() {
+		var self = this;
+		var notifications = new DescribeMe.Collections.NotificationList();
+
+		notifications.fetch({
+			success: function() {
+				if(self.notificationList) {
+    				self.notificationList.model = notifications;
+    			}
+    			else {
+    				self.notificationList = new DescribeMe.Views.NotificationList({model:notifications});
+    			}
+    			self.notificationList.render();
+			},
+			error: function() {
+				console.log('Unable to load notifications!');
+			}
+		});
+	},
 
 	routeTriggered: function() {
 		$('.navbar-inverse .navbar-inner').css('background-image','-webkit-linear-gradient(top, #04498C, #033C73)');
+		this.loadNotifications();
 		//$('dropdown-menu').
 	},
 

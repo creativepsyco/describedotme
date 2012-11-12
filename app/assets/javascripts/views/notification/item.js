@@ -1,4 +1,4 @@
-DescribeMe.Views.Notification = Backbone.View.extend({
+DescribeMe.Views.NotificationItem = Backbone.View.extend({
 	
 	template: JST['notification/item'],
 
