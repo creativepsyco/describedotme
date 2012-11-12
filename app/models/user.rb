@@ -50,7 +50,8 @@ class User < ActiveRecord::Base
 
   def recent_notifications(limit = 20)
     result = Array.new
-    self.notifications.each do |notification|
+    sorted_notifications = self.notifications.find(:all, :order=> "created_at")
+    sorted_notifications.each do |notification|
       result.push ({
           type: notification.name,
           data: notification.data,
