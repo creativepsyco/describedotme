@@ -10,7 +10,7 @@ class NotificationsController < ApplicationController
   def index
     notifications = @current_user.recent_notifications
     respond_to do |format|
-      format.json { render :json => { :notification => notifications} }
+      format.json { render :json => notifications }
       format.xml  { render text: "Unsupported Format", status: 404 }
       format.html { render text: "Unsupported Format", status: 404 }
     end
