@@ -7,15 +7,18 @@
       $ rake db:migrate
       $ rake db:seed
 ```
+
 4. Populate sample data for testing. (Ignore if not running automated testing).
 ```
       $ rake db:populate_demo_user
       $ rake db:populate
 ```
+
 5. Start the server
 ```
       $ rails server
 ```
+
 6. Server will be up and running at localhost:3000
 
 
