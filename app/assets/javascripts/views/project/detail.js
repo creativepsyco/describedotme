@@ -44,9 +44,10 @@ DescribeMe.Views.ProjectDetail = Backbone.View.extend({
     },
 	
 	add: function(item) {
-        var self = this;
-        $(self.el).find('#project-container').append(new DescribeMe.Views.PictureAttachment({ model: item }).render().el);
-    },
+    var self = this;
+    console.log(item);
+    $(self.el).find('#project-container').append(new DescribeMe.Views.Attachment({ model: item }).render().el);
+  },
 
 	render: function() {
 		var self = this;
@@ -60,8 +61,8 @@ DescribeMe.Views.ProjectDetail = Backbone.View.extend({
 		this.attachmentList = this.model.getAttachmentList();
 		
 		_.each(this.attachmentList.models, function(item) {
-            self.add(item);
-        }, this);
+      self.add(item);
+    }, this);
 
 		return this;
 	},
