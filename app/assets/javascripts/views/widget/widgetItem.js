@@ -20,6 +20,23 @@ DescribeMe.Views.WidgetItem = Backbone.View.extend({
 
 	render: function() {
 		$(this.el).html(this.template(this.model.toJSON()));
+		var arr = WidgetLoader.getEnabledWidgets(window.CurrentUser);
+		for(i=0;i<arr.length; i++)
+		{
+			console.log(arr[i], this.model.get('id'), arr[i].id);
+			if(this.model.get('id') == arr[i].id)
+			{
+				var tick = $(this.el).find('.add i');
+				tick.removeClass('icon-plus');
+				tick.addClass('icon-ok');
+			}
+			else
+			{
+				var tick = $(this.el).find('.add i');
+				tick.removeClass('icon-ok');
+				tick.addClass('icon-plus');
+			}
+		}
 		return this;
 	}
 });

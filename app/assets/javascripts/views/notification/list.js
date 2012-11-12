@@ -7,7 +7,7 @@ DescribeMe.Views.NotificationList = Backbone.View.extend({
 	},
 
 	resetNotification: function() {
-		DescribeMe.NotificationCount = this.model.length;
+		DescribeMe.NotificationCount = this.count;
 	},
 
 	initialize: function () {
@@ -26,24 +26,28 @@ DescribeMe.Views.NotificationList = Backbone.View.extend({
     render: function() {
         var self = this;
         $(this.el).empty();
-        if(this.model.length === 0) {
+        this.count = 0;
+        _.each(this.model.models, function(item) {
+			if(item.get('type') != 'ITEM_CREATED')
+			{	
+				self.count++;
+				self.add(item);
+			}
+        }, this);
+        if(this.count === 0) {
 			$('.badge').css('display','none');
         }
         else {
 			$('.badge').css('display','list');
-			$('.badge').text(this.model.length);
+			$('.badge').text(this.count);
         }
-        if(DescribeMe.NotificationCount <= this.model.length)
+        if(DescribeMe.NotificationCount <= this.count)
         {
 			$('.badge').css('display','none');
         }
         else {
 			
         }
-        _.each(this.model.models, function(item) {
-            self.add(item);
-        }, this);
-
         return this;
     }
 });
