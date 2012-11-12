@@ -320,6 +320,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	showFollowingUsers: function(){
+		this.routeTriggered();
 		var self = this;
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
 		var followingModel = new DescribeMe.Models.Following();
@@ -343,6 +344,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	showProjectDetail: function(uid, pid) {
+		this.routeTriggered();
 		var self = this;
 		var myProfile = new DescribeMe.Models.Profile();
 		var profile = new DescribeMe.Models.UserProfile({id:uid});
