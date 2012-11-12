@@ -158,9 +158,13 @@ class ItemsController < ApplicationController
       params[:attachments].each do |att_id|
         @att = Attachment.find(att_id)
         @item.attachments.push(@att)
+        if @att.att_type == 'photo'
+          @item.photos.build(
+            photo_url: @att.url
+          )
+        end
       end
     end
-    
     if @item.save
       respond_to do |format|
         format.json { render :json => @item.to_json, :status => 200 }
