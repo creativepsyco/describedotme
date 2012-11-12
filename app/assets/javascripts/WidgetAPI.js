@@ -44,13 +44,8 @@ window.WidgetAPI = {
 	 */
 	getCurrentUser: function widget_api_current_user () {
 		// body...
-		if (this.currentUserId) {
-			return this.currentUserId;
-		} else {
-			// Get the user
-			this.currentUserId = window.CurrentUser;
-			return this.currentUserId;
-		}
+		this.currentUserId = window.CurrentUser;
+		return window.CurrentUser;
 	},
 
 	getWidgetId: function widget_api_widget_id (location) {
