@@ -32,6 +32,8 @@ gem 'backbone-on-rails'
 # Bootstrap Rails
 gem "bootstrap-sass", "2.0.0"
 
+# zip
+gem "rubyzip", "~> 0.9.9"
 
 # this group is for testing only
 # delete them if cannot install

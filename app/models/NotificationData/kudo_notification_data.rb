@@ -6,7 +6,8 @@ class KudoNotificationData
       item_id: kudo.item_id,
       user_id: kudo.user_id,
       user_name: user.name,
-      item_name: item.title
+      item_name: item.title,
+      user_pic_url: user.photo_url
     }
     print "Encoded data: ", JSON.generate(data)
     return JSON.generate(data)

@@ -3,7 +3,8 @@ class FollowNotificationData
   	user = User.find(follow.follower_id)
     data = {
       user_id: follow.follower_id,
-      user_name: user.name 
+      user_name: user.name,
+      user_pic_url: user.photo_url 
     }
     puts data
     return JSON.generate(data)
