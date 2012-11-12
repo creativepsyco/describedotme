@@ -9,6 +9,9 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
+    <script type="text/javascript">
+      $('.dropdown-toggle').dropdown();
+    </script>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,6 +23,16 @@
             <% if user_signed_in? %>
               <li><a id="profile-nav" href="/#profile">Profile</a></li>
               <li><a id="dashboard-nav" href="/#">Dashboard</a></li>
+              
+              <li class="dropdown">
+                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+                  <i class="icon-comment icon-white"></i>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  
+                </ul>
+              </li>
               <li><a href="#settings">Settings</a></li>
               <li>
                 <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        

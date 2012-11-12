@@ -29,7 +29,7 @@ DescribeMe.Views.ProjectItem = Backbone.View.extend({
 		$(this.el).html(this.template(this.model.toJSON()));
 
 		if(!this.editable){
-			$(this.el).find('#controls').css("display", "none");
+			$(this.el).find('#controls a').css("display", "none");
 			$(this.el).find('#projectLink').attr("href", "#project/" + this.uid + "/" + this.model.get('id'));
 		}
 		return this;

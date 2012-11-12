@@ -71,8 +71,10 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 		return projects;
 	},
 
+
 	routeTriggered: function() {
 		$('.navbar-inverse .navbar-inner').css('background-image','-webkit-linear-gradient(top, #04498C, #033C73)');
+		//$('dropdown-menu').
 	},
 
 	showProfile: function() {
@@ -233,6 +235,7 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	},
 
 	showMyProjectDetail: function(pid){
+		this.routeTriggered();
 		var self = this;
 		var profile = new DescribeMe.Models.Profile();
 		var project = new DescribeMe.Models.ProjectItem({id:pid});

@@ -29,6 +29,7 @@ DescribeMe.Views.Theme = Backbone.View.extend({
 		$('.profile-top').css('background','#064400');
 		$('.profile-top').css('border-radius','#4px 4px 0 0');
 		$('h1, h2, h3, h4, h5').css('color', '#064400');
+		$('h1 a, h2 a, h3 a, h4 a, h5 a').css('color', '#064400');
 		$('h1, h2, h3, h4, h5').css('font-family','\'Offside\', cursive');
 	},
 	applyPhoto: function() {
