@@ -63,10 +63,14 @@ class WidgetsController < ApplicationController
   end
 
   def unzip_file (file, destination)
+
     Zip::ZipFile.open(file) { |zip_file|
       zip_file.each { |f|
         f_path=File.join(destination, f.name)
         FileUtils.mkdir_p(File.dirname(f_path))
+        if File.exist?(f_path)
+          FileUtils.rm_rf(f_path)
+        end
         zip_file.extract(f, f_path) unless File.exist?(f_path)
       }
     }
