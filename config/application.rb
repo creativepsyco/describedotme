@@ -5,9 +5,9 @@ require "sass-rails" # add this here
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  # Bundler.require(*Rails.groups(:assets => %w(development test)))
+  Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
-  Bundler.require(:default, :assets, Rails.env)
+  # Bundler.require(:default, :assets, Rails.env)
 end
 
 module DescribeMe
@@ -63,6 +63,6 @@ module DescribeMe
     config.active_record.observers = [:item_observer, :comment_observer, :favorite_kudo_item_observer, 
                                 :user_follow_user_observer]
 
-    # config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = false
   end
 end
