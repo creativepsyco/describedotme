@@ -32,7 +32,7 @@ gem "paperclip", "~> 3.0"
 gem 'backbone-on-rails'
 
 # Bootstrap Rails
-gem "bootstrap-sass", "2.0.0"
+# gem "bootstrap-sass", "2.0.0"
 
 # zip
 gem "rubyzip", "~> 0.9.9"
