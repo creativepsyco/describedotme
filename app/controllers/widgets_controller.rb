@@ -72,14 +72,13 @@ class WidgetsController < ApplicationController
           FileUtils.rm_rf(f_path)
         end
         zip_file.extract(f, f_path) unless File.exist?(f_path)
+        puts "Unzipping File #{f_path}"
       }
     }
   end
 
   def create
-    location = "public/widgets/#{Widget.all.count}"
-
-
+    location = "nil"
     widget_data = {
       :name => params[:name],
       :description => params[:description],
@@ -92,9 +91,14 @@ class WidgetsController < ApplicationController
 
     if @widget.save
       location = "public/widgets/#{@widget.id}"
+    
       puts location
+      
       unzip_file(params[:zipFile].tempfile,location)
+
       puts "File unzipped"
+      @widget.location = location
+      @widget.save
 
       respond_to do |format|
         format.json { render :json => @widget.to_json, :status => 200 }
