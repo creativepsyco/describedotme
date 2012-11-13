@@ -32,7 +32,7 @@
 
 
 
-##Configuration for database:
+##Database configuration:
 
 1. Download and Install MySql database server from http://dev.mysql.com/downloads/mysql/
 2. Login into MySql Db server using the root account.
