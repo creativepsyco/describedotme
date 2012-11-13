@@ -22,7 +22,7 @@
 6. Server will be up and running at localhost:3000
 
 
-##Configuration for database:
+##Database configuration:
 
 1. Install mysql server
 2. Enter these commands into the bash.
