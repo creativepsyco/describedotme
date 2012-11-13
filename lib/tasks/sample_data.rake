@@ -54,7 +54,7 @@ namespace :db do
 
     puts "Making Robinson follow Emmma Watson" 
     
-    user.following_user_ids = [2];
+    user.following_user_ids = [user2.id];
     
     project_name = [
       'Harry Potter 1', 'Harry Potter 2', 'Harry Potter 3', 'Harry Potter 4',
@@ -85,7 +85,7 @@ namespace :db do
     user2.kudo_item_ids=[user.items.find_first()]
 
     puts "Making Emma follow Robinson" 
-    user2.following_user_ids = [1]
+    user2.following_user_ids = [user.id]
   end
 
   task populate: :environment do
