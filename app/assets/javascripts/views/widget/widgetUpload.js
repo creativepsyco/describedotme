@@ -14,13 +14,11 @@ DescribeMe.Views.WidgetUpload = Backbone.View.extend({
         var name = $('#widgetName').val();
         var desc = $('#description').val();
         var thumbnail = $('#thumbnail').val();
-        var location = $('#location').val();
 
         var aModel = new DescribeMe.Models.WidgetItem({
             name: name,
             description: desc,
-            thumbnail: thumbnail,
-            location: location
+            thumbnail: thumbnail
         });
 
         var fd = new FormData();
@@ -38,15 +36,6 @@ DescribeMe.Views.WidgetUpload = Backbone.View.extend({
         }
 
         xhr.send(fd);
-
-        // aModel.save(null, {
-        //     success: function(model, response) {
-        //         alert("successfully saved");
-        //     },
-        //     error: function(model, response) {
-        //         alert("error");
-        //     }
-        // });
     },
 
     uploadSuccess: function(response) {

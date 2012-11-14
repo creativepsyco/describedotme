@@ -83,7 +83,6 @@ class WidgetsController < ApplicationController
       :name => params[:name],
       :description => params[:description],
       :thumbnail => params[:thumbnail],
-      :location => location,
       :creator_id => current_user.id
     }
 
