@@ -30,8 +30,13 @@ namespace :db do
       item = user.items.create!(title: project_name[n],
       description: description)
       photo = item.photos.create!(
-      caption: Faker::Lorem.sentence(3),
-      photo_url: cover_photo[n]
+        caption: Faker::Lorem.sentence(3),
+        photo_url: cover_photo[n]
+      )
+      attachment = item.attachments.create!(
+        url: photo.photo_url,
+        description: photo.caption,
+        att_type: 'photo'
       )
     end
 
@@ -41,8 +46,6 @@ namespace :db do
     Widget.create(creator_id: users.sample.id, thumbnail:"http://goo.gl/YpH0I", name: "Clock")
     Widget.create(creator_id: users.sample.id, thumbnail:"http://devfiles.myopera.com/articles/1281/widget_control_buttons.png", name: "Twitter Widget")
     Widget.create(creator_id: users.sample.id, thumbnail:"http://flickholdr.com/200/300", name: "Contact Form")
-
-
 
     puts "Populate Another User called Emma Watson :example2@describe.me"
     user2 = User.create(name: "Emma Watson",
@@ -54,7 +57,7 @@ namespace :db do
 
     puts "Making Robinson follow Emmma Watson" 
     
-    user.following_user_ids = [2];
+    user.following_user_ids = [user2.id];
     
     project_name = [
       'Harry Potter 1', 'Harry Potter 2', 'Harry Potter 3', 'Harry Potter 4',
@@ -76,8 +79,13 @@ namespace :db do
       item = user2.items.create!(title: project_name[n],
       description: description)
       photo = item.photos.create!(
-      caption: Faker::Lorem.sentence(3),
-      photo_url: cover_photo[n]
+        caption: Faker::Lorem.sentence(3),
+        photo_url: cover_photo[n]
+      )
+      attachment = item.attachments.create!(
+        url: photo.photo_url,
+        description: photo.caption,
+        att_type: 'photo'
       )
     end
 
@@ -85,7 +93,7 @@ namespace :db do
     user2.kudo_item_ids=[user.items.find_first()]
 
     puts "Making Emma follow Robinson" 
-    user2.following_user_ids = [1]
+    user2.following_user_ids = [user.id]
   end
 
   task populate: :environment do
@@ -143,8 +151,13 @@ namespace :db do
       users.each do |user|
         user.items.each do |item|
           photo = item.photos.create!(
-          caption: Faker::Lorem.sentence(3),
-          photo_url: sample_photos.sample
+            caption: Faker::Lorem.sentence(3),
+            photo_url: sample_photos.sample
+          )
+          attachment = item.attachments.create!(
+            url: photo.photo_url,
+            description: photo.caption,
+            att_type: 'photo'
           )
         end
       end

@@ -6,7 +6,8 @@ class ItemNotificationData
       item_id: item.id,
       item_name: item.title,
       user_id: item.creator.id,
-      user_name: user.name
+      user_name: user.name,
+      user_pic_url: user.photo_url
     }
     print "Encoded data: ", JSON.generate(data)
     return JSON.generate(data)

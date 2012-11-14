@@ -17,5 +17,8 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 
+# Ignore all DS_Store files
+*.DS_Store
+
 # Ignore Gemfile.lock
 #Gemfile.lock

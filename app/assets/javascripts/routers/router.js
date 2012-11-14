@@ -474,8 +474,32 @@ DescribeMe.Routers.Router = Backbone.Router.extend({
 	showDashboard: function(){
 		this.routeTriggered();
 		var self = this;
+		var profile = new DescribeMe.Models.Profile();
+		profile.fetch(
+		{
+			success: function() {
+				window.CurrentUser = profile.get('id');
+			},
+			error: function() {
+				console.log('Unable to load profile!');
+			}
+		});
 		this.sidebar = (this.sidebar) ? this.sidebar : new DescribeMe.Views.Sidebar();
-		
-		var dashboardShow = new DescribeMe.Views.DashboardShow({sidebar:self.sidebar}).render();
+		var notifications = new DescribeMe.Collections.NotificationList();
+
+		notifications.fetch({
+			success: function() {
+				if(self.dashboardShow) {
+    				self.dashboardShow.model = notifications;
+    			}
+    			else {
+    				self.dashboardShow = new DescribeMe.Views.DashboardShow({sidebar:self.sidebar, model:notifications}).render();
+    			}
+    			self.dashboardShow.render();
+			},
+			error: function() {
+				console.log('Unable to load notifications!');
+			}
+		});
 	}
 });

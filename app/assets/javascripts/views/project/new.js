@@ -31,7 +31,7 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 	    	},
 
 	    	error: function(model, response){
-	    		alert("Failure - " + response);
+	    		alert("Some problem with the network, refresh and try again.");
 	    	}
 	    });
 		return false;
@@ -51,9 +51,16 @@ DescribeMe.Views.ProjectNew = Backbone.View.extend({
 		$(this.el).append(this.template());
 
     var att_container = $(this.el).find('#attachment-upload-container');
-    att_container.append((new DescribeMe.Views.Attachment()).getUploadForms(
-      this.onAttachmentCreated));
-		
+    var att_triggers = $(this.el).find('#attachment-triggers');
+    this.atts = AttachmentFactory.getAllAttachments();
+
+    for (i in this.atts) {
+      var att = this.atts[i];
+      att.registerUploadCallback(this.onAttachmentCreated);
+      att_triggers.append(att.renderTrigger());
+      att_container.append(att.renderUpload());
+    }
+
 		this.titleDOM = $(this.el).find('#title');
 		this.descriptionDOM = $(this.el).find('#description');
 		this.tagDOM = $(this.el).find('#tag');

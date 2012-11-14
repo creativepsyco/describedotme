@@ -42,6 +42,11 @@ DescribeMe.Views.VideoAttachment = Backbone.View.extend({
     return this.uploadForm;
   },
 
+  renderTrigger: function() {
+    var trigger = $('<a id="vid-upload" class="btn btn-small" href="#videoUploadModal" class="delete" data-toggle="modal"><i class="icon-camera"></i></a>');
+    return trigger;
+  },
+
 	render: function() {
 		$(this.el).html(this.template(this.model.toJSON()));
 		return this;
