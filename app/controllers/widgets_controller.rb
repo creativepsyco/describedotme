@@ -90,6 +90,7 @@ class WidgetsController < ApplicationController
     @widget = Widget.new(widget_data)
 
     if @widget.save
+      # location to store the widget file
       location = "public/widgets/#{@widget.id}"
     
       puts location
