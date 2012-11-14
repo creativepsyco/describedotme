@@ -1,23 +1,30 @@
 DescribeMe.Views.NotificationList = Backbone.View.extend({
-	
-	el: '.dropdown-menu',
 
-	events : {
-		'click li a' : 'resetNotification'
-	},
+    el: '.dropdown-menu',
+
+    events: {
+        'click li a': 'resetNotification'
+    },
 
 	resetNotification: function() {
 		DescribeMe.NotificationCount = this.count;
 	},
 
-	initialize: function () {
+    initialize: function() {
         this.model.bind("reset", this.render, this);
         this.model.bind("add", this.add);
-	},
+    },
 
-	add: function(item) {
+    add: function(item) {
         var self = this;
-        var projectItem = new DescribeMe.Views.NotificationItem({ model: item});
+        if(item.get('type') == 'USER_FOLLOWED') {
+            item.set('path', 'profile');
+        } else {
+            item.set('path', 'project');
+        }
+        var projectItem = new DescribeMe.Views.NotificationItem({
+            model: item
+        });
         projectItem.editable = this.options.editable;
         projectItem.uid = this.uid;
         $(self.el).append(projectItem.render().el);
