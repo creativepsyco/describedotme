@@ -4,15 +4,16 @@
 	<title></title>
 	<link href="hello.css" rel="stylesheet" type="text/css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
-	<script type="text/javascript" src="comments.js"></script>
+	<script type="text/javascript" src="twitter.js"></script>
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="widget-container">
-		<p>This will add a Comment widget to your profile. Visitors can leave their comments on your portfolio</p>
-		<form  id="comment-input">
-			<input type="text" id="description" placeholder="Enter Description text">
+		<p>This will add a twitter widget to your profile.</p>
+		<form  id="twitter-input">
+			<input type="text" id="twitter_handle" placeholder="Enter Twitter Handle">
+			<input type="text" id="max_tweets" placeholder="Maximum Tweets to display">
 			<a href="#" onclick="onClickSave()" class="btn btn-primary">Add to Profile</a>
 		</form>
 	</div>

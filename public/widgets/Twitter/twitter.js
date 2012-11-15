@@ -32,9 +32,7 @@ var WidgetAPI_getWidgetId = getParentFunction("WidgetAPI.getWidgetId");
 //////////////////////////////
 //
 //
-var commentJSON = null;
-
-function loadComments() {
+function loadTweets() {
   var URL = '/widgets/' + WidgetAPI_getWidgetId(document.location.pathname) + '/users/' + WidgetAPI_getProfileUser();
   var json = null;
   jQuery.ajax({
@@ -48,29 +46,14 @@ function loadComments() {
     },
     error: function(xhr, textStatus, errorThrown) {
       //called when there is an error
-      alert("Cannot retrieve data");
     }
   });
 
-  WidgetAPI_log(json.comments.length);
-  commentJSON = json;
-  renderComments();
-}
+  var handle =  json.handle;
 
-function renderComments() {
-
-  $("#comment-widget-container").html("");
-
-  $("#comment-widget-desc").html('<h2>' + commentJSON.desc + '</h2>');
-
-  function writeComment(element, index, array) {
-    var theComment = element.comment;
-    var theUser = element.name;
-
-    var html = '<hr><div class="comment"> <div class="user"><h4>' + theUser + '</h4></div> <div class="comment_text"><p>' + theComment + '</p></div></div>';
-    $("#comment-widget-container").append(html);
-  }
-  commentJSON.comments.forEach(writeComment);
+ // var twitter_dom = '<a class="twitter-timeline" href="https://twitter.com/' + handle + '" data-widget-id="258833292500008961">Tweets by @' + handle + '</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+  //$("#twitter-widget-container").html(twitter_dom);
+  $('#twitter-widget-container').miniTwitter({username: json.handle, limit: json.max_tweets});
 }
 
 $(document).ready(function($) {
@@ -79,36 +62,18 @@ $(document).ready(function($) {
 
 });
 
-function onCommentSave() {
-  var comment = $("#comment_desc").val();
-  var author = $("#author").val();
-
-  var jsonStuff = {
-    "comment": comment,
-    "name": author
-  };
-  commentJSON.comments.push(jsonStuff);
-
-  var URL = '/widgets/' + WidgetAPI_getWidgetId(document.location.pathname) + '/users/' + WidgetAPI_getProfileUser();
-  console.log(URL);
-
-  $.post(URL, {
-    "config_json": JSON.stringify(commentJSON)
-  }, function(data, textStatus, xhr) {
-    alert("Comment Successfully Made");
-    renderComments();
-  });
-}
-
 function onClickSave() {
-  var desc = $("#description").val();
+  var tweets = $("#max_tweets").val();
+  var handle = $("#twitter_handle").val();
+
+  WidgetAPI_log(tweets + " " + handle);
 
   var jsonStuff = {
-    "desc": desc,
-    "comments": []
+    "max_tweets": tweets,
+    "handle": handle
   };
 
-  var URL = '/widgets/' + WidgetAPI_getWidgetId(document.location.pathname) + '/users/' + WidgetAPI_getCurrentUser();
+  var URL =  '/widgets/' + WidgetAPI_getWidgetId(document.location.pathname) + '/users/' + WidgetAPI_getCurrentUser();
   console.log(URL);
 
   $.post(URL, {
