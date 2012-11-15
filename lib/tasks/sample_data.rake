@@ -42,11 +42,9 @@ namespace :db do
 
     users = User.all()
     #2.times do
-    Widget.create(creator_id: users.sample.id, thumbnail:"http://lorempixel.com/g/400/200", name: "Hello")
-    Widget.create(creator_id: users.sample.id, thumbnail:"http://goo.gl/YpH0I", name: "Clock")
-    Widget.create(creator_id: users.sample.id, thumbnail:"http://devfiles.myopera.com/articles/1281/widget_control_buttons.png", name: "Twitter Widget")
-    Widget.create(creator_id: users.sample.id, thumbnail:"http://flickholdr.com/200/300", name: "Contact Form")
-
+    Widget.create(creator_id: users.sample.id, thumbnail:"https://twitter.com/images/resources/twitter-bird-light-bgs.png", name: "Twitter Widget", location: "public/widgets/1")
+    Widget.create(creator_id: users.sample.id, thumbnail:"http://goo.gl/YpH0I", name: "Clock", location: "public/widgets/2")
+    
     puts "Populate Another User called Emma Watson :example2@describe.me"
     user2 = User.create(name: "Emma Watson",
     email: "example2@describe.me",
