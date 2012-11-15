@@ -8,7 +8,8 @@ namespace :db do
     password: "foobar",
     password_confirmation: "foobar",
     description: 'I love to draw, and sing. Well, cooking is also one of my big interest',
-    photo_url: 'http://behance.vo.llnwd.net/profiles/58036/b9d4960785150ab2cb73e48efb923ff2.png')
+    photo_url: 'http://behance.vo.llnwd.net/profiles/58036/b9d4960785150ab2cb73e48efb923ff2.png',
+    theme: 'BlueGrid')
 
     project_name = [
       'Verticals', 'Metrio Tea', 'Metrio Coffee Packagin', 'Missile, Energy drink identity',
@@ -51,7 +52,8 @@ namespace :db do
     password: "foobar",
     password_confirmation: "foobar",
     description: 'I love to act and, Love Pinterest and dogs. Well, cooking is also one of my big interest',
-    photo_url: 'https://lh6.googleusercontent.com/-SfFJb67xmho/UCvr31BJKPI/AAAAAAAADXc/bfRvF5xnnDc/s500/emma_watson-g%2Bprofile.jpg')
+    photo_url: 'https://lh6.googleusercontent.com/-SfFJb67xmho/UCvr31BJKPI/AAAAAAAADXc/bfRvF5xnnDc/s500/emma_watson-g%2Bprofile.jpg',
+    theme: 'BlueGrid')
 
     puts "Making Robinson follow Emmma Watson" 
     
