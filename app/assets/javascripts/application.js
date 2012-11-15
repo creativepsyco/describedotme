@@ -15,10 +15,9 @@
 //= require bootstrap
 //= require underscore
 //= require backbone
-//= require underscore
-//= require backbone
 //
 //= require .//describe_me
+//
 //
 //= require_tree ../templates/
 //= require_tree .//models

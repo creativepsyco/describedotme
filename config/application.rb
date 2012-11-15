@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require "sass-rails" # add this here
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -61,5 +62,7 @@ module DescribeMe
 
     config.active_record.observers = [:item_observer, :comment_observer, :favorite_kudo_item_observer, 
                                 :user_follow_user_observer]
+
+    config.assets.initialize_on_precompile = false
   end
 end
