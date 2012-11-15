@@ -5,10 +5,10 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	template: JST['user/profile'],
 
 	initialize: function () {
-		if(!this.options.theme)
-			this.theme = new DescribeMe.Views.Theme({el:this.el});
+		if(this.options.theme)
+			this.theme = DescribeMe.ThemeFactory.getTheme(this.options.theme);
 		else
-			this.theme = new DescribeMe.Views.Theme({el:this.el, theme:this.options.theme});
+			this.theme = DescribeMe.ThemeFactory.getTheme('BlueGrid');
 	},
 
 	events : {
@@ -21,12 +21,12 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 	render: function() {
 		$(this.el).empty();
 		$(this.el).html(this.template());
+		this.theme.setElement(this.el);
 		this.theme.render();
 		return this;
 	},
 
 	renderProfile: function() {
-		//this.profileModel.set('followersCount', this.followModel.get('followers').length);
 		this.userProfileView = new DescribeMe.Views.UserProfile({model: this.profileModel, myProfile:this.options.myProfile}).render();
 		//render the view
 		$(this.el).find('#profile-container').append($(this.userProfileView.el));
@@ -36,7 +36,8 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 		//apply the theme
 		if(!this.options.theme)
 		{
-			this.theme.options.theme = this.profileModel.get('theme');
+			console.log('------->',this.profileModel.get('theme'));
+			this.theme = DescribeMe.ThemeFactory.getTheme(this.profileModel.get('theme'));
 		}
 		this.theme.render();
 	},
@@ -46,6 +47,11 @@ DescribeMe.Views.ProfileShow = Backbone.View.extend({
 		this.projectList.uid = this.profileModel.get('id');
 		$(this.el).find('#project-container').append($(this.projectList.render().el));
 		//apply the theme
+		if(!this.options.theme)
+		{
+			console.log('------->',this.profileModel.get('theme'));
+			this.theme = DescribeMe.ThemeFactory.getTheme(this.profileModel.get('theme'));
+		}
 		this.theme.render();
 
 	},
